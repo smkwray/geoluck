@@ -433,6 +433,169 @@ export function createFeatureImportanceChart(canvas: HTMLCanvasElement, data: {
   });
 }
 
+export function createBlockPermutationChart(canvas: HTMLCanvasElement, data: {
+  labels: string[];
+  values: number[];
+  featureCounts: number[];
+}): Chart {
+  return new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: data.labels,
+      datasets: [
+        {
+          label: "\u0394 R\u00B2",
+          data: data.values,
+          backgroundColor: data.values.map((v) =>
+            v > 0 ? "hsl(210, 55%, 48%)" : "hsla(210, 55%, 48%, 0.3)",
+          ),
+          borderRadius: 6,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const i = ctx.dataIndex;
+              const count = data.featureCounts[i] ?? 0;
+              return `\u0394 R\u00B2: ${(ctx.parsed.x as number).toFixed(4)} (${count} feature${count !== 1 ? "s" : ""})`;
+            },
+            afterLabel: () =>
+              "Permutation importance: how much held-out\nmodel performance drops when this block is shuffled.",
+          },
+        },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          title: { display: true, text: "\u0394 R\u00B2 (performance drop when shuffled)", color: MUTED_COLOR },
+          grid: { color: GRID_COLOR },
+          ticks: { color: MUTED_COLOR },
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: MUTED_COLOR, font: { size: 11 } },
+        },
+      },
+    },
+  });
+}
+
+export function createFeaturePermutationChart(canvas: HTMLCanvasElement, data: {
+  labels: string[];
+  values: number[];
+  blocks: string[];
+}): Chart {
+  return new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: data.labels,
+      datasets: [
+        {
+          label: "\u0394 R\u00B2",
+          data: data.values,
+          backgroundColor: data.values.map((v) =>
+            v > 0 ? "hsl(145, 55%, 42%)" : "hsla(145, 55%, 42%, 0.3)",
+          ),
+          borderRadius: 6,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const i = ctx.dataIndex;
+              const block = data.blocks[i] ?? "";
+              return `\u0394 R\u00B2: ${(ctx.parsed.x as number).toFixed(4)} [${block}]`;
+            },
+            afterLabel: () =>
+              "Permutation importance: how much held-out\nmodel performance drops when this feature is shuffled.",
+          },
+        },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          title: { display: true, text: "\u0394 R\u00B2 (performance drop when shuffled)", color: MUTED_COLOR },
+          grid: { color: GRID_COLOR },
+          ticks: { color: MUTED_COLOR },
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: MUTED_COLOR, font: { size: 11 } },
+        },
+      },
+    },
+  });
+}
+
+export function createCountryFeatureProfileChart(canvas: HTMLCanvasElement, data: {
+  labels: string[];
+  values: number[];
+  blocks: string[];
+}): Chart {
+  return new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: data.labels,
+      datasets: [
+        {
+          label: "SHAP contribution",
+          data: data.values,
+          backgroundColor: data.values.map((v) =>
+            v >= 0 ? "hsl(145, 55%, 42%)" : "hsl(12, 65%, 55%)",
+          ),
+          borderRadius: 4,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const i = ctx.dataIndex;
+              const v = ctx.parsed.x as number;
+              const sign = v >= 0 ? "+" : "";
+              const block = data.blocks[i] ?? "";
+              return `${sign}${v.toFixed(4)} [${block}]`;
+            },
+            afterLabel: () =>
+              "Local attribution: how this feature shifts\nthe prediction for this specific country.",
+          },
+        },
+      },
+      scales: {
+        x: {
+          title: { display: true, text: "SHAP contribution (effect on prediction)", color: MUTED_COLOR },
+          grid: { color: GRID_COLOR },
+          ticks: { color: MUTED_COLOR },
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: MUTED_COLOR, font: { size: 11 } },
+        },
+      },
+    },
+  });
+}
+
 export function createCountryTrajectoryChart(canvas: HTMLCanvasElement, data: {
   decades: number[];
   actual: Array<number | null>;

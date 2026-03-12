@@ -1,6 +1,7 @@
 import type {
   BundleCountryContributionsBundle,
   BundleFeatureEffectsTarget,
+  BundlePermutationImportanceTarget,
   BundleSummaryTarget,
 } from "./data";
 
@@ -11,6 +12,7 @@ export type AnalyticsData = {
   bundle: BundleCountryContributionsBundle | null;
   bundleSummary: BundleSummaryTarget | null;
   featureEffects: BundleFeatureEffectsTarget | null;
+  permutationImportance: BundlePermutationImportanceTarget | null;
   tierKey: string | null;
   r2: number | null;
   decade: number;
@@ -113,7 +115,7 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
     return `<div class="analytics-loading"><p>Loading analytics data\u2026</p></div>`;
   }
 
-  const { bundle, bundleSummary, featureEffects, tierKey, decade, targetLabel, tierLabel, r2 } = data;
+  const { bundle, bundleSummary, featureEffects, permutationImportance, tierKey, decade, targetLabel, tierLabel, r2 } = data;
 
   const modelCards = bundleSummary
     ? bundleSummary.bundles
@@ -196,6 +198,42 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
     </section>
 
     ${topFeatures}
+
+    ${(() => {
+      const tierPerm = tierKey && permutationImportance
+        ? permutationImportance.bundles.find((b) => b.feature_tier === tierKey)
+        : null;
+      if (!tierPerm) return "";
+      const hasBlocks = tierPerm.block_summary.length > 0;
+      const hasFeatures = tierPerm.top_permutation_features.length > 0;
+      if (!hasBlocks && !hasFeatures) return "";
+      return `
+      <section class="analytics-section">
+        <h2>Predictive value \u2014 ${tierLabel}</h2>
+        <p class="section-subtitle">
+          Permutation importance measures how much held-out model performance drops when a feature or block is shuffled.
+          This reflects predictive value, not causal effect.
+        </p>
+        ${hasBlocks ? `
+        <div class="chart-row">
+          <div class="chart-wrap chart-wrap-tall">
+            <h3>By data source</h3>
+            <canvas id="block-permutation-chart"></canvas>
+          </div>
+          <div class="chart-wrap chart-wrap-tall">
+            <h3>Top individual features</h3>
+            <canvas id="feature-permutation-chart"></canvas>
+          </div>
+        </div>
+        ` : hasFeatures ? `
+        <div class="chart-wrap chart-wrap-tall">
+          <h3>Top individual features</h3>
+          <canvas id="feature-permutation-chart"></canvas>
+        </div>
+        ` : ""}
+      </section>
+      `;
+    })()}
 
     ${noBundle}
 

@@ -386,6 +386,14 @@ export function renderCountryTab(data: CountryTabData): string {
       ${contribCard}
     </section>
 
+    <section class="country-section">
+      <h2>Feature importance profile</h2>
+      <p class="section-subtitle">Top features ranked by absolute contribution to this country's ${targetLabel.toLowerCase()} prediction.</p>
+      <div class="chart-wrap chart-wrap-tall">
+        <canvas id="country-feature-profile-chart"></canvas>
+      </div>
+    </section>
+
     ${crossTable}
 
     ${comparisonSection}

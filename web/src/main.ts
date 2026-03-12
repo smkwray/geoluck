@@ -1,10 +1,13 @@
 import "leaflet/dist/leaflet.css";
 
 import {
+  createBlockPermutationChart,
   createContinentComparisonChart,
+  createCountryFeatureProfileChart,
   createCountryTrajectoryChart,
   createErrorComparisonChart,
   createFeatureImportanceChart,
+  createFeaturePermutationChart,
   createModelComparisonChart,
   createRegionalResidualChart,
   createResidualHistogramWithSemantics,
@@ -14,6 +17,7 @@ import type {
   BundleCountryContributionsBundle,
   BundleCountryContributionsPayload,
   BundleFeatureEffectsPayload,
+  BundlePermutationImportancePayload,
   BundleSummaryPayload,
   CountryContributionSummary,
   CountryProfile,
@@ -24,6 +28,7 @@ import {
   loadBundleCountryContributions,
   loadBundleCountryContributionsIndex,
   loadBundleFeatureEffects,
+  loadBundlePermutationImportance,
   loadBundleSummary,
   loadCountryProfiles,
   loadMapGeoJson,
@@ -159,6 +164,18 @@ async function bootstrap(): Promise<void> {
     }
   }
 
+  // Load bundle permutation importance
+  let bundlePermutationImportance: BundlePermutationImportancePayload | null = null;
+  if (metadata.bundle_permutation_importance_path) {
+    try {
+      bundlePermutationImportance = await loadBundlePermutationImportance(
+        metadata.bundle_permutation_importance_path,
+      );
+    } catch {
+      /* optional */
+    }
+  }
+
   // Load legacy income profiles (for trajectory chart historical data)
   const profiles = await loadCountryProfiles(metadata.country_profiles_path);
   const profileLookup = new Map(profiles.countries.map((p) => [p.iso3, p]));
@@ -194,7 +211,7 @@ async function bootstrap(): Promise<void> {
     ? new Set<TierFlag>(
         initialHash.params.get("tiers")!.split(",").map(Number).filter((n) => n >= 1 && n <= 3) as TierFlag[],
       )
-    : new Set<TierFlag>([1, 2, 3]);
+    : new Set<TierFlag>([1]);
 
   const state: AppState = {
     activeTab: initialHash.tab,
@@ -209,7 +226,7 @@ async function bootstrap(): Promise<void> {
     const parts: string[] = [];
     if (state.activeTarget !== "income") parts.push(`target=${state.activeTarget}`);
     const tiers = [...state.activeTiers].sort().join(",");
-    if (tiers !== "1,2,3") parts.push(`tiers=${tiers}`);
+    if (tiers !== "1") parts.push(`tiers=${tiers}`);
     if (state.selectedIso3) parts.push(`c=${state.selectedIso3}`);
     if (state.compareIso3) parts.push(`vs=${state.compareIso3}`);
     const tab = state.activeTab === "map" ? "" : state.activeTab;
@@ -369,6 +386,7 @@ async function bootstrap(): Promise<void> {
         bundle,
         bundleSummary: bundleSummary?.targets.find((t) => t.target === state.activeTarget) ?? null,
         featureEffects: bundleFeatureEffects?.targets.find((t) => t.target === state.activeTarget) ?? null,
+        permutationImportance: bundlePermutationImportance?.targets.find((t) => t.target === state.activeTarget) ?? null,
         tierKey: tierKey(state.activeTiers),
         r2: bundleR2(),
         decade,
@@ -659,6 +677,40 @@ async function bootstrap(): Promise<void> {
       }
     }
 
+    // Permutation importance charts (block + individual features)
+    const targetPerm = bundlePermutationImportance?.targets.find((t) => t.target === state.activeTarget);
+    const tierPerm = tk && targetPerm
+      ? targetPerm.bundles.find((b) => b.feature_tier === tk)
+      : null;
+    if (tierPerm) {
+      // Block-level chart
+      if (tierPerm.block_summary.length > 0) {
+        const blockCanvas = document.querySelector<HTMLCanvasElement>("#block-permutation-chart");
+        if (blockCanvas) {
+          const sorted = [...tierPerm.block_summary]
+            .filter((b) => b.feature_block != null)
+            .sort((a, b) => (b.delta_r2_mean ?? 0) - (a.delta_r2_mean ?? 0));
+          createBlockPermutationChart(blockCanvas, {
+            labels: sorted.map((b) => (b.feature_block ?? "").replace(/_/g, " ")),
+            values: sorted.map((b) => b.delta_r2_mean ?? 0),
+            featureCounts: sorted.map((b) => b.feature_count ?? 0),
+          });
+        }
+      }
+      // Individual feature chart
+      if (tierPerm.top_permutation_features.length > 0) {
+        const featCanvas = document.querySelector<HTMLCanvasElement>("#feature-permutation-chart");
+        if (featCanvas) {
+          const features = tierPerm.top_permutation_features.slice(0, 15);
+          createFeaturePermutationChart(featCanvas, {
+            labels: features.map((f) => (f.feature_name ?? "").replace(/_/g, " ")),
+            values: features.map((f) => f.delta_r2_mean ?? 0),
+            blocks: features.map((f) => (f.feature_block ?? "").replace(/_/g, " ")),
+          });
+        }
+      }
+    }
+
     // Scatter: actual vs predicted
     const scatterCanvas = document.querySelector<HTMLCanvasElement>("#scatter-chart");
     if (scatterCanvas) {
@@ -894,6 +946,30 @@ async function bootstrap(): Promise<void> {
           csvForCountry(iso3ForExport, tk, bundleContribs, countryNames),
         );
       });
+    }
+
+    // Feature importance profile chart
+    const profileCanvas = document.querySelector<HTMLCanvasElement>("#country-feature-profile-chart");
+    if (profileCanvas && state.selectedIso3) {
+      const tk = tierKey(state.activeTiers);
+      if (tk) {
+        const targetPayload = bundleContribs.get(state.activeTarget);
+        const bundle = targetPayload?.bundles.find((b) => b.feature_tier === tk);
+        const country = bundle?.countries.find((c) => c.iso3 === state.selectedIso3);
+        if (country) {
+          const allContribs = [...(country.top_absolute ?? [])];
+          if (allContribs.length > 0) {
+            const sorted = allContribs
+              .sort((a, b) => (b.abs_contribution ?? 0) - (a.abs_contribution ?? 0))
+              .slice(0, 15);
+            createCountryFeatureProfileChart(profileCanvas, {
+              labels: sorted.map((f) => (f.feature_name ?? "").replace(/_/g, " ")),
+              values: sorted.map((f) => f.contribution ?? 0),
+              blocks: sorted.map((f) => (f.feature_block ?? "").replace(/_/g, " ")),
+            });
+          }
+        }
+      }
     }
 
     // Income trajectory chart

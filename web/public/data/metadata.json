@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-03-12T15:09:42.012319+00:00",
+  "generated_at_utc": "2026-03-12T18:09:18.391480+00:00",
   "metric_default": "income_rank_pct",
   "decades": [
     1900,
@@ -60,5 +60,6 @@
   "country_contributions_summary_path": "country_contributions_summary.json",
   "bundle_summary_path": "bundle_summary.json",
   "bundle_feature_effects_path": "bundle_feature_effects.json",
+  "bundle_permutation_importance_path": "bundle_permutation_importance.json",
   "bundle_country_contributions_index_path": "bundle_country_contributions_index.json"
 }
