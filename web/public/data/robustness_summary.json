@@ -1,0 +1,2093 @@
+{
+  "latest_decade": 2020,
+  "decades": [
+    1960,
+    1970,
+    1980,
+    1990,
+    2000,
+    2010,
+    2020
+  ],
+  "strategies": [
+    {
+      "strategy": "decade_holdout",
+      "score_count": 56,
+      "holdout_count": 7,
+      "small_sample_holdout_threshold": 5,
+      "small_sample_holdout_count": 0,
+      "best_overall": {
+        "holdout_label": "2000",
+        "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+        "model_name": "hist_gb",
+        "model_family": "boosted_tree",
+        "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+        "feature_tier": null,
+        "feature_tier_label": null,
+        "r2": 0.920524,
+        "rmse": 0.081865,
+        "mae": 0.058181,
+        "spearman": 0.956698,
+        "train_row_count": 1418,
+        "test_row_count": 169,
+        "is_small_sample_holdout": false
+      },
+      "mean_scores_by_feature_set": [
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "boosted_tree",
+          "mean_r2": 0.880849,
+          "mean_rmse": 0.099208,
+          "mean_mae": 0.07437,
+          "mean_spearman": 0.941981,
+          "holdout_count": 7
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "boosted_tree",
+          "mean_r2": 0.878098,
+          "mean_rmse": 0.10038,
+          "mean_mae": 0.075851,
+          "mean_spearman": 0.941036,
+          "holdout_count": 7
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "baseline",
+          "mean_r2": 0.225687,
+          "mean_rmse": 0.252726,
+          "mean_mae": 0.212699,
+          "mean_spearman": 0.668413,
+          "holdout_count": 7
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "baseline",
+          "mean_r2": 0.225687,
+          "mean_rmse": 0.252726,
+          "mean_mae": 0.212699,
+          "mean_spearman": 0.668413,
+          "holdout_count": 7
+        }
+      ],
+      "mean_scores_by_feature_set_large_holdouts": [
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "boosted_tree",
+          "mean_r2": 0.880849,
+          "mean_rmse": 0.099208,
+          "mean_mae": 0.07437,
+          "mean_spearman": 0.941981,
+          "holdout_count": 7
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "boosted_tree",
+          "mean_r2": 0.878098,
+          "mean_rmse": 0.10038,
+          "mean_mae": 0.075851,
+          "mean_spearman": 0.941036,
+          "holdout_count": 7
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "baseline",
+          "mean_r2": 0.225687,
+          "mean_rmse": 0.252726,
+          "mean_mae": 0.212699,
+          "mean_spearman": 0.668413,
+          "holdout_count": 7
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "baseline",
+          "mean_r2": 0.225687,
+          "mean_rmse": 0.252726,
+          "mean_mae": 0.212699,
+          "mean_spearman": 0.668413,
+          "holdout_count": 7
+        }
+      ],
+      "best_holdouts": [
+        {
+          "holdout_label": "1960",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.81472,
+          "rmse": 0.125078,
+          "mae": 0.097893,
+          "spearman": 0.920364,
+          "train_row_count": 1435,
+          "test_row_count": 152,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1970",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.886895,
+          "rmse": 0.097721,
+          "mae": 0.073935,
+          "spearman": 0.945746,
+          "train_row_count": 1434,
+          "test_row_count": 153,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1980",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.913299,
+          "rmse": 0.085511,
+          "mae": 0.0635,
+          "spearman": 0.954562,
+          "train_row_count": 1420,
+          "test_row_count": 167,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1990",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.882923,
+          "rmse": 0.09936,
+          "mae": 0.074267,
+          "spearman": 0.942867,
+          "train_row_count": 1418,
+          "test_row_count": 169,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2000",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.920524,
+          "rmse": 0.081865,
+          "mae": 0.058181,
+          "spearman": 0.956698,
+          "train_row_count": 1418,
+          "test_row_count": 169,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2010",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.91403,
+          "rmse": 0.085144,
+          "mae": 0.06,
+          "spearman": 0.9576,
+          "train_row_count": 1418,
+          "test_row_count": 169,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2020",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.85522,
+          "rmse": 0.110493,
+          "mae": 0.079718,
+          "spearman": 0.921234,
+          "train_row_count": 1418,
+          "test_row_count": 169,
+          "is_small_sample_holdout": false
+        }
+      ],
+      "weakest_holdouts": [
+        {
+          "holdout_label": "1960",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.81472,
+          "rmse": 0.125078,
+          "mae": 0.097893,
+          "spearman": 0.920364,
+          "train_row_count": 1435,
+          "test_row_count": 152,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2020",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.85522,
+          "rmse": 0.110493,
+          "mae": 0.079718,
+          "spearman": 0.921234,
+          "train_row_count": 1418,
+          "test_row_count": 169,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1990",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.882923,
+          "rmse": 0.09936,
+          "mae": 0.074267,
+          "spearman": 0.942867,
+          "train_row_count": 1418,
+          "test_row_count": 169,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1970",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.886895,
+          "rmse": 0.097721,
+          "mae": 0.073935,
+          "spearman": 0.945746,
+          "train_row_count": 1434,
+          "test_row_count": 153,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1980",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.913299,
+          "rmse": 0.085511,
+          "mae": 0.0635,
+          "spearman": 0.954562,
+          "train_row_count": 1420,
+          "test_row_count": 167,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2010",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.91403,
+          "rmse": 0.085144,
+          "mae": 0.06,
+          "spearman": 0.9576,
+          "train_row_count": 1418,
+          "test_row_count": 169,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2000",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.920524,
+          "rmse": 0.081865,
+          "mae": 0.058181,
+          "spearman": 0.956698,
+          "train_row_count": 1418,
+          "test_row_count": 169,
+          "is_small_sample_holdout": false
+        }
+      ],
+      "weakest_countries": [
+        {
+          "holdout_label": "2020",
+          "iso3": "TWN",
+          "country_name": "Taiwan, Province of China",
+          "region_name": "East Asia",
+          "mean_abs_residual": 0.465022,
+          "mean_residual": 0.465022,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2020",
+          "iso3": "VEN",
+          "country_name": "Venezuela (Bolivarian Republic of)",
+          "region_name": "Latin America",
+          "mean_abs_residual": 0.398205,
+          "mean_residual": -0.398205,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2010",
+          "iso3": "TWN",
+          "country_name": "Taiwan, Province of China",
+          "region_name": "East Asia",
+          "mean_abs_residual": 0.375478,
+          "mean_residual": 0.375478,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2020",
+          "iso3": "SYR",
+          "country_name": "Syrian Arab Republic",
+          "region_name": "Middle East and North Africa",
+          "mean_abs_residual": 0.375281,
+          "mean_residual": -0.375281,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2010",
+          "iso3": "GNQ",
+          "country_name": "Equatorial Guinea",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.363636,
+          "mean_residual": 0.363636,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2000",
+          "iso3": "TWN",
+          "country_name": "Taiwan, Province of China",
+          "region_name": "East Asia",
+          "mean_abs_residual": 0.346068,
+          "mean_residual": 0.346068,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1990",
+          "iso3": "TWN",
+          "country_name": "Taiwan, Province of China",
+          "region_name": "East Asia",
+          "mean_abs_residual": 0.337698,
+          "mean_residual": 0.337698,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1960",
+          "iso3": "CSK",
+          "country_name": "Czechoslovakia",
+          "region_name": "Eastern Europe",
+          "mean_abs_residual": 0.327655,
+          "mean_residual": 0.327655,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1960",
+          "iso3": "VEN",
+          "country_name": "Venezuela (Bolivarian Republic of)",
+          "region_name": "Latin America",
+          "mean_abs_residual": 0.323612,
+          "mean_residual": 0.323612,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2000",
+          "iso3": "GNQ",
+          "country_name": "Equatorial Guinea",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.317926,
+          "mean_residual": 0.317926,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1990",
+          "iso3": "LBN",
+          "country_name": "Lebanon",
+          "region_name": "Middle East and North Africa",
+          "mean_abs_residual": 0.313309,
+          "mean_residual": -0.313309,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1990",
+          "iso3": "KWT",
+          "country_name": "Kuwait",
+          "region_name": "Middle East and North Africa",
+          "mean_abs_residual": 0.311591,
+          "mean_residual": -0.311591,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1960",
+          "iso3": "BRB",
+          "country_name": "Barbados",
+          "region_name": "Latin America",
+          "mean_abs_residual": 0.300692,
+          "mean_residual": 0.300692,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2010",
+          "iso3": "LBY",
+          "country_name": "Libya",
+          "region_name": "Middle East and North Africa",
+          "mean_abs_residual": 0.295933,
+          "mean_residual": 0.295933,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1960",
+          "iso3": "COM",
+          "country_name": "Comoros",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.295881,
+          "mean_residual": -0.295881,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1970",
+          "iso3": "CSK",
+          "country_name": "Czechoslovakia",
+          "region_name": "Eastern Europe",
+          "mean_abs_residual": 0.292473,
+          "mean_residual": 0.292473,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1960",
+          "iso3": "SWZ",
+          "country_name": "Swaziland",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.290408,
+          "mean_residual": -0.290408,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1970",
+          "iso3": "COM",
+          "country_name": "Comoros",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.287691,
+          "mean_residual": -0.287691,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1980",
+          "iso3": "COM",
+          "country_name": "Comoros",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.285539,
+          "mean_residual": -0.285539,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1990",
+          "iso3": "QAT",
+          "country_name": "Qatar",
+          "region_name": "Middle East and North Africa",
+          "mean_abs_residual": 0.281561,
+          "mean_residual": -0.281561,
+          "row_count": 1
+        }
+      ],
+      "weakest_holdout_countries": [
+        {
+          "holdout_label": "1960",
+          "countries": [
+            {
+              "holdout_label": "1960",
+              "iso3": "CSK",
+              "country_name": "Czechoslovakia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.327655,
+              "mean_residual": 0.327655,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1960",
+              "iso3": "VEN",
+              "country_name": "Venezuela (Bolivarian Republic of)",
+              "region_name": "Latin America",
+              "mean_abs_residual": 0.323612,
+              "mean_residual": 0.323612,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1960",
+              "iso3": "BRB",
+              "country_name": "Barbados",
+              "region_name": "Latin America",
+              "mean_abs_residual": 0.300692,
+              "mean_residual": 0.300692,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1960",
+              "iso3": "COM",
+              "country_name": "Comoros",
+              "region_name": "Sub Saharan Africa",
+              "mean_abs_residual": 0.295881,
+              "mean_residual": -0.295881,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1960",
+              "iso3": "SWZ",
+              "country_name": "Swaziland",
+              "region_name": "Sub Saharan Africa",
+              "mean_abs_residual": 0.290408,
+              "mean_residual": -0.290408,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "2020",
+          "countries": [
+            {
+              "holdout_label": "2020",
+              "iso3": "TWN",
+              "country_name": "Taiwan, Province of China",
+              "region_name": "East Asia",
+              "mean_abs_residual": 0.465022,
+              "mean_residual": 0.465022,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020",
+              "iso3": "VEN",
+              "country_name": "Venezuela (Bolivarian Republic of)",
+              "region_name": "Latin America",
+              "mean_abs_residual": 0.398205,
+              "mean_residual": -0.398205,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020",
+              "iso3": "SYR",
+              "country_name": "Syrian Arab Republic",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.375281,
+              "mean_residual": -0.375281,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020",
+              "iso3": "PSE",
+              "country_name": "State of Palestine",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.265043,
+              "mean_residual": -0.265043,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020",
+              "iso3": "CSK",
+              "country_name": "Czechoslovakia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.262163,
+              "mean_residual": 0.262163,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "1990",
+          "countries": [
+            {
+              "holdout_label": "1990",
+              "iso3": "TWN",
+              "country_name": "Taiwan, Province of China",
+              "region_name": "East Asia",
+              "mean_abs_residual": 0.337698,
+              "mean_residual": 0.337698,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1990",
+              "iso3": "LBN",
+              "country_name": "Lebanon",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.313309,
+              "mean_residual": -0.313309,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1990",
+              "iso3": "KWT",
+              "country_name": "Kuwait",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.311591,
+              "mean_residual": -0.311591,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1990",
+              "iso3": "QAT",
+              "country_name": "Qatar",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.281561,
+              "mean_residual": -0.281561,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1990",
+              "iso3": "CSK",
+              "country_name": "Czechoslovakia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.259696,
+              "mean_residual": 0.259696,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "1970",
+          "countries": [
+            {
+              "holdout_label": "1970",
+              "iso3": "CSK",
+              "country_name": "Czechoslovakia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.292473,
+              "mean_residual": 0.292473,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1970",
+              "iso3": "COM",
+              "country_name": "Comoros",
+              "region_name": "Sub Saharan Africa",
+              "mean_abs_residual": 0.287691,
+              "mean_residual": -0.287691,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1970",
+              "iso3": "BRB",
+              "country_name": "Barbados",
+              "region_name": "Latin America",
+              "mean_abs_residual": 0.276502,
+              "mean_residual": 0.276502,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1970",
+              "iso3": "CIV",
+              "country_name": "C\u00f4te d'Ivoire",
+              "region_name": "Sub Saharan Africa",
+              "mean_abs_residual": 0.241559,
+              "mean_residual": 0.241559,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1970",
+              "iso3": "SUN",
+              "country_name": "Former USSR",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.239842,
+              "mean_residual": 0.239842,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "1980",
+          "countries": [
+            {
+              "holdout_label": "1980",
+              "iso3": "COM",
+              "country_name": "Comoros",
+              "region_name": "Sub Saharan Africa",
+              "mean_abs_residual": 0.285539,
+              "mean_residual": -0.285539,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1980",
+              "iso3": "CPV",
+              "country_name": "Cabo Verde",
+              "region_name": "Sub Saharan Africa",
+              "mean_abs_residual": 0.264235,
+              "mean_residual": -0.264235,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1980",
+              "iso3": "LBN",
+              "country_name": "Lebanon",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.256936,
+              "mean_residual": -0.256936,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1980",
+              "iso3": "CSK",
+              "country_name": "Czechoslovakia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.24399,
+              "mean_residual": 0.24399,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1980",
+              "iso3": "OMN",
+              "country_name": "Oman",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.237212,
+              "mean_residual": -0.237212,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "2010",
+          "countries": [
+            {
+              "holdout_label": "2010",
+              "iso3": "TWN",
+              "country_name": "Taiwan, Province of China",
+              "region_name": "East Asia",
+              "mean_abs_residual": 0.375478,
+              "mean_residual": 0.375478,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2010",
+              "iso3": "GNQ",
+              "country_name": "Equatorial Guinea",
+              "region_name": "Sub Saharan Africa",
+              "mean_abs_residual": 0.363636,
+              "mean_residual": 0.363636,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2010",
+              "iso3": "LBY",
+              "country_name": "Libya",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.295933,
+              "mean_residual": 0.295933,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2010",
+              "iso3": "OMN",
+              "country_name": "Oman",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.236423,
+              "mean_residual": 0.236423,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2010",
+              "iso3": "CSK",
+              "country_name": "Czechoslovakia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.231586,
+              "mean_residual": 0.231586,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "2000",
+          "countries": [
+            {
+              "holdout_label": "2000",
+              "iso3": "TWN",
+              "country_name": "Taiwan, Province of China",
+              "region_name": "East Asia",
+              "mean_abs_residual": 0.346068,
+              "mean_residual": 0.346068,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2000",
+              "iso3": "GNQ",
+              "country_name": "Equatorial Guinea",
+              "region_name": "Sub Saharan Africa",
+              "mean_abs_residual": 0.317926,
+              "mean_residual": 0.317926,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2000",
+              "iso3": "CSK",
+              "country_name": "Czechoslovakia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.22968,
+              "mean_residual": 0.22968,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2000",
+              "iso3": "MDA",
+              "country_name": "Republic of Moldova",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.210553,
+              "mean_residual": -0.210553,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2000",
+              "iso3": "IRQ",
+              "country_name": "Iraq",
+              "region_name": "Middle East and North Africa",
+              "mean_abs_residual": 0.208422,
+              "mean_residual": -0.208422,
+              "row_count": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "strategy": "leave_region_out",
+      "score_count": 280,
+      "holdout_count": 35,
+      "small_sample_holdout_threshold": 5,
+      "small_sample_holdout_count": 7,
+      "best_overall": {
+        "holdout_label": "1970:Asia",
+        "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+        "model_name": "gradient_boosting",
+        "model_family": "boosted_tree",
+        "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+        "feature_tier": null,
+        "feature_tier_label": null,
+        "r2": 0.677775,
+        "rmse": 0.171228,
+        "mae": 0.132505,
+        "spearman": 0.882687,
+        "train_row_count": 104,
+        "test_row_count": 33,
+        "is_small_sample_holdout": false
+      },
+      "mean_scores_by_feature_set": [
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "boosted_tree",
+          "mean_r2": -21.964251,
+          "mean_rmse": 0.18136,
+          "mean_mae": 0.151888,
+          "mean_spearman": 0.428631,
+          "holdout_count": 35
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "boosted_tree",
+          "mean_r2": -36.385031,
+          "mean_rmse": 0.195667,
+          "mean_mae": 0.164706,
+          "mean_spearman": 0.402123,
+          "holdout_count": 35
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "baseline",
+          "mean_r2": -214.622687,
+          "mean_rmse": 0.348026,
+          "mean_mae": 0.31731,
+          "mean_spearman": null,
+          "holdout_count": 35
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "baseline",
+          "mean_r2": -214.622687,
+          "mean_rmse": 0.348026,
+          "mean_mae": 0.31731,
+          "mean_spearman": null,
+          "holdout_count": 35
+        }
+      ],
+      "mean_scores_by_feature_set_large_holdouts": [
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "boosted_tree",
+          "mean_r2": 0.092999,
+          "mean_rmse": 0.180968,
+          "mean_mae": 0.14809,
+          "mean_spearman": 0.642932,
+          "holdout_count": 28
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "boosted_tree",
+          "mean_r2": 0.02665,
+          "mean_rmse": 0.188862,
+          "mean_mae": 0.154975,
+          "mean_spearman": 0.645511,
+          "holdout_count": 28
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "baseline",
+          "mean_r2": -2.611244,
+          "mean_rmse": 0.330812,
+          "mean_mae": 0.292874,
+          "mean_spearman": null,
+          "holdout_count": 28
+        },
+        {
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "model_family": "baseline",
+          "mean_r2": -2.611244,
+          "mean_rmse": 0.330812,
+          "mean_mae": 0.292874,
+          "mean_spearman": null,
+          "holdout_count": 28
+        }
+      ],
+      "best_holdouts": [
+        {
+          "holdout_label": "1960:Africa",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.372229,
+          "rmse": 0.224093,
+          "mae": 0.199166,
+          "spearman": 0.413259,
+          "train_row_count": 90,
+          "test_row_count": 46,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1960:Americas",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.37183,
+          "rmse": 0.141879,
+          "mae": 0.091734,
+          "spearman": 0.656923,
+          "train_row_count": 111,
+          "test_row_count": 25,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1960:Asia",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.496247,
+          "rmse": 0.205565,
+          "mae": 0.169613,
+          "spearman": 0.806818,
+          "train_row_count": 103,
+          "test_row_count": 33,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1960:Europe",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.057091,
+          "rmse": 0.150205,
+          "mae": 0.127594,
+          "spearman": 0.640044,
+          "train_row_count": 106,
+          "test_row_count": 30,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1960:Oceania",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -275.564657,
+          "rmse": 0.110134,
+          "mae": 0.1024,
+          "spearman": 1.0,
+          "train_row_count": 134,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "1970:Africa",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.201582,
+          "rmse": 0.160359,
+          "mae": 0.126746,
+          "spearman": 0.466064,
+          "train_row_count": 91,
+          "test_row_count": 46,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1970:Americas",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.468043,
+          "rmse": 0.139159,
+          "mae": 0.108397,
+          "spearman": 0.717692,
+          "train_row_count": 112,
+          "test_row_count": 25,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1970:Asia",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.677775,
+          "rmse": 0.171228,
+          "mae": 0.132505,
+          "spearman": 0.882687,
+          "train_row_count": 104,
+          "test_row_count": 33,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1970:Europe",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.593358,
+          "rmse": 0.178669,
+          "mae": 0.150202,
+          "spearman": 0.752419,
+          "train_row_count": 106,
+          "test_row_count": 31,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1970:Oceania",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -189.212701,
+          "rmse": 0.136103,
+          "mae": 0.133179,
+          "spearman": -1.0,
+          "train_row_count": 135,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "1980:Africa",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.098692,
+          "rmse": 0.16444,
+          "mae": 0.13054,
+          "spearman": 0.531422,
+          "train_row_count": 105,
+          "test_row_count": 46,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1980:Americas",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.582454,
+          "rmse": 0.130305,
+          "mae": 0.111042,
+          "spearman": 0.797461,
+          "train_row_count": 126,
+          "test_row_count": 25,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1980:Asia",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.495483,
+          "rmse": 0.196206,
+          "mae": 0.158865,
+          "spearman": 0.735398,
+          "train_row_count": 110,
+          "test_row_count": 41,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1980:Europe",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.075464,
+          "rmse": 0.151619,
+          "mae": 0.11301,
+          "spearman": 0.514936,
+          "train_row_count": 114,
+          "test_row_count": 37,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1980:Oceania",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -37.87007,
+          "rmse": 0.206568,
+          "mae": 0.194297,
+          "spearman": -1.0,
+          "train_row_count": 149,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "1990:Africa",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.040777,
+          "rmse": 0.154131,
+          "mae": 0.129645,
+          "spearman": 0.548398,
+          "train_row_count": 107,
+          "test_row_count": 46,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1990:Americas",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.482082,
+          "rmse": 0.15185,
+          "mae": 0.12715,
+          "spearman": 0.771538,
+          "train_row_count": 128,
+          "test_row_count": 25,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1990:Asia",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.583008,
+          "rmse": 0.160932,
+          "mae": 0.12392,
+          "spearman": 0.777328,
+          "train_row_count": 111,
+          "test_row_count": 42,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1990:Europe",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.270518,
+          "rmse": 0.134541,
+          "mae": 0.11227,
+          "spearman": 0.698435,
+          "train_row_count": 115,
+          "test_row_count": 38,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "1990:Oceania",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -35.620701,
+          "rmse": 0.144083,
+          "mae": 0.126782,
+          "spearman": -1.0,
+          "train_row_count": 151,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "2000:Africa",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.10756,
+          "rmse": 0.181523,
+          "mae": 0.155597,
+          "spearman": 0.520444,
+          "train_row_count": 107,
+          "test_row_count": 46,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2000:Americas",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.572655,
+          "rmse": 0.13627,
+          "mae": 0.115412,
+          "spearman": 0.808462,
+          "train_row_count": 128,
+          "test_row_count": 25,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2000:Asia",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.482114,
+          "rmse": 0.190925,
+          "mae": 0.153379,
+          "spearman": 0.701321,
+          "train_row_count": 111,
+          "test_row_count": 42,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2000:Europe",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.072779,
+          "rmse": 0.195224,
+          "mae": 0.161105,
+          "spearman": 0.673487,
+          "train_row_count": 115,
+          "test_row_count": 38,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2000:Oceania",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -13.759729,
+          "rmse": 0.171511,
+          "mae": 0.122667,
+          "spearman": -1.0,
+          "train_row_count": 151,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "2010:Africa",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.232848,
+          "rmse": 0.186853,
+          "mae": 0.160562,
+          "spearman": 0.63836,
+          "train_row_count": 107,
+          "test_row_count": 46,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2010:Americas",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.537043,
+          "rmse": 0.142493,
+          "mae": 0.105272,
+          "spearman": 0.812308,
+          "train_row_count": 128,
+          "test_row_count": 25,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2010:Asia",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.479956,
+          "rmse": 0.19048,
+          "mae": 0.151315,
+          "spearman": 0.732437,
+          "train_row_count": 111,
+          "test_row_count": 42,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2010:Europe",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.424394,
+          "rmse": 0.200942,
+          "mae": 0.163273,
+          "spearman": 0.725791,
+          "train_row_count": 115,
+          "test_row_count": 38,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2010:Oceania",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -7.573038,
+          "rmse": 0.182998,
+          "mae": 0.158992,
+          "spearman": -1.0,
+          "train_row_count": 151,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "2020:Africa",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.149506,
+          "rmse": 0.165743,
+          "mae": 0.136205,
+          "spearman": 0.560777,
+          "train_row_count": 107,
+          "test_row_count": 46,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2020:Americas",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.607368,
+          "rmse": 0.1299,
+          "mae": 0.107453,
+          "spearman": 0.909231,
+          "train_row_count": 128,
+          "test_row_count": 25,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2020:Asia",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": 0.349976,
+          "rmse": 0.212974,
+          "mae": 0.169981,
+          "spearman": 0.621587,
+          "train_row_count": 111,
+          "test_row_count": 42,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2020:Europe",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.655198,
+          "rmse": 0.204674,
+          "mae": 0.172794,
+          "spearman": 0.690338,
+          "train_row_count": 115,
+          "test_row_count": 38,
+          "is_small_sample_holdout": false
+        },
+        {
+          "holdout_label": "2020:Oceania",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -20.255758,
+          "rmse": 0.233264,
+          "mae": 0.221834,
+          "spearman": -1.0,
+          "train_row_count": 151,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        }
+      ],
+      "weakest_holdouts": [
+        {
+          "holdout_label": "1960:Oceania",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -275.564657,
+          "rmse": 0.110134,
+          "mae": 0.1024,
+          "spearman": 1.0,
+          "train_row_count": 134,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "1970:Oceania",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -189.212701,
+          "rmse": 0.136103,
+          "mae": 0.133179,
+          "spearman": -1.0,
+          "train_row_count": 135,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "1980:Oceania",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -37.87007,
+          "rmse": 0.206568,
+          "mae": 0.194297,
+          "spearman": -1.0,
+          "train_row_count": 149,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "1990:Oceania",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -35.620701,
+          "rmse": 0.144083,
+          "mae": 0.126782,
+          "spearman": -1.0,
+          "train_row_count": 151,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "2020:Oceania",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -20.255758,
+          "rmse": 0.233264,
+          "mae": 0.221834,
+          "spearman": -1.0,
+          "train_row_count": 151,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "2000:Oceania",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -13.759729,
+          "rmse": 0.171511,
+          "mae": 0.122667,
+          "spearman": -1.0,
+          "train_row_count": 151,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "2010:Oceania",
+          "spec_name": "hist_gb__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -7.573038,
+          "rmse": 0.182998,
+          "mae": 0.158992,
+          "spearman": -1.0,
+          "train_row_count": 151,
+          "test_row_count": 2,
+          "is_small_sample_holdout": true
+        },
+        {
+          "holdout_label": "2020:Europe",
+          "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+          "feature_tier": null,
+          "feature_tier_label": null,
+          "r2": -0.655198,
+          "rmse": 0.204674,
+          "mae": 0.172794,
+          "spearman": 0.690338,
+          "train_row_count": 115,
+          "test_row_count": 38,
+          "is_small_sample_holdout": false
+        }
+      ],
+      "weakest_countries": [
+        {
+          "holdout_label": "1960:Asia",
+          "iso3": "MNG",
+          "country_name": "Mongolia",
+          "region_name": "South and South East Asia",
+          "mean_abs_residual": 0.567083,
+          "mean_residual": -0.567083,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1970:Asia",
+          "iso3": "MNG",
+          "country_name": "Mongolia",
+          "region_name": "South and South East Asia",
+          "mean_abs_residual": 0.533887,
+          "mean_residual": -0.533887,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2000:Africa",
+          "iso3": "DJI",
+          "country_name": "Djibouti",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.523194,
+          "mean_residual": -0.523194,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2010:Asia",
+          "iso3": "PRK",
+          "country_name": "D.P.R. of Korea",
+          "region_name": "East Asia",
+          "mean_abs_residual": 0.52233,
+          "mean_residual": -0.52233,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1980:Asia",
+          "iso3": "MNG",
+          "country_name": "Mongolia",
+          "region_name": "South and South East Asia",
+          "mean_abs_residual": 0.521835,
+          "mean_residual": -0.521835,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1970:Africa",
+          "iso3": "NAM",
+          "country_name": "Namibia",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.510419,
+          "mean_residual": 0.510419,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1960:Africa",
+          "iso3": "NAM",
+          "country_name": "Namibia",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.490883,
+          "mean_residual": 0.490883,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2020:Asia",
+          "iso3": "TWN",
+          "country_name": "Taiwan, Province of China",
+          "region_name": "East Asia",
+          "mean_abs_residual": 0.490571,
+          "mean_residual": 0.490571,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1960:Americas",
+          "iso3": "TTO",
+          "country_name": "Trinidad and Tobago",
+          "region_name": "Latin America",
+          "mean_abs_residual": 0.480475,
+          "mean_residual": 0.480475,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2010:Africa",
+          "iso3": "GNQ",
+          "country_name": "Equatorial Guinea",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.465606,
+          "mean_residual": 0.465606,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2010:Europe",
+          "iso3": "AUT",
+          "country_name": "Austria",
+          "region_name": "Western Europe",
+          "mean_abs_residual": 0.458545,
+          "mean_residual": 0.458545,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2020:Asia",
+          "iso3": "PRK",
+          "country_name": "D.P.R. of Korea",
+          "region_name": "East Asia",
+          "mean_abs_residual": 0.446349,
+          "mean_residual": -0.446349,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2010:Europe",
+          "iso3": "SVN",
+          "country_name": "Slovenia",
+          "region_name": "Eastern Europe",
+          "mean_abs_residual": 0.44165,
+          "mean_residual": 0.44165,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1970:Europe",
+          "iso3": "CHE",
+          "country_name": "Switzerland",
+          "region_name": "Western Europe",
+          "mean_abs_residual": 0.436891,
+          "mean_residual": 0.436891,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2010:Africa",
+          "iso3": "DJI",
+          "country_name": "Djibouti",
+          "region_name": "Sub Saharan Africa",
+          "mean_abs_residual": 0.436146,
+          "mean_residual": -0.436146,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2000:Europe",
+          "iso3": "CHE",
+          "country_name": "Switzerland",
+          "region_name": "Western Europe",
+          "mean_abs_residual": 0.429411,
+          "mean_residual": 0.429411,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1990:Asia",
+          "iso3": "LBN",
+          "country_name": "Lebanon",
+          "region_name": "Middle East and North Africa",
+          "mean_abs_residual": 0.428725,
+          "mean_residual": -0.428725,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2000:Europe",
+          "iso3": "FIN",
+          "country_name": "Finland",
+          "region_name": "Western Europe",
+          "mean_abs_residual": 0.409997,
+          "mean_residual": 0.409997,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "2020:Asia",
+          "iso3": "SYR",
+          "country_name": "Syrian Arab Republic",
+          "region_name": "Middle East and North Africa",
+          "mean_abs_residual": 0.40965,
+          "mean_residual": -0.40965,
+          "row_count": 1
+        },
+        {
+          "holdout_label": "1980:Europe",
+          "iso3": "CHE",
+          "country_name": "Switzerland",
+          "region_name": "Western Europe",
+          "mean_abs_residual": 0.40942,
+          "mean_residual": 0.40942,
+          "row_count": 1
+        }
+      ],
+      "weakest_holdout_countries": [
+        {
+          "holdout_label": "1960:Oceania",
+          "countries": [
+            {
+              "holdout_label": "1960:Oceania",
+              "iso3": "AUS",
+              "country_name": "Australia",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.142943,
+              "mean_residual": 0.142943,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1960:Oceania",
+              "iso3": "NZL",
+              "country_name": "New Zealand",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.061858,
+              "mean_residual": 0.061858,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "1970:Oceania",
+          "countries": [
+            {
+              "holdout_label": "1970:Oceania",
+              "iso3": "AUS",
+              "country_name": "Australia",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.161241,
+              "mean_residual": 0.161241,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1970:Oceania",
+              "iso3": "NZL",
+              "country_name": "New Zealand",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.105116,
+              "mean_residual": 0.105116,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "1980:Oceania",
+          "countries": [
+            {
+              "holdout_label": "1980:Oceania",
+              "iso3": "AUS",
+              "country_name": "Australia",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.264432,
+              "mean_residual": 0.264432,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1980:Oceania",
+              "iso3": "NZL",
+              "country_name": "New Zealand",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.124161,
+              "mean_residual": 0.124161,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "1990:Oceania",
+          "countries": [
+            {
+              "holdout_label": "1990:Oceania",
+              "iso3": "AUS",
+              "country_name": "Australia",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.195239,
+              "mean_residual": 0.195239,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "1990:Oceania",
+              "iso3": "NZL",
+              "country_name": "New Zealand",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.058325,
+              "mean_residual": 0.058325,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "2020:Oceania",
+          "countries": [
+            {
+              "holdout_label": "2020:Oceania",
+              "iso3": "AUS",
+              "country_name": "Australia",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.293957,
+              "mean_residual": 0.293957,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020:Oceania",
+              "iso3": "NZL",
+              "country_name": "New Zealand",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.149712,
+              "mean_residual": 0.149712,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "2000:Oceania",
+          "countries": [
+            {
+              "holdout_label": "2000:Oceania",
+              "iso3": "AUS",
+              "country_name": "Australia",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.242537,
+              "mean_residual": 0.242537,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2000:Oceania",
+              "iso3": "NZL",
+              "country_name": "New Zealand",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.002798,
+              "mean_residual": 0.002798,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "2010:Oceania",
+          "countries": [
+            {
+              "holdout_label": "2010:Oceania",
+              "iso3": "AUS",
+              "country_name": "Australia",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.249601,
+              "mean_residual": 0.249601,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2010:Oceania",
+              "iso3": "NZL",
+              "country_name": "New Zealand",
+              "region_name": "Western Offshoots",
+              "mean_abs_residual": 0.068383,
+              "mean_residual": 0.068383,
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "holdout_label": "2020:Europe",
+          "countries": [
+            {
+              "holdout_label": "2020:Europe",
+              "iso3": "AUT",
+              "country_name": "Austria",
+              "region_name": "Western Europe",
+              "mean_abs_residual": 0.39942,
+              "mean_residual": 0.39942,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020:Europe",
+              "iso3": "SVN",
+              "country_name": "Slovenia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.370712,
+              "mean_residual": 0.370712,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020:Europe",
+              "iso3": "SVK",
+              "country_name": "Slovakia",
+              "region_name": "Eastern Europe",
+              "mean_abs_residual": 0.364665,
+              "mean_residual": 0.364665,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020:Europe",
+              "iso3": "FIN",
+              "country_name": "Finland",
+              "region_name": "Western Europe",
+              "mean_abs_residual": 0.356436,
+              "mean_residual": 0.356436,
+              "row_count": 1
+            },
+            {
+              "holdout_label": "2020:Europe",
+              "iso3": "CHE",
+              "country_name": "Switzerland",
+              "region_name": "Western Europe",
+              "mean_abs_residual": 0.334435,
+              "mean_residual": 0.334435,
+              "row_count": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

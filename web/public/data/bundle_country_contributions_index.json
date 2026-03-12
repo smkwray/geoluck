@@ -1,0 +1,36 @@
+{
+  "targets": [
+    {
+      "target": "income",
+      "target_label": "Income rank percentile",
+      "path": "bundle_country_contributions_income.json",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "top_k": 8
+    },
+    {
+      "target": "life_expectancy",
+      "target_label": "Life expectancy rank percentile",
+      "path": "bundle_country_contributions_life_expectancy.json",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "top_k": 8
+    },
+    {
+      "target": "inequality",
+      "target_label": "Disposable-income Gini rank percentile",
+      "path": "bundle_country_contributions_inequality.json",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "top_k": 8
+    },
+    {
+      "target": "wealth",
+      "target_label": "Produced capital per capita rank percentile",
+      "path": "bundle_country_contributions_wealth.json",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "top_k": 8
+    }
+  ]
+}

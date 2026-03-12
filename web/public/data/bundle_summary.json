@@ -1,0 +1,579 @@
+{
+  "targets": [
+    {
+      "target": "income",
+      "target_label": "Income rank percentile",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "best_overall": {
+        "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+        "model_name": "gradient_boosting",
+        "model_family": "boosted_tree",
+        "feature_set": "tier3_only_social_structure_v1",
+        "feature_tier": "tier3_only",
+        "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+        "feature_components": [
+          "tier3"
+        ],
+        "decade": 2020,
+        "r2": 0.863272,
+        "rmse": 0.107376,
+        "mae": 0.079463,
+        "spearman": 0.928407
+      },
+      "bundles": [
+        {
+          "feature_set": "tier1_pure_nature_v1",
+          "feature_tier": "tier1",
+          "feature_tier_label": "Tier 1 - Natural Endowment",
+          "feature_components": [
+            "tier1"
+          ],
+          "spec_name": "gradient_boosting__tier1_pure_nature_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 169,
+          "r2": 0.519795,
+          "rmse": 0.20123,
+          "mae": 0.154514,
+          "spearman": 0.718964
+        },
+        {
+          "feature_set": "tier1_tier3_without_tier2_v1",
+          "feature_tier": "tier13",
+          "feature_tier_label": "Tier 1 + Tier 3 - No Tier 2",
+          "feature_components": [
+            "tier1",
+            "tier3"
+          ],
+          "spec_name": "hist_gb__tier1_tier3_without_tier2_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "row_count": 169,
+          "r2": 0.862277,
+          "rmse": 0.107766,
+          "mae": 0.080203,
+          "spearman": 0.926794
+        },
+        {
+          "feature_set": "tier2_only_resource_development_v1",
+          "feature_tier": "tier2_only",
+          "feature_tier_label": "Tier 2 Only - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier2"
+          ],
+          "spec_name": "hist_gb__tier2_only_resource_development_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "row_count": 169,
+          "r2": 0.660944,
+          "rmse": 0.169089,
+          "mae": 0.130256,
+          "spearman": 0.813458
+        },
+        {
+          "feature_set": "tier2_resource_utilization_v1",
+          "feature_tier": "tier2",
+          "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier1",
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_resource_utilization_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 169,
+          "r2": 0.717736,
+          "rmse": 0.154279,
+          "mae": 0.121905,
+          "spearman": 0.847683
+        },
+        {
+          "feature_set": "tier2_tier3_without_tier1_v1",
+          "feature_tier": "tier23",
+          "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+          "feature_components": [
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 169,
+          "r2": 0.855576,
+          "rmse": 0.110357,
+          "mae": 0.078907,
+          "spearman": 0.924061
+        },
+        {
+          "feature_set": "tier3_institutional_cultural_v1",
+          "feature_tier": "tier3",
+          "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier1",
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 169,
+          "r2": 0.853608,
+          "rmse": 0.111106,
+          "mae": 0.080264,
+          "spearman": 0.921456
+        },
+        {
+          "feature_set": "tier3_only_social_structure_v1",
+          "feature_tier": "tier3_only",
+          "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 169,
+          "r2": 0.863272,
+          "rmse": 0.107376,
+          "mae": 0.079463,
+          "spearman": 0.928407
+        }
+      ]
+    },
+    {
+      "target": "life_expectancy",
+      "target_label": "Life expectancy rank percentile",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "best_overall": {
+        "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
+        "model_name": "gradient_boosting",
+        "model_family": "boosted_tree",
+        "feature_set": "tier2_tier3_without_tier1_v1",
+        "feature_tier": "tier23",
+        "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+        "feature_components": [
+          "tier2",
+          "tier3"
+        ],
+        "decade": 2020,
+        "r2": 0.88821,
+        "rmse": 0.097105,
+        "mae": 0.075345,
+        "spearman": 0.940304
+      },
+      "bundles": [
+        {
+          "feature_set": "tier1_pure_nature_v1",
+          "feature_tier": "tier1",
+          "feature_tier_label": "Tier 1 - Natural Endowment",
+          "feature_components": [
+            "tier1"
+          ],
+          "spec_name": "gradient_boosting__tier1_pure_nature_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 165,
+          "r2": 0.667121,
+          "rmse": 0.167566,
+          "mae": 0.129073,
+          "spearman": 0.824558
+        },
+        {
+          "feature_set": "tier1_tier3_without_tier2_v1",
+          "feature_tier": "tier13",
+          "feature_tier_label": "Tier 1 + Tier 3 - No Tier 2",
+          "feature_components": [
+            "tier1",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier1_tier3_without_tier2_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 165,
+          "r2": 0.884024,
+          "rmse": 0.098907,
+          "mae": 0.076054,
+          "spearman": 0.936543
+        },
+        {
+          "feature_set": "tier2_only_resource_development_v1",
+          "feature_tier": "tier2_only",
+          "feature_tier_label": "Tier 2 Only - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier2"
+          ],
+          "spec_name": "hist_gb__tier2_only_resource_development_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "row_count": 165,
+          "r2": 0.676392,
+          "rmse": 0.165216,
+          "mae": 0.131529,
+          "spearman": 0.81955
+        },
+        {
+          "feature_set": "tier2_resource_utilization_v1",
+          "feature_tier": "tier2",
+          "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier1",
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_resource_utilization_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 165,
+          "r2": 0.759681,
+          "rmse": 0.142376,
+          "mae": 0.112587,
+          "spearman": 0.873355
+        },
+        {
+          "feature_set": "tier2_tier3_without_tier1_v1",
+          "feature_tier": "tier23",
+          "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+          "feature_components": [
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 165,
+          "r2": 0.88821,
+          "rmse": 0.097105,
+          "mae": 0.075345,
+          "spearman": 0.940304
+        },
+        {
+          "feature_set": "tier3_institutional_cultural_v1",
+          "feature_tier": "tier3",
+          "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier1",
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 165,
+          "r2": 0.886176,
+          "rmse": 0.097985,
+          "mae": 0.07566,
+          "spearman": 0.938533
+        },
+        {
+          "feature_set": "tier3_only_social_structure_v1",
+          "feature_tier": "tier3_only",
+          "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 165,
+          "r2": 0.882622,
+          "rmse": 0.099503,
+          "mae": 0.07695,
+          "spearman": 0.937905
+        }
+      ]
+    },
+    {
+      "target": "inequality",
+      "target_label": "Disposable-income Gini rank percentile",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "best_overall": {
+        "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+        "model_name": "gradient_boosting",
+        "model_family": "boosted_tree",
+        "feature_set": "tier3_institutional_cultural_v1",
+        "feature_tier": "tier3",
+        "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+        "feature_components": [
+          "tier1",
+          "tier2",
+          "tier3"
+        ],
+        "decade": 2020,
+        "r2": 0.681239,
+        "rmse": 0.164513,
+        "mae": 0.12903,
+        "spearman": 0.825652
+      },
+      "bundles": [
+        {
+          "feature_set": "tier1_pure_nature_v1",
+          "feature_tier": "tier1",
+          "feature_tier_label": "Tier 1 - Natural Endowment",
+          "feature_components": [
+            "tier1"
+          ],
+          "spec_name": "gradient_boosting__tier1_pure_nature_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 107,
+          "r2": 0.658476,
+          "rmse": 0.170285,
+          "mae": 0.135759,
+          "spearman": 0.813421
+        },
+        {
+          "feature_set": "tier1_tier3_without_tier2_v1",
+          "feature_tier": "tier13",
+          "feature_tier_label": "Tier 1 + Tier 3 - No Tier 2",
+          "feature_components": [
+            "tier1",
+            "tier3"
+          ],
+          "spec_name": "hist_gb__tier1_tier3_without_tier2_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "row_count": 107,
+          "r2": 0.674971,
+          "rmse": 0.166122,
+          "mae": 0.127083,
+          "spearman": 0.819921
+        },
+        {
+          "feature_set": "tier2_only_resource_development_v1",
+          "feature_tier": "tier2_only",
+          "feature_tier_label": "Tier 2 Only - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_only_resource_development_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 107,
+          "r2": 0.372995,
+          "rmse": 0.230729,
+          "mae": 0.182996,
+          "spearman": 0.620411
+        },
+        {
+          "feature_set": "tier2_resource_utilization_v1",
+          "feature_tier": "tier2",
+          "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier1",
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_resource_utilization_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 107,
+          "r2": 0.652821,
+          "rmse": 0.171689,
+          "mae": 0.134433,
+          "spearman": 0.809263
+        },
+        {
+          "feature_set": "tier2_tier3_without_tier1_v1",
+          "feature_tier": "tier23",
+          "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+          "feature_components": [
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 107,
+          "r2": 0.676911,
+          "rmse": 0.165626,
+          "mae": 0.12782,
+          "spearman": 0.819466
+        },
+        {
+          "feature_set": "tier3_institutional_cultural_v1",
+          "feature_tier": "tier3",
+          "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier1",
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 107,
+          "r2": 0.681239,
+          "rmse": 0.164513,
+          "mae": 0.12903,
+          "spearman": 0.825652
+        },
+        {
+          "feature_set": "tier3_only_social_structure_v1",
+          "feature_tier": "tier3_only",
+          "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 107,
+          "r2": 0.636637,
+          "rmse": 0.175645,
+          "mae": 0.133757,
+          "spearman": 0.798217
+        }
+      ]
+    },
+    {
+      "target": "wealth",
+      "target_label": "Produced capital per capita rank percentile",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "best_overall": {
+        "spec_name": "hist_gb__tier2_tier3_without_tier1_v1",
+        "model_name": "hist_gb",
+        "model_family": "boosted_tree",
+        "feature_set": "tier2_tier3_without_tier1_v1",
+        "feature_tier": "tier23",
+        "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+        "feature_components": [
+          "tier2",
+          "tier3"
+        ],
+        "decade": 2020,
+        "r2": 0.8805,
+        "rmse": 0.100487,
+        "mae": 0.079888,
+        "spearman": 0.936022
+      },
+      "bundles": [
+        {
+          "feature_set": "tier1_pure_nature_v1",
+          "feature_tier": "tier1",
+          "feature_tier_label": "Tier 1 - Natural Endowment",
+          "feature_components": [
+            "tier1"
+          ],
+          "spec_name": "gradient_boosting__tier1_pure_nature_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 144,
+          "r2": 0.679252,
+          "rmse": 0.164629,
+          "mae": 0.133225,
+          "spearman": 0.822305
+        },
+        {
+          "feature_set": "tier1_tier3_without_tier2_v1",
+          "feature_tier": "tier13",
+          "feature_tier_label": "Tier 1 + Tier 3 - No Tier 2",
+          "feature_components": [
+            "tier1",
+            "tier3"
+          ],
+          "spec_name": "hist_gb__tier1_tier3_without_tier2_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "row_count": 144,
+          "r2": 0.873972,
+          "rmse": 0.103195,
+          "mae": 0.080943,
+          "spearman": 0.932763
+        },
+        {
+          "feature_set": "tier2_only_resource_development_v1",
+          "feature_tier": "tier2_only",
+          "feature_tier_label": "Tier 2 Only - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier2"
+          ],
+          "spec_name": "hist_gb__tier2_only_resource_development_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "row_count": 144,
+          "r2": 0.707326,
+          "rmse": 0.15726,
+          "mae": 0.125088,
+          "spearman": 0.848356
+        },
+        {
+          "feature_set": "tier2_resource_utilization_v1",
+          "feature_tier": "tier2",
+          "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier1",
+            "tier2"
+          ],
+          "spec_name": "hist_gb__tier2_resource_utilization_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "row_count": 144,
+          "r2": 0.775693,
+          "rmse": 0.137672,
+          "mae": 0.110031,
+          "spearman": 0.883088
+        },
+        {
+          "feature_set": "tier2_tier3_without_tier1_v1",
+          "feature_tier": "tier23",
+          "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+          "feature_components": [
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "hist_gb__tier2_tier3_without_tier1_v1",
+          "model_name": "hist_gb",
+          "model_family": "boosted_tree",
+          "row_count": 144,
+          "r2": 0.8805,
+          "rmse": 0.100487,
+          "mae": 0.079888,
+          "spearman": 0.936022
+        },
+        {
+          "feature_set": "tier3_institutional_cultural_v1",
+          "feature_tier": "tier3",
+          "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier1",
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 144,
+          "r2": 0.877385,
+          "rmse": 0.101788,
+          "mae": 0.082293,
+          "spearman": 0.937855
+        },
+        {
+          "feature_set": "tier3_only_social_structure_v1",
+          "feature_tier": "tier3_only",
+          "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "row_count": 144,
+          "r2": 0.872898,
+          "rmse": 0.103634,
+          "mae": 0.082646,
+          "spearman": 0.932168
+        }
+      ]
+    }
+  ],
+  "available_targets": [
+    "income",
+    "life_expectancy",
+    "inequality",
+    "wealth"
+  ],
+  "latest_decade_max": 2020
+}

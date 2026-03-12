@@ -1,0 +1,4565 @@
+{
+  "targets": [
+    {
+      "target": "income",
+      "target_label": "Income rank percentile",
+      "latest_decade": 2020,
+      "top_k": 12,
+      "bundles": [
+        {
+          "feature_set": "tier1_pure_nature_v1",
+          "feature_tier": "tier1",
+          "feature_tier_label": "Tier 1 - Natural Endowment",
+          "feature_components": [
+            "tier1"
+          ],
+          "spec_name": "gradient_boosting__tier1_pure_nature_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.519795,
+          "top_feature_importance": [
+            {
+              "feature_name": "abs_latitude",
+              "importance": 0.125848,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "kiszewski_malaria_ecology_index",
+              "importance": 0.090984,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "clim_wind_speed_ms",
+              "importance": 0.078503,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "solar_tilt_gain_over_ghi_pct",
+              "importance": 0.066568,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "clim_mean_diurnal_range_c",
+              "importance": 0.038058,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "cru_temp_decade_std_c",
+              "importance": 0.036309,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "usgs_eq_mean_depth_km",
+              "importance": 0.035436,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "wind_onshore_available_area_km2",
+              "importance": 0.034936,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "solar_opta_tilt_deg",
+              "importance": 0.024421,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "clim_precip_driest_quarter_mm",
+              "importance": 0.023377,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "ocean_npp_max_mg_c_m2_day",
+              "importance": 0.023176,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "solar_ghi_annual_kwh_m2",
+              "importance": 0.022055,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_min_pressure_mb",
+              "feature_kind": "numeric",
+              "non_null_share": 0.337278,
+              "non_null_count": 57,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "ibtracs_min_storm_min_pressure_mb",
+              "feature_kind": "numeric",
+              "non_null_share": 0.337278,
+              "non_null_count": 57,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "ibtracs_max_storm_max_wind_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.349112,
+              "non_null_count": 59,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_max_wind_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.349112,
+              "non_null_count": 59,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_min_distance_to_land_km",
+              "feature_kind": "numeric",
+              "non_null_share": 0.366864,
+              "non_null_count": 62,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_speed_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.366864,
+              "non_null_count": 62,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "ibtracs_severe_storm_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.366864,
+              "non_null_count": 62,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "usgs_eq_deep_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.526627,
+              "non_null_count": 89,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "usgs_eq_intermediate_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.526627,
+              "non_null_count": 89,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "usgs_eq_major_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.526627,
+              "non_null_count": 89,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "usgs_eq_max_magnitude",
+              "feature_kind": "numeric",
+              "non_null_share": 0.526627,
+              "non_null_count": 89,
+              "available_row_count": 169
+            }
+          ]
+        },
+        {
+          "feature_set": "tier1_tier3_without_tier2_v1",
+          "feature_tier": "tier13",
+          "feature_tier_label": "Tier 1 + Tier 3 - No Tier 2",
+          "feature_components": [
+            "tier1",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier1_tier3_without_tier2_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.848073,
+          "top_feature_importance": [
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.204045,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.181708,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wpp_population_share_15_24_pct",
+              "importance": 0.148394,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_economy",
+              "importance": 0.04875,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.037249,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.036184,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "wgi_regulatory_quality_estimate",
+              "importance": 0.033996,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "wpp_life_expectancy_birth_years",
+              "importance": 0.029277,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.026001,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "fsi_external_intervention",
+              "importance": 0.020692,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wpp_net_migration_rate_per_1000",
+              "importance": 0.018372,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.015997,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_only_resource_development_v1",
+          "feature_tier": "tier2_only",
+          "feature_tier_label": "Tier 2 Only - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_only_resource_development_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.6484,
+          "top_feature_importance": [
+            {
+              "feature_name": "forest_rents_pct_gdp",
+              "importance": 0.425918,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "aquastat_irrigation_share_pct",
+              "importance": 0.099741,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "forest_depletion_pct_gni",
+              "importance": 0.030753,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "agricultural_land_pct",
+              "importance": 0.029309,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "agricultural_minus_forest_land_pct",
+              "importance": 0.020729,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "aquastat_irrigation_dam_count",
+              "importance": 0.019139,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "fuel_exports_pct_merchandise",
+              "importance": 0.018033,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "aquastat_incomplete_or_unknown_dam_count",
+              "importance": 0.015935,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "managed_land_share_pct",
+              "importance": 0.015632,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "mrds_producer_count",
+              "importance": 0.015042,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "log_population_est",
+              "importance": 0.013653,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "gas_share_of_resource_rents_pct",
+              "importance": 0.012641,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "open_mine_iron_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "wocqi_hardgrove_grindability_index_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.047337,
+              "non_null_count": 8,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_barrels_per_tonne",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_feature_non_null_count",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_implied_api_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_implied_density_kg_m3",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_implied_specific_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "open_mine_nickel_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.076923,
+              "non_null_count": 13,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "open_mine_zinc_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.112426,
+              "non_null_count": 19,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "wocqi_calorific_value_mj_kg_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.130178,
+              "non_null_count": 22,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "wocqi_fixed_carbon_pct_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.130178,
+              "non_null_count": 22,
+              "available_row_count": 169
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_resource_utilization_v1",
+          "feature_tier": "tier2",
+          "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier1",
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_resource_utilization_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.717736,
+          "top_feature_importance": [
+            {
+              "feature_name": "forest_rents_pct_gdp",
+              "importance": 0.256926,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "abs_latitude",
+              "importance": 0.094612,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "aquastat_irrigation_share_pct",
+              "importance": 0.067809,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "clim_wind_speed_ms",
+              "importance": 0.043368,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "agricultural_land_pct",
+              "importance": 0.042029,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "kiszewski_malaria_ecology_index",
+              "importance": 0.032988,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "solar_pvout_csi_annual_kwh_kwp",
+              "importance": 0.030147,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "solar_ghi_annual_kwh_m2",
+              "importance": 0.027024,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "agricultural_minus_forest_land_pct",
+              "importance": 0.019524,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "solar_opta_tilt_deg",
+              "importance": 0.018135,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "usgs_eq_mean_depth_km",
+              "importance": 0.017772,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "solar_tilt_gain_over_ghi_pct",
+              "importance": 0.015984,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "open_mine_iron_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "wocqi_hardgrove_grindability_index_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.047337,
+              "non_null_count": 8,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_barrels_per_tonne",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_feature_non_null_count",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_implied_api_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_implied_density_kg_m3",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "opec_asb_implied_specific_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.071006,
+              "non_null_count": 12,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "open_mine_nickel_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.076923,
+              "non_null_count": 13,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "open_mine_zinc_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.112426,
+              "non_null_count": 19,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "wocqi_calorific_value_mj_kg_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.130178,
+              "non_null_count": 22,
+              "available_row_count": 169
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_tier3_without_tier1_v1",
+          "feature_tier": "tier23",
+          "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+          "feature_components": [
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.855576,
+          "top_feature_importance": [
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.21865,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.186158,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wpp_population_share_15_24_pct",
+              "importance": 0.139676,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_economy",
+              "importance": 0.059678,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.034563,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wgi_regulatory_quality_estimate",
+              "importance": 0.033703,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "wpp_life_expectancy_birth_years",
+              "importance": 0.031878,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.026,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.023533,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "fsi_external_intervention",
+              "importance": 0.019816,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wgi_rule_of_law_estimate",
+              "importance": 0.017982,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.015948,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            }
+          ]
+        },
+        {
+          "feature_set": "tier3_institutional_cultural_v1",
+          "feature_tier": "tier3",
+          "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier1",
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.853608,
+          "top_feature_importance": [
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.206349,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.187115,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wpp_population_share_15_24_pct",
+              "importance": 0.148055,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_economy",
+              "importance": 0.044896,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.040197,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.034402,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "wgi_regulatory_quality_estimate",
+              "importance": 0.032452,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "wpp_life_expectancy_birth_years",
+              "importance": 0.029092,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.025396,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "fsi_external_intervention",
+              "importance": 0.018811,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.015802,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wpp_net_migration_rate_per_1000",
+              "importance": 0.015683,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            }
+          ]
+        },
+        {
+          "feature_set": "tier3_only_social_structure_v1",
+          "feature_tier": "tier3_only",
+          "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.863272,
+          "top_feature_importance": [
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.219601,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.193224,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wpp_population_share_15_24_pct",
+              "importance": 0.141709,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_economy",
+              "importance": 0.055992,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "wgi_regulatory_quality_estimate",
+              "importance": 0.037551,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wpp_life_expectancy_birth_years",
+              "importance": 0.029613,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.026699,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.026042,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.023286,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "wpp_net_migration_rate_per_1000",
+              "importance": 0.019297,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.018046,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "fsi_external_intervention",
+              "importance": 0.0174,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 169
+            },
+            {
+              "feature_name": "polity5_regtrans",
+              "feature_kind": "numeric",
+              "non_null_share": 0.35503,
+              "non_null_count": 60,
+              "available_row_count": 169
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target": "life_expectancy",
+      "target_label": "Life expectancy rank percentile",
+      "latest_decade": 2020,
+      "top_k": 12,
+      "bundles": [
+        {
+          "feature_set": "tier1_pure_nature_v1",
+          "feature_tier": "tier1",
+          "feature_tier_label": "Tier 1 - Natural Endowment",
+          "feature_components": [
+            "tier1"
+          ],
+          "spec_name": "gradient_boosting__tier1_pure_nature_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.667121,
+          "top_feature_importance": [
+            {
+              "feature_name": "kiszewski_malaria_ecology_index",
+              "importance": 0.240747,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "clim_isothermality",
+              "importance": 0.108084,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wind_offshore_share_of_total_power_pct",
+              "importance": 0.037936,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "wind_offshore_share_of_total_energy_pct",
+              "importance": 0.037178,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "clim_precip_wettest_to_driest_month_ratio",
+              "importance": 0.033415,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "solar_opta_tilt_deg",
+              "importance": 0.02939,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "wind_onshore_available_area_km2",
+              "importance": 0.029362,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "terrain_elevation_max_m",
+              "importance": 0.026768,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "clim_precip_coldest_quarter_mm",
+              "importance": 0.021434,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "representative_longitude",
+              "importance": 0.019056,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wind_onshore_power_gw_total",
+              "importance": 0.018102,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wind_onshore_power_density_gw_per_1000_km2",
+              "importance": 0.017554,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_min_pressure_mb",
+              "feature_kind": "numeric",
+              "non_null_share": 0.339394,
+              "non_null_count": 56,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "ibtracs_min_storm_min_pressure_mb",
+              "feature_kind": "numeric",
+              "non_null_share": 0.339394,
+              "non_null_count": 56,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "ibtracs_max_storm_max_wind_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.351515,
+              "non_null_count": 58,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_max_wind_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.351515,
+              "non_null_count": 58,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_min_distance_to_land_km",
+              "feature_kind": "numeric",
+              "non_null_share": 0.369697,
+              "non_null_count": 61,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_speed_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.369697,
+              "non_null_count": 61,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "ibtracs_severe_storm_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.369697,
+              "non_null_count": 61,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "usgs_eq_deep_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.533333,
+              "non_null_count": 88,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "usgs_eq_intermediate_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.533333,
+              "non_null_count": 88,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "usgs_eq_major_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.533333,
+              "non_null_count": 88,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "usgs_eq_max_magnitude",
+              "feature_kind": "numeric",
+              "non_null_share": 0.533333,
+              "non_null_count": 88,
+              "available_row_count": 165
+            }
+          ]
+        },
+        {
+          "feature_set": "tier1_tier3_without_tier2_v1",
+          "feature_tier": "tier13",
+          "feature_tier_label": "Tier 1 + Tier 3 - No Tier 2",
+          "feature_components": [
+            "tier1",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier1_tier3_without_tier2_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.884024,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.288876,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.262617,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wgi_regulatory_quality_estimate",
+              "importance": 0.08805,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.059747,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "undp_gii_adolescent_birth_rate",
+              "importance": 0.040758,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wpp_crude_birth_rate_per_1000",
+              "importance": 0.02462,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "fsi_demographic_pressures",
+              "importance": 0.021307,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.019009,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "fsi_economic_inequality",
+              "importance": 0.017456,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "wpp_child_dependency_ratio_pct",
+              "importance": 0.01573,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "urban_population_pct",
+              "importance": 0.012675,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wgi_rule_of_law_estimate",
+              "importance": 0.012456,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_only_resource_development_v1",
+          "feature_tier": "tier2_only",
+          "feature_tier_label": "Tier 2 Only - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_only_resource_development_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.65825,
+          "top_feature_importance": [
+            {
+              "feature_name": "forest_rents_pct_gdp",
+              "importance": 0.413967,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "aquastat_irrigation_share_pct",
+              "importance": 0.071635,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "forest_depletion_pct_gni",
+              "importance": 0.049178,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "aquastat_incomplete_or_unknown_dam_count",
+              "importance": 0.038353,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "natural_resource_rents_pct_gdp",
+              "importance": 0.028647,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "resource_rents_breakdown_sum_pct_gdp",
+              "importance": 0.026604,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "agricultural_minus_forest_land_pct",
+              "importance": 0.016673,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "mrds_producer_or_past_producer_share_pct",
+              "importance": 0.016436,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "extractive_resource_rents_pct_gdp",
+              "importance": 0.016126,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "depletion_component_sum_pct_gni",
+              "importance": 0.014281,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "mrds_producer_count",
+              "importance": 0.012592,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "natural_resources_depletion_pct_gni",
+              "importance": 0.012174,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "open_mine_iron_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "wocqi_hardgrove_grindability_index_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.048485,
+              "non_null_count": 8,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_barrels_per_tonne",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_feature_non_null_count",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_implied_api_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_implied_density_kg_m3",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_implied_specific_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "open_mine_nickel_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.078788,
+              "non_null_count": 13,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "open_mine_zinc_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.115152,
+              "non_null_count": 19,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "wocqi_calorific_value_mj_kg_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.133333,
+              "non_null_count": 22,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "wocqi_fixed_carbon_pct_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.133333,
+              "non_null_count": 22,
+              "available_row_count": 165
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_resource_utilization_v1",
+          "feature_tier": "tier2",
+          "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier1",
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_resource_utilization_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.759681,
+          "top_feature_importance": [
+            {
+              "feature_name": "forest_rents_pct_gdp",
+              "importance": 0.309154,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "kiszewski_malaria_ecology_index",
+              "importance": 0.140651,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "aquastat_irrigation_share_pct",
+              "importance": 0.057389,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "clim_precip_wettest_quarter_share",
+              "importance": 0.034506,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "wind_offshore_share_of_total_power_pct",
+              "importance": 0.028302,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "solar_opta_tilt_deg",
+              "importance": 0.024782,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "resource_rents_breakdown_sum_pct_gdp",
+              "importance": 0.020252,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "solar_ghi_annual_kwh_m2",
+              "importance": 0.013947,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "forest_depletion_pct_gni",
+              "importance": 0.013858,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "clim_wind_speed_ms",
+              "importance": 0.010678,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "clim_precip_wettest_to_driest_month_ratio",
+              "importance": 0.010506,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "aquastat_incomplete_or_unknown_dam_count",
+              "importance": 0.009223,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "open_mine_iron_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "wocqi_hardgrove_grindability_index_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.048485,
+              "non_null_count": 8,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_barrels_per_tonne",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_feature_non_null_count",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_implied_api_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_implied_density_kg_m3",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "opec_asb_implied_specific_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.072727,
+              "non_null_count": 12,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "open_mine_nickel_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.078788,
+              "non_null_count": 13,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "open_mine_zinc_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.115152,
+              "non_null_count": 19,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "wocqi_calorific_value_mj_kg_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.133333,
+              "non_null_count": 22,
+              "available_row_count": 165
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_tier3_without_tier1_v1",
+          "feature_tier": "tier23",
+          "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+          "feature_components": [
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.88821,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.310168,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.260729,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wgi_regulatory_quality_estimate",
+              "importance": 0.078226,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.051827,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "undp_gii_adolescent_birth_rate",
+              "importance": 0.037401,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wpp_crude_birth_rate_per_1000",
+              "importance": 0.024653,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "fsi_demographic_pressures",
+              "importance": 0.02102,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.019551,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "fsi_economic_inequality",
+              "importance": 0.015709,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "wpp_child_dependency_ratio_pct",
+              "importance": 0.01327,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "urban_population_pct",
+              "importance": 0.012073,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.011047,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            }
+          ]
+        },
+        {
+          "feature_set": "tier3_institutional_cultural_v1",
+          "feature_tier": "tier3",
+          "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier1",
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.886176,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.289692,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.262256,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wgi_regulatory_quality_estimate",
+              "importance": 0.08867,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.056256,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "undp_gii_adolescent_birth_rate",
+              "importance": 0.04076,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wpp_crude_birth_rate_per_1000",
+              "importance": 0.025928,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "fsi_demographic_pressures",
+              "importance": 0.021177,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.019136,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "fsi_economic_inequality",
+              "importance": 0.015334,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "wpp_child_dependency_ratio_pct",
+              "importance": 0.013209,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wgi_rule_of_law_estimate",
+              "importance": 0.01233,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.011586,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            }
+          ]
+        },
+        {
+          "feature_set": "tier3_only_social_structure_v1",
+          "feature_tier": "tier3_only",
+          "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.882622,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.311103,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.255977,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wgi_regulatory_quality_estimate",
+              "importance": 0.07662,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.052849,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "undp_gii_adolescent_birth_rate",
+              "importance": 0.03995,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wpp_crude_birth_rate_per_1000",
+              "importance": 0.027006,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "fsi_economic_inequality",
+              "importance": 0.02013,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "fsi_demographic_pressures",
+              "importance": 0.019133,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.018846,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "wpp_child_dependency_ratio_pct",
+              "importance": 0.013956,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "urban_population_pct",
+              "importance": 0.013248,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.012662,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 165
+            },
+            {
+              "feature_name": "polity5_regtrans",
+              "feature_kind": "numeric",
+              "non_null_share": 0.363636,
+              "non_null_count": 60,
+              "available_row_count": 165
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target": "inequality",
+      "target_label": "Disposable-income Gini rank percentile",
+      "latest_decade": 2020,
+      "top_k": 12,
+      "bundles": [
+        {
+          "feature_set": "tier1_pure_nature_v1",
+          "feature_tier": "tier1",
+          "feature_tier_label": "Tier 1 - Natural Endowment",
+          "feature_components": [
+            "tier1"
+          ],
+          "spec_name": "gradient_boosting__tier1_pure_nature_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.658476,
+          "top_feature_importance": [
+            {
+              "feature_name": "clim_isothermality",
+              "importance": 0.266459,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "representative_latitude",
+              "importance": 0.256482,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "abs_latitude",
+              "importance": 0.079502,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "cru_wet_days_change_prev_decade",
+              "importance": 0.036036,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "wind_offshore_share_of_total_power_pct",
+              "importance": 0.028755,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "solar_dif_annual_kwh_m2",
+              "importance": 0.027459,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "representative_longitude",
+              "importance": 0.020945,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "wind_onshore_power_density_gw_per_1000_km2",
+              "importance": 0.016737,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "cru_temp_decade_std_c",
+              "importance": 0.016704,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_speed_kt",
+              "importance": 0.01309,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "clim_precip_coldest_quarter_mm",
+              "importance": 0.012646,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "cru_wet_days_decade_std",
+              "importance": 0.010411,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_min_pressure_mb",
+              "feature_kind": "numeric",
+              "non_null_share": 0.327103,
+              "non_null_count": 35,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "ibtracs_min_storm_min_pressure_mb",
+              "feature_kind": "numeric",
+              "non_null_share": 0.327103,
+              "non_null_count": 35,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "ibtracs_max_storm_max_wind_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.336449,
+              "non_null_count": 36,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_max_wind_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.336449,
+              "non_null_count": 36,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_min_distance_to_land_km",
+              "feature_kind": "numeric",
+              "non_null_share": 0.345794,
+              "non_null_count": 37,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_speed_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.345794,
+              "non_null_count": 37,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "ibtracs_severe_storm_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.345794,
+              "non_null_count": 37,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "usgs_eq_deep_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.579439,
+              "non_null_count": 62,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "usgs_eq_intermediate_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.579439,
+              "non_null_count": 62,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "usgs_eq_major_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.579439,
+              "non_null_count": 62,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "usgs_eq_max_magnitude",
+              "feature_kind": "numeric",
+              "non_null_share": 0.579439,
+              "non_null_count": 62,
+              "available_row_count": 107
+            }
+          ]
+        },
+        {
+          "feature_set": "tier1_tier3_without_tier2_v1",
+          "feature_tier": "tier13",
+          "feature_tier_label": "Tier 1 + Tier 3 - No Tier 2",
+          "feature_components": [
+            "tier1",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier1_tier3_without_tier2_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.668662,
+          "top_feature_importance": [
+            {
+              "feature_name": "clim_isothermality",
+              "importance": 0.209253,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "wpp_population_share_15_24_pct",
+              "importance": 0.123381,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.112641,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "representative_latitude",
+              "importance": 0.07002,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "abs_latitude",
+              "importance": 0.059788,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "fsi_economic_inequality",
+              "importance": 0.036218,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "cru_wet_days_change_prev_decade",
+              "importance": 0.030795,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.02774,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "representative_longitude",
+              "importance": 0.022955,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "cepii_common_ethno_language_partner_share_pct",
+              "importance": 0.020618,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "cepii_common_ethno_language_partner_count",
+              "importance": 0.009695,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "cru_temp_decade_std_c",
+              "importance": 0.009402,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_only_resource_development_v1",
+          "feature_tier": "tier2_only",
+          "feature_tier_label": "Tier 2 Only - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_only_resource_development_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.372995,
+          "top_feature_importance": [
+            {
+              "feature_name": "forest_rents_pct_gdp",
+              "importance": 0.117493,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "arable_share_of_agricultural_land_pct",
+              "importance": 0.081609,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "mrds_occurrence_count",
+              "importance": 0.063318,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "resource_rents_breakdown_sum_pct_gdp",
+              "importance": 0.049057,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "mrds_manganese_site_count",
+              "importance": 0.047731,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "forest_share_of_resource_rents_pct",
+              "importance": 0.040839,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "depletion_component_sum_pct_gni",
+              "importance": 0.032795,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "aquastat_hydropower_share_pct",
+              "importance": 0.030522,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "natural_resources_depletion_pct_gni",
+              "importance": 0.022254,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "aquastat_latest_completion_year",
+              "importance": 0.020154,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "water_stress_pct_available_resources",
+              "importance": 0.018249,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "natural_resource_rents_pct_gdp",
+              "importance": 0.016956,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "open_mine_iron_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_barrels_per_tonne",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_feature_non_null_count",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_implied_api_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_implied_density_kg_m3",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_implied_specific_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "wocqi_hardgrove_grindability_index_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.056075,
+              "non_null_count": 6,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "open_mine_nickel_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.093458,
+              "non_null_count": 10,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "wocqi_calorific_value_mj_kg_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.149533,
+              "non_null_count": 16,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "wocqi_fixed_carbon_pct_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.149533,
+              "non_null_count": 16,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "open_mine_zinc_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.158879,
+              "non_null_count": 17,
+              "available_row_count": 107
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_resource_utilization_v1",
+          "feature_tier": "tier2",
+          "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier1",
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_resource_utilization_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.652821,
+          "top_feature_importance": [
+            {
+              "feature_name": "clim_isothermality",
+              "importance": 0.27894,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "representative_latitude",
+              "importance": 0.26065,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "abs_latitude",
+              "importance": 0.047555,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "cru_wet_days_change_prev_decade",
+              "importance": 0.025307,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "wind_offshore_share_of_total_power_pct",
+              "importance": 0.023242,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "clim_solar_radiation_kj_m2_day",
+              "importance": 0.021656,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "clim_mean_temp_driest_quarter_c",
+              "importance": 0.017968,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "solar_dif_annual_kwh_m2",
+              "importance": 0.016794,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "aquastat_irrigation_dam_count",
+              "importance": 0.015148,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "representative_longitude",
+              "importance": 0.013546,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "kiszewski_malaria_ecology_index",
+              "importance": 0.011644,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_speed_kt",
+              "importance": 0.009444,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "open_mine_iron_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_barrels_per_tonne",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_feature_non_null_count",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_implied_api_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_implied_density_kg_m3",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "opec_asb_implied_specific_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.037383,
+              "non_null_count": 4,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "wocqi_hardgrove_grindability_index_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.056075,
+              "non_null_count": 6,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "open_mine_nickel_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.093458,
+              "non_null_count": 10,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "wocqi_calorific_value_mj_kg_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.149533,
+              "non_null_count": 16,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "wocqi_fixed_carbon_pct_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.149533,
+              "non_null_count": 16,
+              "available_row_count": 107
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_tier3_without_tier1_v1",
+          "feature_tier": "tier23",
+          "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+          "feature_components": [
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.676911,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_population_share_15_24_pct",
+              "importance": 0.193015,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.191819,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "fsi_economic_inequality",
+              "importance": 0.068616,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.059776,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "pwt_human_capital_index",
+              "importance": 0.040163,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "cepii_common_ethno_language_partner_share_pct",
+              "importance": 0.039919,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "cepii_common_ethno_language_partner_count",
+              "importance": 0.031619,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "water_stress_pct_available_resources",
+              "importance": 0.020138,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "forest_to_agricultural_land_ratio",
+              "importance": 0.015495,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "mrds_manganese_site_count",
+              "importance": 0.013412,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "forest_area_pct",
+              "importance": 0.013294,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "pew_christians_pct",
+              "importance": 0.011604,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            }
+          ]
+        },
+        {
+          "feature_set": "tier3_institutional_cultural_v1",
+          "feature_tier": "tier3",
+          "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier1",
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.681239,
+          "top_feature_importance": [
+            {
+              "feature_name": "clim_isothermality",
+              "importance": 0.203061,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "wpp_population_share_15_24_pct",
+              "importance": 0.122738,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "representative_latitude",
+              "importance": 0.122298,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.120036,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "fsi_economic_inequality",
+              "importance": 0.03207,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.031112,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "cru_wet_days_change_prev_decade",
+              "importance": 0.022754,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "cepii_common_ethno_language_partner_share_pct",
+              "importance": 0.016622,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "representative_longitude",
+              "importance": 0.015371,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "cepii_common_ethno_language_partner_count",
+              "importance": 0.015284,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "forest_to_agricultural_land_ratio",
+              "importance": 0.01284,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_speed_kt",
+              "importance": 0.007466,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            }
+          ]
+        },
+        {
+          "feature_set": "tier3_only_social_structure_v1",
+          "feature_tier": "tier3_only",
+          "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.636637,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_population_share_15_24_pct",
+              "importance": 0.21067,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.188871,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "fsi_economic_inequality",
+              "importance": 0.072605,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "cepii_common_ethno_language_partner_count",
+              "importance": 0.048219,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "pwt_human_capital_index",
+              "importance": 0.040691,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.039174,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "pew_christians_pct",
+              "importance": 0.036744,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "cepii_common_ethno_language_partner_share_pct",
+              "importance": 0.031097,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "undp_gii_secondary_education_gap_pct",
+              "importance": 0.015659,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "pwt_import_share_expenditure",
+              "importance": 0.012476,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "geot_inactive_asset_share_pct",
+              "importance": 0.011473,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "glottolog_multi_country_language_count",
+              "importance": 0.009851,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 107
+            },
+            {
+              "feature_name": "polity5_regtrans",
+              "feature_kind": "numeric",
+              "non_null_share": 0.327103,
+              "non_null_count": 35,
+              "available_row_count": 107
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target": "wealth",
+      "target_label": "Produced capital per capita rank percentile",
+      "latest_decade": 2020,
+      "top_k": 12,
+      "bundles": [
+        {
+          "feature_set": "tier1_pure_nature_v1",
+          "feature_tier": "tier1",
+          "feature_tier_label": "Tier 1 - Natural Endowment",
+          "feature_components": [
+            "tier1"
+          ],
+          "spec_name": "gradient_boosting__tier1_pure_nature_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.679252,
+          "top_feature_importance": [
+            {
+              "feature_name": "kiszewski_malaria_ecology_index",
+              "importance": 0.243726,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "clim_wind_speed_ms",
+              "importance": 0.094542,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "clim_precip_wettest_to_driest_month_ratio",
+              "importance": 0.07185,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "solar_opta_tilt_deg",
+              "importance": 0.06792,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "clim_solar_radiation_kj_m2_day",
+              "importance": 0.048197,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "cru_temp_decade_std_c",
+              "importance": 0.02659,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "abs_latitude",
+              "importance": 0.024481,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "cru_wet_days_decade_mean",
+              "importance": 0.021252,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "wind_offshore_share_of_total_energy_pct",
+              "importance": 0.019904,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "wind_offshore_energy_density_pwh_per_1000_km2",
+              "importance": 0.018235,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "usgs_eq_mean_depth_km",
+              "importance": 0.013883,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "clim_precip_wettest_quarter_mm",
+              "importance": 0.011837,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_min_pressure_mb",
+              "feature_kind": "numeric",
+              "non_null_share": 0.340278,
+              "non_null_count": 49,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "ibtracs_min_storm_min_pressure_mb",
+              "feature_kind": "numeric",
+              "non_null_share": 0.340278,
+              "non_null_count": 49,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "ibtracs_max_storm_max_wind_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.354167,
+              "non_null_count": 51,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_max_wind_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.354167,
+              "non_null_count": 51,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_min_distance_to_land_km",
+              "feature_kind": "numeric",
+              "non_null_share": 0.375,
+              "non_null_count": 54,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "ibtracs_mean_storm_speed_kt",
+              "feature_kind": "numeric",
+              "non_null_share": 0.375,
+              "non_null_count": 54,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "ibtracs_severe_storm_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.375,
+              "non_null_count": 54,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "usgs_eq_deep_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.534722,
+              "non_null_count": 77,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "usgs_eq_intermediate_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.534722,
+              "non_null_count": 77,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "usgs_eq_major_event_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.534722,
+              "non_null_count": 77,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "usgs_eq_max_magnitude",
+              "feature_kind": "numeric",
+              "non_null_share": 0.534722,
+              "non_null_count": 77,
+              "available_row_count": 144
+            }
+          ]
+        },
+        {
+          "feature_set": "tier1_tier3_without_tier2_v1",
+          "feature_tier": "tier13",
+          "feature_tier_label": "Tier 1 + Tier 3 - No Tier 2",
+          "feature_components": [
+            "tier1",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier1_tier3_without_tier2_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.873053,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.303529,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.093103,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wpp_crude_birth_rate_per_1000",
+              "importance": 0.064657,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "urban_population_pct",
+              "importance": 0.055907,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "fsi_total_score",
+              "importance": 0.054139,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wgi_rule_of_law_estimate",
+              "importance": 0.046223,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "wpp_population_share_0_14_pct",
+              "importance": 0.033741,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "wpp_life_expectancy_birth_years",
+              "importance": 0.03236,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.031228,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "undp_gii_secondary_education_ratio",
+              "importance": 0.028007,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wgi_governance_mean_estimate",
+              "importance": 0.021084,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.017714,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_only_resource_development_v1",
+          "feature_tier": "tier2_only",
+          "feature_tier_label": "Tier 2 Only - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_only_resource_development_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.679698,
+          "top_feature_importance": [
+            {
+              "feature_name": "forest_rents_pct_gdp",
+              "importance": 0.428821,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "aquastat_irrigation_share_pct",
+              "importance": 0.155627,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "aquastat_oldest_completion_year",
+              "importance": 0.02801,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "log_population_est",
+              "importance": 0.024195,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "natural_resource_rents_pct_gdp",
+              "importance": 0.019067,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "log_renewable_internal_freshwater_per_capita",
+              "importance": 0.016605,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "oil_share_of_resource_rents_pct",
+              "importance": 0.015263,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "depletion_component_sum_pct_gni",
+              "importance": 0.010464,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "capture_share_of_total_fisheries_pct",
+              "importance": 0.009943,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "renewable_internal_freshwater_per_capita",
+              "importance": 0.009589,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "fuel_exports_pct_merchandise",
+              "importance": 0.009523,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "mrds_distinct_primary_commodities",
+              "importance": 0.008831,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "open_mine_iron_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_barrels_per_tonne",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_feature_non_null_count",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_implied_api_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_implied_density_kg_m3",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_implied_specific_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "wocqi_hardgrove_grindability_index_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "open_mine_nickel_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.076389,
+              "non_null_count": 11,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "open_mine_zinc_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.131944,
+              "non_null_count": 19,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "wocqi_calorific_value_mj_kg_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.152778,
+              "non_null_count": 22,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "wocqi_fixed_carbon_pct_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.152778,
+              "non_null_count": 22,
+              "available_row_count": 144
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_resource_utilization_v1",
+          "feature_tier": "tier2",
+          "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+          "feature_components": [
+            "tier1",
+            "tier2"
+          ],
+          "spec_name": "gradient_boosting__tier2_resource_utilization_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.770347,
+          "top_feature_importance": [
+            {
+              "feature_name": "kiszewski_malaria_ecology_index",
+              "importance": 0.238997,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "forest_rents_pct_gdp",
+              "importance": 0.084361,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "aquastat_irrigation_share_pct",
+              "importance": 0.076225,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "solar_opta_tilt_deg",
+              "importance": 0.069314,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "clim_wind_speed_ms",
+              "importance": 0.053477,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "clim_precip_wettest_to_driest_month_ratio",
+              "importance": 0.048006,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "solar_dif_annual_kwh_m2",
+              "importance": 0.03666,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "clim_solar_radiation_kj_m2_day",
+              "importance": 0.023905,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "abs_latitude",
+              "importance": 0.018368,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "cru_wet_days_decade_mean",
+              "importance": 0.017481,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "arable_land_pct",
+              "importance": 0.014706,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "mrds_gold_site_count",
+              "importance": 0.012357,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "open_mine_iron_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "wind_offshore_deep_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_barrels_per_tonne",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_feature_non_null_count",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_implied_api_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_implied_density_kg_m3",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "opec_asb_implied_specific_gravity",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "wocqi_hardgrove_grindability_index_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.055556,
+              "non_null_count": 8,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "open_mine_nickel_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.076389,
+              "non_null_count": 11,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "open_mine_zinc_value_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.131944,
+              "non_null_count": 19,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "wocqi_calorific_value_mj_kg_median",
+              "feature_kind": "numeric",
+              "non_null_share": 0.152778,
+              "non_null_count": 22,
+              "available_row_count": 144
+            }
+          ]
+        },
+        {
+          "feature_set": "tier2_tier3_without_tier1_v1",
+          "feature_tier": "tier23",
+          "feature_tier_label": "Tier 2 + Tier 3 - No Tier 1",
+          "feature_components": [
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.87675,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.302375,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.117504,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wpp_crude_birth_rate_per_1000",
+              "importance": 0.064915,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_total_score",
+              "importance": 0.056043,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "urban_population_pct",
+              "importance": 0.052237,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wgi_rule_of_law_estimate",
+              "importance": 0.047107,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "wpp_life_expectancy_birth_years",
+              "importance": 0.03378,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.031453,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "undp_gii_secondary_education_ratio",
+              "importance": 0.027591,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.022191,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wgi_governance_mean_estimate",
+              "importance": 0.021344,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wpp_population_share_0_14_pct",
+              "importance": 0.021027,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            }
+          ]
+        },
+        {
+          "feature_set": "tier3_institutional_cultural_v1",
+          "feature_tier": "tier3",
+          "feature_tier_label": "Tier 3 - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier1",
+            "tier2",
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.877385,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.30203,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.113,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "wpp_crude_birth_rate_per_1000",
+              "importance": 0.063609,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "fsi_total_score",
+              "importance": 0.053659,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "urban_population_pct",
+              "importance": 0.051278,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wgi_rule_of_law_estimate",
+              "importance": 0.046683,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "undp_gii_secondary_education_ratio",
+              "importance": 0.034351,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.03104,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "wpp_life_expectancy_birth_years",
+              "importance": 0.027361,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "wgi_governance_mean_estimate",
+              "importance": 0.021115,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wgi_government_effectiveness_estimate",
+              "importance": 0.020754,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "wpp_child_dependency_ratio_pct",
+              "importance": 0.018279,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "aquastat_total_hydroelectricity_mw",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            }
+          ]
+        },
+        {
+          "feature_set": "tier3_only_social_structure_v1",
+          "feature_tier": "tier3_only",
+          "feature_tier_label": "Tier 3 Only - Social, Institutional & Historical Structure",
+          "feature_components": [
+            "tier3"
+          ],
+          "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
+          "model_name": "gradient_boosting",
+          "model_family": "boosted_tree",
+          "r2": 0.872898,
+          "top_feature_importance": [
+            {
+              "feature_name": "wpp_median_age_years",
+              "importance": 0.301315,
+              "importance_rank": 1
+            },
+            {
+              "feature_name": "wpp_crude_birth_rate_per_1000",
+              "importance": 0.08582,
+              "importance_rank": 2
+            },
+            {
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.076294,
+              "importance_rank": 3
+            },
+            {
+              "feature_name": "urban_population_pct",
+              "importance": 0.060318,
+              "importance_rank": 4
+            },
+            {
+              "feature_name": "fsi_total_score",
+              "importance": 0.053832,
+              "importance_rank": 5
+            },
+            {
+              "feature_name": "wgi_rule_of_law_estimate",
+              "importance": 0.053385,
+              "importance_rank": 6
+            },
+            {
+              "feature_name": "wpp_life_expectancy_birth_years",
+              "importance": 0.034372,
+              "importance_rank": 7
+            },
+            {
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.032436,
+              "importance_rank": 8
+            },
+            {
+              "feature_name": "fsi_public_services",
+              "importance": 0.03156,
+              "importance_rank": 9
+            },
+            {
+              "feature_name": "undp_gii_secondary_education_ratio",
+              "importance": 0.031169,
+              "importance_rank": 10
+            },
+            {
+              "feature_name": "wgi_governance_mean_estimate",
+              "importance": 0.021402,
+              "importance_rank": 11
+            },
+            {
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.018013,
+              "importance_rank": 12
+            }
+          ],
+          "top_coefficients": [],
+          "lowest_coverage_features": [
+            {
+              "feature_name": "barro_lee_mean_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_no_schooling_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_primary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_secondary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_complete_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_share_pct",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "barro_lee_tertiary_years_schooling",
+              "feature_kind": "numeric",
+              "non_null_share": 0.0,
+              "non_null_count": 0,
+              "available_row_count": 144
+            },
+            {
+              "feature_name": "polity5_regtrans",
+              "feature_kind": "numeric",
+              "non_null_share": 0.354167,
+              "non_null_count": 51,
+              "available_row_count": 144
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "top_k": 12
+}

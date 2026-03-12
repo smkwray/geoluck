@@ -1,0 +1,194 @@
+{
+  "selected_model_spec": {
+    "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+    "model_name": "gradient_boosting",
+    "model_family": "boosted_tree",
+    "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+    "feature_tier": null,
+    "feature_tier_label": null,
+    "feature_components": [],
+    "decade": 2020,
+    "r2": 0.7516,
+    "rmse": 0.144729,
+    "mae": 0.109454,
+    "spearman": 0.866093
+  },
+  "latest_decade": 2020,
+  "best_by_feature_set": [
+    {
+      "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+      "feature_tier": null,
+      "feature_tier_label": null,
+      "feature_components": [],
+      "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_aquastat_full_v1",
+      "model_name": "gradient_boosting",
+      "model_family": "boosted_tree",
+      "r2": 0.7516,
+      "rmse": 0.144729,
+      "mae": 0.109454,
+      "spearman": 0.866093
+    },
+    {
+      "feature_set": "combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+      "feature_tier": null,
+      "feature_tier_label": null,
+      "feature_components": [],
+      "spec_name": "gradient_boosting__combined_geo_wdi_resources_agri_water_climate_hydro_terrain_full_v1",
+      "model_name": "gradient_boosting",
+      "model_family": "boosted_tree",
+      "r2": 0.749177,
+      "rmse": 0.145433,
+      "mae": 0.113074,
+      "spearman": 0.867145
+    }
+  ],
+  "selected_model_top_features": [
+    {
+      "feature_name": "urban_population_pct",
+      "importance": 0.27265,
+      "importance_rank": 1
+    },
+    {
+      "feature_name": "forest_rents_pct_gdp",
+      "importance": 0.178677,
+      "importance_rank": 2
+    },
+    {
+      "feature_name": "abs_latitude",
+      "importance": 0.090248,
+      "importance_rank": 3
+    },
+    {
+      "feature_name": "aquastat_irrigation_share_pct",
+      "importance": 0.05638,
+      "importance_rank": 4
+    },
+    {
+      "feature_name": "clim_wind_speed_ms",
+      "importance": 0.031641,
+      "importance_rank": 5
+    },
+    {
+      "feature_name": "clim_mean_diurnal_range_c",
+      "importance": 0.022809,
+      "importance_rank": 6
+    },
+    {
+      "feature_name": "agricultural_land_pct",
+      "importance": 0.022502,
+      "importance_rank": 7
+    },
+    {
+      "feature_name": "clim_precip_wettest_quarter_share",
+      "importance": 0.021078,
+      "importance_rank": 8
+    },
+    {
+      "feature_name": "fuel_exports_pct_merchandise",
+      "importance": 0.02104,
+      "importance_rank": 9
+    },
+    {
+      "feature_name": "wdi_derived_feature_non_null_count",
+      "importance": 0.019532,
+      "importance_rank": 10
+    },
+    {
+      "feature_name": "cru_temp_decade_std_c",
+      "importance": 0.016149,
+      "importance_rank": 11
+    },
+    {
+      "feature_name": "aquastat_irrigation_dam_count",
+      "importance": 0.015017,
+      "importance_rank": 12
+    }
+  ],
+  "selected_model_top_coefficients": [],
+  "selected_feature_set_low_coverage": [
+    {
+      "feature_name": "aquastat_total_hydroelectricity_mw",
+      "feature_kind": "numeric",
+      "non_null_share": 0.0,
+      "non_null_count": 0,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "agricultural_irrigated_land_pct",
+      "feature_kind": "numeric",
+      "non_null_share": 0.39645,
+      "non_null_count": 67,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "irrigated_share_of_agricultural_land_pct",
+      "feature_kind": "numeric",
+      "non_null_share": 0.39645,
+      "non_null_count": 67,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "river_to_coast_ratio",
+      "feature_kind": "numeric",
+      "non_null_share": 0.686391,
+      "non_null_count": 116,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "aquastat_total_reservoir_area_km2",
+      "feature_kind": "numeric",
+      "non_null_share": 0.715976,
+      "non_null_count": 121,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "aquastat_max_dam_height_m",
+      "feature_kind": "numeric",
+      "non_null_share": 0.810651,
+      "non_null_count": 137,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "aquastat_mean_dam_height_m",
+      "feature_kind": "numeric",
+      "non_null_share": 0.810651,
+      "non_null_count": 137,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "aquastat_latest_completion_year",
+      "feature_kind": "numeric",
+      "non_null_share": 0.822485,
+      "non_null_count": 139,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "aquastat_oldest_completion_year",
+      "feature_kind": "numeric",
+      "non_null_share": 0.822485,
+      "non_null_count": 139,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "aquastat_log_total_reservoir_capacity_million_m3",
+      "feature_kind": "numeric",
+      "non_null_share": 0.828402,
+      "non_null_count": 140,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "aquastat_mean_reservoir_capacity_million_m3",
+      "feature_kind": "numeric",
+      "non_null_share": 0.828402,
+      "non_null_count": 140,
+      "available_row_count": 169
+    },
+    {
+      "feature_name": "aquastat_reservoir_capacity_per_1000_km2",
+      "feature_kind": "numeric",
+      "non_null_share": 0.828402,
+      "non_null_count": 140,
+      "available_row_count": 169
+    }
+  ]
+}
