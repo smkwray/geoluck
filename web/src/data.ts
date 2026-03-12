@@ -53,6 +53,7 @@ export type MetadataPayload = {
   country_contributions_summary_path?: string | null;
   bundle_summary_path?: string | null;
   bundle_feature_effects_path?: string | null;
+  bundle_permutation_importance_path?: string | null;
   bundle_country_contributions_index_path?: string | null;
 };
 
@@ -236,6 +237,51 @@ export type BundleFeatureEffectsPayload = {
   top_k: number;
 };
 
+export type BundlePermutationImportanceRow = {
+  feature_name: string | null;
+  feature_block: string | null;
+  delta_r2_mean: number | null;
+  delta_rmse_mean: number | null;
+  delta_mae_mean: number | null;
+  delta_spearman_mean: number | null;
+  importance_rank: number | null;
+};
+
+export type BundlePermutationBlockSummaryRow = {
+  feature_block: string | null;
+  feature_count: number | null;
+  delta_r2_mean: number | null;
+  delta_rmse_mean: number | null;
+  delta_mae_mean: number | null;
+  delta_spearman_mean: number | null;
+};
+
+export type BundlePermutationImportanceBundle = {
+  feature_set: string;
+  feature_tier: string | null;
+  feature_tier_label: string | null;
+  feature_components: string[];
+  spec_name: string;
+  model_name: string;
+  model_family: string;
+  r2: number | null;
+  top_permutation_features: BundlePermutationImportanceRow[];
+  block_summary: BundlePermutationBlockSummaryRow[];
+};
+
+export type BundlePermutationImportanceTarget = {
+  target: string;
+  target_label: string;
+  latest_decade: number | null;
+  top_k: number;
+  bundles: BundlePermutationImportanceBundle[];
+};
+
+export type BundlePermutationImportancePayload = {
+  targets: BundlePermutationImportanceTarget[];
+  top_k: number;
+};
+
 export type BundleCountryContributionsBundle = {
   feature_set: string;
   feature_tier: string | null;
@@ -324,6 +370,12 @@ export function loadBundleFeatureEffects(
   path: string,
 ): Promise<BundleFeatureEffectsPayload> {
   return loadJson<BundleFeatureEffectsPayload>(dataPath(`data/${path}`));
+}
+
+export function loadBundlePermutationImportance(
+  path: string,
+): Promise<BundlePermutationImportancePayload> {
+  return loadJson<BundlePermutationImportancePayload>(dataPath(`data/${path}`));
 }
 
 export function loadBundleCountryContributionsIndex(

@@ -164,6 +164,29 @@ CONTRIBUTION_COLUMNS = [
     "abs_contribution",
     "contribution_rank",
 ]
+PERMUTATION_IMPORTANCE_COLUMNS = [
+    "decade",
+    "target_name",
+    "target_column",
+    "spec_name",
+    "model_name",
+    "model_family",
+    "feature_set",
+    "feature_name",
+    "feature_block",
+    "repeat_count",
+    "fold_count",
+    "row_count",
+    "delta_r2_mean",
+    "delta_r2_std",
+    "delta_rmse_mean",
+    "delta_rmse_std",
+    "delta_mae_mean",
+    "delta_mae_std",
+    "delta_spearman_mean",
+    "delta_spearman_std",
+    "importance_rank",
+]
 ROBUSTNESS_PREDICTION_COLUMNS = [
     *MODEL_OUTPUT_COLUMNS,
     "robustness_strategy",
@@ -253,6 +276,7 @@ class TrainLevelsResult:
     feature_importance_path: Path
     coefficients_path: Path
     contributions_path: Path
+    permutation_importance_path: Path
     feature_coverage_path: Path
     target_correlations_path: Path
     row_count: int
@@ -1673,6 +1697,10 @@ def empty_contribution_frame() -> pd.DataFrame:
     return pd.DataFrame(columns=CONTRIBUTION_COLUMNS)
 
 
+def empty_permutation_importance_frame() -> pd.DataFrame:
+    return pd.DataFrame(columns=PERMUTATION_IMPORTANCE_COLUMNS)
+
+
 def contribution_frame_for_rows(
     rows_frame: pd.DataFrame,
     *,
@@ -2023,6 +2051,135 @@ def build_latest_decade_country_contributions(
         ["spec_name", "iso3", "contribution_rank", "feature_name"],
         kind="stable",
     )
+
+
+def build_latest_decade_permutation_importance(
+    frame: pd.DataFrame,
+    feature_sets: list[FeatureSetSpec],
+    model_specs: list[ModelSpec],
+    *,
+    target_spec: TargetSpec,
+    repeat_count: int = 2,
+    random_state: int = 42,
+) -> pd.DataFrame:
+    diagnostic_decades = sorted(
+        int(decade)
+        for decade, decade_frame in frame.groupby("decade", sort=True)
+        if int(decade_frame[target_spec.target_column].notna().sum()) >= 8
+    )
+    if not diagnostic_decades:
+        return empty_permutation_importance_frame()
+
+    latest_decade = diagnostic_decades[-1]
+    valid = frame.loc[
+        (frame["decade"] == latest_decade) & frame[target_spec.target_column].notna()
+    ].copy()
+    if len(valid) < 8:
+        return empty_permutation_importance_frame()
+
+    feature_lookup = {feature_set.feature_set: feature_set for feature_set in feature_sets}
+    splitter = KFold(n_splits=n_splits_for_rows(len(valid)), shuffle=True, random_state=42)
+    rng = np.random.default_rng(random_state)
+    rows: list[dict[str, object]] = []
+
+    for spec in model_specs:
+        if spec.is_baseline or spec.build_pipeline is None:
+            continue
+        feature_set = feature_lookup[spec.feature_set]
+        if feature_set.min_decade is not None and latest_decade < feature_set.min_decade:
+            continue
+        feature_columns = [*feature_set.numeric_columns, *feature_set.categorical_columns]
+        fold_records: list[dict[str, object]] = []
+        for train_idx, test_idx in splitter.split(valid):
+            train = valid.iloc[train_idx].copy()
+            test = valid.iloc[test_idx].copy()
+            model = spec.build_pipeline()
+            model = fit_pipeline(model, train[feature_columns], train[target_spec.target_column])
+            baseline_predictions = np.asarray(
+                model.predict(test[feature_columns]),
+                dtype="float64",
+            )
+            baseline_summary = metric_summary(
+                test[target_spec.target_column],
+                baseline_predictions,
+            )
+            for feature_name in feature_columns:
+                for _ in range(repeat_count):
+                    permuted = test[feature_columns].copy()
+                    shuffled = permuted[feature_name].to_numpy(copy=True)
+                    rng.shuffle(shuffled)
+                    permuted[feature_name] = shuffled
+                    permuted_predictions = np.asarray(
+                        model.predict(permuted),
+                        dtype="float64",
+                    )
+                    permuted_summary = metric_summary(
+                        test[target_spec.target_column],
+                        permuted_predictions,
+                    )
+                    fold_records.append(
+                        {
+                            "feature_name": feature_name,
+                            "feature_block": feature_block_name(feature_name),
+                            "row_count": int(len(test)),
+                            "delta_r2": float(
+                                baseline_summary["r2"] - permuted_summary["r2"]
+                            ),
+                            "delta_rmse": float(
+                                permuted_summary["rmse"] - baseline_summary["rmse"]
+                            ),
+                            "delta_mae": float(
+                                permuted_summary["mae"] - baseline_summary["mae"]
+                            ),
+                            "delta_spearman": float(
+                                baseline_summary["spearman"]
+                                - permuted_summary["spearman"]
+                            ),
+                        }
+                    )
+        if not fold_records:
+            continue
+        fold_frame = pd.DataFrame(fold_records)
+        aggregated = (
+            fold_frame.groupby(["feature_name", "feature_block"], as_index=False)
+            .agg(
+                repeat_count=("feature_name", "size"),
+                fold_count=("row_count", "count"),
+                row_count=("row_count", "sum"),
+                delta_r2_mean=("delta_r2", "mean"),
+                delta_r2_std=("delta_r2", "std"),
+                delta_rmse_mean=("delta_rmse", "mean"),
+                delta_rmse_std=("delta_rmse", "std"),
+                delta_mae_mean=("delta_mae", "mean"),
+                delta_mae_std=("delta_mae", "std"),
+                delta_spearman_mean=("delta_spearman", "mean"),
+                delta_spearman_std=("delta_spearman", "std"),
+            )
+            .fillna(0.0)
+        )
+        aggregated["decade"] = latest_decade
+        aggregated["target_name"] = target_spec.target_name
+        aggregated["target_column"] = target_spec.target_column
+        aggregated["spec_name"] = f"{spec.model_name}__{spec.feature_set}"
+        aggregated["model_name"] = spec.model_name
+        aggregated["model_family"] = spec.model_family
+        aggregated["feature_set"] = spec.feature_set
+        aggregated["importance_rank"] = (
+            aggregated["delta_r2_mean"]
+            .rank(method="dense", ascending=False)
+            .astype("int64")
+        )
+        rows.extend(
+            aggregated.loc[:, PERMUTATION_IMPORTANCE_COLUMNS].to_dict("records")
+        )
+
+    permutation_frame = pd.DataFrame(rows, columns=PERMUTATION_IMPORTANCE_COLUMNS)
+    if permutation_frame.empty:
+        return permutation_frame
+    return permutation_frame.sort_values(
+        ["spec_name", "importance_rank", "feature_name"],
+        kind="stable",
+    ).reset_index(drop=True)
 
 
 def feature_block_name(feature_name: str) -> str:
@@ -2623,6 +2780,7 @@ def export_level_model_outputs(
     model_families: Sequence[str] | None = None,
     output_suffix: str | None = None,
     allow_canonical_outputs: bool = False,
+    with_permutation_importance: bool = False,
 ) -> TrainLevelsResult:
     resolved_paths = paths or get_paths()
     budget = build_train_levels_budget(
@@ -2671,6 +2829,16 @@ def export_level_model_outputs(
         selected_model_specs,
         target_spec=target_spec,
     )
+    permutation_importance_frame = (
+        build_latest_decade_permutation_importance(
+            training_frame,
+            selected_feature_sets,
+            selected_model_specs,
+            target_spec=target_spec,
+        )
+        if with_permutation_importance
+        else empty_permutation_importance_frame()
+    )
     target_correlation_frame = build_target_correlation_frame(training_frame)
     resolved_suffix = resolved_output_suffix(budget)
 
@@ -2702,6 +2870,10 @@ def export_level_model_outputs(
         resolved_paths.data_final / "model_contributions.parquet",
         resolved_suffix,
     )
+    permutation_importance_path = output_path_for_budget(
+        resolved_paths.data_final / "model_permutation_importance.parquet",
+        resolved_suffix,
+    )
     feature_coverage_path = output_path_for_budget(
         resolved_paths.data_final / "feature_coverage.parquet",
         resolved_suffix,
@@ -2717,6 +2889,7 @@ def export_level_model_outputs(
     feature_importance_frame.to_parquet(feature_importance_path, index=False)
     coefficients_frame.to_parquet(coefficients_path, index=False)
     contributions_frame.to_parquet(contributions_path, index=False)
+    permutation_importance_frame.to_parquet(permutation_importance_path, index=False)
     feature_coverage_frame.to_parquet(feature_coverage_path, index=False)
     target_correlation_frame.to_parquet(target_correlations_path, index=False)
     specs_path.write_text(
@@ -2734,6 +2907,7 @@ def export_level_model_outputs(
         feature_importance_path=feature_importance_path,
         coefficients_path=coefficients_path,
         contributions_path=contributions_path,
+        permutation_importance_path=permutation_importance_path,
         feature_coverage_path=feature_coverage_path,
         target_correlations_path=target_correlations_path,
         row_count=len(predictions_frame),

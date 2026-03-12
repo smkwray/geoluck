@@ -35,6 +35,7 @@ class WebExportResult:
     country_contributions_summary_path: Path | None
     bundle_summary_path: Path | None
     bundle_feature_effects_path: Path | None
+    bundle_permutation_importance_path: Path | None
     bundle_country_contributions_index_path: Path | None
     country_count: int
     decade_count: int
@@ -625,6 +626,114 @@ def build_bundle_feature_effects_summary_payload(
     }
 
 
+def build_bundle_permutation_importance_payload(
+    target: str,
+    scores: pd.DataFrame,
+    permutation_importance: pd.DataFrame | None,
+    *,
+    top_k: int = 20,
+) -> dict:
+    if permutation_importance is None or permutation_importance.empty:
+        return {
+            "target": target,
+            "target_label": TARGET_LABELS.get(target, target),
+            "latest_decade": _clean_int(scores["decade"].max()) if not scores.empty else None,
+            "top_k": int(top_k),
+            "bundles": [],
+        }
+    available_spec_names = set(
+        permutation_importance["spec_name"].astype(str).unique().tolist()
+    )
+    best_rows = best_available_non_baseline_by_feature_set(scores, available_spec_names)
+    bundles: list[dict[str, object]] = []
+    for row in best_rows.itertuples(index=False):
+        spec_name = str(row.spec_name)
+        feature_rows = (
+            permutation_importance.loc[permutation_importance["spec_name"] == spec_name]
+            .sort_values(["importance_rank", "delta_r2_mean"], ascending=[True, False])
+            .head(top_k)
+        )
+        if feature_rows.empty:
+            continue
+        block_rows = (
+            permutation_importance.loc[permutation_importance["spec_name"] == spec_name]
+            .groupby("feature_block", as_index=False)
+            .agg(
+                feature_count=("feature_name", "size"),
+                delta_r2_mean=("delta_r2_mean", "sum"),
+                delta_rmse_mean=("delta_rmse_mean", "sum"),
+                delta_mae_mean=("delta_mae_mean", "sum"),
+                delta_spearman_mean=("delta_spearman_mean", "sum"),
+            )
+            .sort_values("delta_r2_mean", ascending=False)
+        )
+        bundles.append(
+            {
+                "feature_set": _clean_text(row.feature_set),
+                "feature_tier": feature_set_tier_key(row.feature_set),
+                "feature_tier_label": feature_set_tier_label(row.feature_set),
+                "feature_components": feature_set_components(row.feature_set),
+                "spec_name": spec_name,
+                "model_name": _clean_text(row.model_name),
+                "model_family": _clean_text(row.model_family),
+                "r2": _clean_number(row.r2),
+                "top_permutation_features": [
+                    {
+                        "feature_name": _clean_text(item.feature_name),
+                        "feature_block": _clean_text(item.feature_block),
+                        "delta_r2_mean": _clean_number(item.delta_r2_mean),
+                        "delta_rmse_mean": _clean_number(item.delta_rmse_mean),
+                        "delta_mae_mean": _clean_number(item.delta_mae_mean),
+                        "delta_spearman_mean": _clean_number(item.delta_spearman_mean),
+                        "importance_rank": _clean_int(item.importance_rank),
+                    }
+                    for item in feature_rows.itertuples(index=False)
+                ],
+                "block_summary": [
+                    {
+                        "feature_block": _clean_text(item.feature_block),
+                        "feature_count": _clean_int(item.feature_count),
+                        "delta_r2_mean": _clean_number(item.delta_r2_mean),
+                        "delta_rmse_mean": _clean_number(item.delta_rmse_mean),
+                        "delta_mae_mean": _clean_number(item.delta_mae_mean),
+                        "delta_spearman_mean": _clean_number(item.delta_spearman_mean),
+                    }
+                    for item in block_rows.itertuples(index=False)
+                ],
+            }
+        )
+    return {
+        "target": target,
+        "target_label": TARGET_LABELS.get(target, target),
+        "latest_decade": _clean_int(scores["decade"].max()) if not scores.empty else None,
+        "top_k": int(top_k),
+        "bundles": bundles,
+    }
+
+
+def build_bundle_permutation_importance_summary_payload(
+    score_frames: dict[str, pd.DataFrame],
+    permutation_frames: dict[str, pd.DataFrame | None],
+    *,
+    top_k: int = 20,
+) -> dict:
+    return {
+        "targets": [
+            build_bundle_permutation_importance_payload(
+                target,
+                score_frames[target],
+                permutation_frames.get(target),
+                top_k=top_k,
+            )
+            for target in BUNDLE_EXPORT_TARGETS
+            if target in score_frames
+            and score_frames[target] is not None
+            and not score_frames[target].empty
+        ],
+        "top_k": int(top_k),
+    }
+
+
 def build_bundle_country_contributions_payload(
     target: str,
     scores: pd.DataFrame,
@@ -910,6 +1019,7 @@ def build_metadata_payload(
     country_contributions_summary_path: str | None = None,
     bundle_summary_path: str | None = None,
     bundle_feature_effects_path: str | None = None,
+    bundle_permutation_importance_path: str | None = None,
     bundle_country_contributions_index_path: str | None = None,
 ) -> dict:
     decades = sorted(int(value) for value in panel["decade"].dropna().unique().tolist())
@@ -939,6 +1049,7 @@ def build_metadata_payload(
         "country_contributions_summary_path": country_contributions_summary_path,
         "bundle_summary_path": bundle_summary_path,
         "bundle_feature_effects_path": bundle_feature_effects_path,
+        "bundle_permutation_importance_path": bundle_permutation_importance_path,
         "bundle_country_contributions_index_path": bundle_country_contributions_index_path,
     }
 
@@ -994,6 +1105,7 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
     country_contributions_summary_path = web_dir / "country_contributions_summary.json"
     bundle_summary_path = web_dir / "bundle_summary.json"
     bundle_feature_effects_path = web_dir / "bundle_feature_effects.json"
+    bundle_permutation_importance_path = web_dir / "bundle_permutation_importance.json"
     bundle_country_contributions_index_path = (
         web_dir / "bundle_country_contributions_index.json"
     )
@@ -1042,6 +1154,7 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
     bundle_feature_importance_frames: dict[str, pd.DataFrame | None] = {}
     bundle_coefficient_frames: dict[str, pd.DataFrame | None] = {}
     bundle_feature_coverage_frames: dict[str, pd.DataFrame | None] = {}
+    bundle_permutation_frames: dict[str, pd.DataFrame | None] = {}
     bundle_contribution_frames: dict[str, pd.DataFrame | None] = {}
     for target in BUNDLE_EXPORT_TARGETS:
         score_candidate = (
@@ -1060,6 +1173,10 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
         coverage_candidate = (
             resolved_paths.data_final / f"feature_coverage__remote_bundle_{target}_2020.parquet"
         )
+        permutation_candidate = (
+            resolved_paths.data_final
+            / f"model_permutation_importance__remote_bundle_{target}_2020.parquet"
+        )
         contribution_candidate = (
             resolved_paths.data_final / f"model_contributions__remote_bundle_{target}_2020.parquet"
         )
@@ -1071,6 +1188,9 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
         )
         bundle_feature_coverage_frames[target] = (
             pd.read_parquet(coverage_candidate) if coverage_candidate.exists() else None
+        )
+        bundle_permutation_frames[target] = (
+            pd.read_parquet(permutation_candidate) if permutation_candidate.exists() else None
         )
         bundle_contribution_frames[target] = (
             pd.read_parquet(contribution_candidate) if contribution_candidate.exists() else None
@@ -1084,6 +1204,14 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
             bundle_feature_importance_frames,
             bundle_coefficient_frames,
             bundle_feature_coverage_frames,
+        )
+        if bundle_score_frames
+        else None
+    )
+    bundle_permutation_importance_payload = (
+        build_bundle_permutation_importance_summary_payload(
+            bundle_score_frames,
+            bundle_permutation_frames,
         )
         if bundle_score_frames
         else None
@@ -1221,6 +1349,11 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
             if bundle_feature_effects_payload is not None
             else None
         ),
+        bundle_permutation_importance_path=(
+            bundle_permutation_importance_path.name
+            if bundle_permutation_importance_payload is not None
+            else None
+        ),
         bundle_country_contributions_index_path=(
             bundle_country_contributions_index_path.name
             if bundle_country_contributions_index_payload is not None
@@ -1257,6 +1390,11 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
             json.dumps(bundle_feature_effects_payload, indent=2) + "\n",
             encoding="utf-8",
         )
+    if bundle_permutation_importance_payload is not None:
+        bundle_permutation_importance_path.write_text(
+            json.dumps(bundle_permutation_importance_payload, indent=2) + "\n",
+            encoding="utf-8",
+        )
     if bundle_country_contributions_index_payload is not None:
         bundle_country_contributions_index_path.write_text(
             json.dumps(bundle_country_contributions_index_payload, indent=2) + "\n",
@@ -1286,6 +1424,8 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
         copy_paths.append(bundle_summary_path)
     if bundle_feature_effects_payload is not None:
         copy_paths.append(bundle_feature_effects_path)
+    if bundle_permutation_importance_payload is not None:
+        copy_paths.append(bundle_permutation_importance_path)
     if bundle_country_contributions_index_payload is not None:
         copy_paths.append(bundle_country_contributions_index_path)
     copy_paths.extend(bundle_country_contributions_paths.values())
@@ -1308,6 +1448,11 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
         bundle_summary_path=bundle_summary_path if bundle_summary_payload is not None else None,
         bundle_feature_effects_path=(
             bundle_feature_effects_path if bundle_feature_effects_payload is not None else None
+        ),
+        bundle_permutation_importance_path=(
+            bundle_permutation_importance_path
+            if bundle_permutation_importance_payload is not None
+            else None
         ),
         bundle_country_contributions_index_path=(
             bundle_country_contributions_index_path

@@ -159,6 +159,11 @@ TARGET_OPTION = typer.Option(
         "Prediction target to use. Available: income, life_expectancy, inequality, wealth."
     ),
 )
+PERMUTATION_IMPORTANCE_OPTION = typer.Option(
+    False,
+    "--with-permutation-importance/--no-with-permutation-importance",
+    help="Compute held-out latest-decade permutation importance. Heavier than standard exports.",
+)
 
 
 def _echo_train_level_result(result: object) -> None:
@@ -171,6 +176,7 @@ def _echo_train_level_result(result: object) -> None:
     typer.echo(f"feature_importance={result.feature_importance_path}")
     typer.echo(f"coefficients={result.coefficients_path}")
     typer.echo(f"contributions={result.contributions_path}")
+    typer.echo(f"permutation_importance={result.permutation_importance_path}")
     typer.echo(f"feature_coverage={result.feature_coverage_path}")
     typer.echo(f"target_correlations={result.target_correlations_path}")
     typer.echo(f"prediction_rows={result.row_count}")
@@ -1268,6 +1274,7 @@ def train_level_models(
     model_name: list[str] | None = MODEL_NAME_OPTION,
     model_family: list[str] | None = MODEL_FAMILY_OPTION,
     output_suffix: str | None = OUTPUT_SUFFIX_OPTION,
+    with_permutation_importance: bool = PERMUTATION_IMPORTANCE_OPTION,
 ) -> None:
     """Train baseline and ML level models by decade."""
     result = export_level_model_outputs(
@@ -1277,6 +1284,7 @@ def train_level_models(
         model_names=model_name,
         model_families=model_family,
         output_suffix=output_suffix,
+        with_permutation_importance=with_permutation_importance,
     )
     _echo_train_level_result(result)
 
@@ -1379,6 +1387,11 @@ def export_web_data() -> None:
         typer.echo(f"bundle_summary={result.bundle_summary_path}")
     if result.bundle_feature_effects_path is not None:
         typer.echo(f"bundle_feature_effects={result.bundle_feature_effects_path}")
+    if result.bundle_permutation_importance_path is not None:
+        typer.echo(
+            "bundle_permutation_importance="
+            f"{result.bundle_permutation_importance_path}"
+        )
     if result.bundle_country_contributions_index_path is not None:
         typer.echo(
             "bundle_country_contributions_index="
