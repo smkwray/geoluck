@@ -657,6 +657,7 @@ async function bootstrap(): Promise<void> {
     const scatterCanvas = document.querySelector<HTMLCanvasElement>("#scatter-chart");
     if (scatterCanvas) {
       createScatterChart(scatterCanvas, {
+        targetLabel: TARGET_LABELS[state.activeTarget],
         points: rows.map((r) => ({
           x: r.actual,
           y: r.predicted,
@@ -687,6 +688,7 @@ async function bootstrap(): Promise<void> {
         .sort((a, b) => b.actual - a.actual);
 
       createContinentComparisonChart(continentCanvas, {
+        targetLabel: TARGET_LABELS[state.activeTarget],
         labels: sorted.map((r) => r.label),
         actual: sorted.map((r) => r.actual),
         predicted: sorted.map((r) => r.predicted),

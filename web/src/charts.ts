@@ -133,9 +133,11 @@ export function createErrorComparisonChart(canvas: HTMLCanvasElement, data: {
 }
 
 export function createScatterChart(canvas: HTMLCanvasElement, data: {
+  targetLabel: string;
   points: Array<{ x: number; y: number; label: string; continent: string }>;
 }): Chart {
   const continents = [...new Set(data.points.map((p) => p.continent))].sort();
+  const axisLabel = data.targetLabel;
 
   const diagonalLine = {
     label: "Perfect prediction",
@@ -179,21 +181,21 @@ export function createScatterChart(canvas: HTMLCanvasElement, data: {
           callbacks: {
             label: (ctx) => {
               const raw = ctx.raw as { x: number; y: number; label: string };
-              return `${raw.label}: actual ${(raw.x * 100).toFixed(0)}%, predicted ${(raw.y * 100).toFixed(0)}%`;
+              return `${raw.label}: actual ${axisLabel.toLowerCase()} ${(raw.x * 100).toFixed(0)}%, predicted ${axisLabel.toLowerCase()} ${(raw.y * 100).toFixed(0)}%`;
             },
           },
         },
       },
       scales: {
         x: {
-          title: { display: true, text: "Actual income rank", color: MUTED_COLOR },
+          title: { display: true, text: `Actual ${axisLabel.toLowerCase()}`, color: MUTED_COLOR },
           min: 0,
           max: 1,
           grid: { color: GRID_COLOR },
           ticks: { color: MUTED_COLOR, callback: (v) => `${Number(v) * 100}%` },
         },
         y: {
-          title: { display: true, text: "Predicted income rank", color: MUTED_COLOR },
+          title: { display: true, text: `Predicted ${axisLabel.toLowerCase()}`, color: MUTED_COLOR },
           min: 0,
           max: 1,
           grid: { color: GRID_COLOR },
@@ -325,23 +327,25 @@ export function createRegionalResidualChart(canvas: HTMLCanvasElement, data: {
 }
 
 export function createContinentComparisonChart(canvas: HTMLCanvasElement, data: {
+  targetLabel: string;
   labels: string[];
   actual: number[];
   predicted: number[];
 }): Chart {
+  const valueLabel = data.targetLabel;
   return new Chart(canvas, {
     type: "bar",
     data: {
       labels: data.labels,
       datasets: [
         {
-          label: "Actual rank",
+          label: `Actual ${valueLabel}`,
           data: data.actual,
           backgroundColor: "hsl(145, 55%, 42%)",
           borderRadius: 6,
         },
         {
-          label: "Predicted rank",
+          label: `Predicted ${valueLabel}`,
           data: data.predicted,
           backgroundColor: "hsl(210, 55%, 48%)",
           borderRadius: 6,
@@ -363,7 +367,7 @@ export function createContinentComparisonChart(canvas: HTMLCanvasElement, data: 
         y: {
           beginAtZero: true,
           max: 1,
-          title: { display: true, text: "Avg income rank", color: MUTED_COLOR },
+          title: { display: true, text: `Avg ${valueLabel.toLowerCase()}`, color: MUTED_COLOR },
           grid: { color: GRID_COLOR },
           ticks: { color: MUTED_COLOR, callback: (v) => `${Number(v) * 100}%` },
         },
