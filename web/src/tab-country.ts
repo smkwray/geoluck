@@ -50,6 +50,10 @@ function fmtFeature(name: string): string {
   return name.replace(/_/g, " ");
 }
 
+function positiveResidualIsGood(target: string): boolean {
+  return target !== "inequality";
+}
+
 const BLOCK_SOURCES: Record<string, string> = {
   deep_geo: "Natural Earth \u2014 latitude, land area, shape",
   hydro_terrain: "Natural Earth \u2014 coastline, rivers, elevation, terrain",
@@ -178,7 +182,11 @@ function renderCrossTargetTable(
           <thead><tr><th>Outcome</th><th>Actual</th><th>Predicted</th><th>Residual</th></tr></thead>
           <tbody>
             ${rows.map((r) => {
-              const cls = r.residual != null ? (r.residual > 0.05 ? "cell-positive" : r.residual < -0.05 ? "cell-negative" : "") : "";
+              const cls = r.residual != null
+                ? positiveResidualIsGood(r.target)
+                  ? (r.residual > 0.05 ? "cell-positive" : r.residual < -0.05 ? "cell-negative" : "")
+                  : (r.residual < -0.05 ? "cell-positive" : r.residual > 0.05 ? "cell-negative" : "")
+                : "";
               return `<tr>
                 <td>${TARGET_LABELS[r.target] ?? r.target}</td>
                 <td>${fmtPct(r.actual)}</td>
@@ -228,8 +236,17 @@ function renderComparisonSection(
         </thead>
         <tbody>
           ${h2hRows.map((r) => {
-            const aResidCls = r.aResid != null ? (r.aResid > 0.05 ? "cell-positive" : r.aResid < -0.05 ? "cell-negative" : "") : "";
-            const bResidCls = r.bResid != null ? (r.bResid > 0.05 ? "cell-positive" : r.bResid < -0.05 ? "cell-negative" : "") : "";
+            const positiveIsGood = positiveResidualIsGood(r.target);
+            const aResidCls = r.aResid != null
+              ? positiveIsGood
+                ? (r.aResid > 0.05 ? "cell-positive" : r.aResid < -0.05 ? "cell-negative" : "")
+                : (r.aResid < -0.05 ? "cell-positive" : r.aResid > 0.05 ? "cell-negative" : "")
+              : "";
+            const bResidCls = r.bResid != null
+              ? positiveIsGood
+                ? (r.bResid > 0.05 ? "cell-positive" : r.bResid < -0.05 ? "cell-negative" : "")
+                : (r.bResid < -0.05 ? "cell-positive" : r.bResid > 0.05 ? "cell-negative" : "")
+              : "";
             return `<tr>
               <td>${TARGET_LABELS[r.target] ?? r.target}</td>
               <td>${fmtPct(r.aActual)} <span class="${aResidCls}" style="font-size:0.82em">(${fmtResidual(r.aResid)})</span></td>
@@ -365,7 +382,7 @@ export function renderCountryTab(data: CountryTabData): string {
         <h2>Feature contributions \u2014 ${targetLabel} (${TIER_LABELS[tk] ?? tk})</h2>
         <button class="export-btn" id="export-country-csv">Export CSV</button>
       </div>
-      <p class="section-subtitle">Which features push this country's predicted rank up or down.</p>
+      <p class="section-subtitle">Which features push this country's predicted ${targetLabel.toLowerCase()} up or down.</p>
       ${contribCard}
     </section>
 

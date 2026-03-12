@@ -58,7 +58,8 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
         </p>
         <p>
           The <strong>residual</strong> (actual rank minus predicted rank) reveals which countries
-          outperform or underperform their endowments. This is explicitly about
+          land above or below the model's expectation. For inequality, a positive residual means
+          <em>more unequal than predicted</em>, while a negative residual means <em>less unequal than predicted</em>. This is explicitly about
           <em>predictive association</em>, not causality.
         </p>
       </div>
@@ -68,8 +69,9 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
       <h2>Interpretation and caveats</h2>
       <div class="about-content">
         <p>
-          A positive residual means a country ranks higher than the model predicts given its features \u2014
-          it does <em>not</em> mean the country is doing something "right." Geography is not destiny,
+          For income, wealth, and life expectancy, a positive residual means a country ranks higher than the model predicts given its features.
+          For inequality, the interpretation flips: a positive residual means the country is <em>more unequal</em> than predicted.
+          It does <em>not</em> mean the country is doing something "right." Geography is not destiny,
           and many omitted variables (policy choices, historical accidents, cultural factors) drive outcomes.
         </p>
         <p>
@@ -115,7 +117,7 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
             </tr>
             <tr>
               <td>Inequality</td>
-              <td>Disposable-income Gini coefficient, percentile rank (higher = more equal)</td>
+              <td>Disposable-income Gini coefficient, percentile rank (higher = more unequal)</td>
               <td>Standardized World Income Inequality Database (SWIID)</td>
             </tr>
           </tbody>

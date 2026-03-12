@@ -7,6 +7,7 @@ export type SpotlightCountry = {
 };
 
 export type MapTabExtras = {
+  target: string;
   targetLabel: string;
   tierLabel: string;
   r2: number | null;
@@ -14,6 +15,10 @@ export type MapTabExtras = {
   overperformers: SpotlightCountry[];
   underperformers: SpotlightCountry[];
 };
+
+function positiveResidualIsGood(target: string): boolean {
+  return target !== "inequality";
+}
 
 function formatValue(metricView: string, value: number | null): string {
   if (value === null) return "No data";
@@ -49,24 +54,25 @@ function topCountries(
     .join("");
 }
 
-function luckBadge(profile: CountryProfile, decadeIndex: number): string {
+function luckBadge(profile: CountryProfile, decadeIndex: number, target: string): string {
   const residual = profile.residual_income_rank_pct[decadeIndex];
   if (residual === null) return "";
   const abs = Math.abs(residual);
   let label: string;
   let cssClass: string;
+  const positiveIsGood = positiveResidualIsGood(target);
   if (residual > 0.15) {
-    label = "Beats geography";
-    cssClass = "luck-positive";
+    label = positiveIsGood ? "Beats geography" : "More unequal than predicted";
+    cssClass = positiveIsGood ? "luck-positive" : "luck-negative";
   } else if (residual > 0.05) {
-    label = "Slightly lucky";
-    cssClass = "luck-mild-positive";
+    label = positiveIsGood ? "Slightly lucky" : "Slightly more unequal";
+    cssClass = positiveIsGood ? "luck-mild-positive" : "luck-mild-negative";
   } else if (residual < -0.15) {
-    label = "Below geography";
-    cssClass = "luck-negative";
+    label = positiveIsGood ? "Below geography" : "Less unequal than predicted";
+    cssClass = positiveIsGood ? "luck-negative" : "luck-positive";
   } else if (residual < -0.05) {
-    label = "Slightly unlucky";
-    cssClass = "luck-mild-negative";
+    label = positiveIsGood ? "Slightly unlucky" : "Slightly less unequal";
+    cssClass = positiveIsGood ? "luck-mild-negative" : "luck-mild-positive";
   } else {
     label = "Near predicted";
     cssClass = "luck-neutral";
@@ -78,6 +84,7 @@ function drawer(
   profile: CountryProfile | null,
   metricView: string,
   targetLabel: string,
+  target: string,
 ): string {
   if (!profile) {
     return `
@@ -104,7 +111,7 @@ function drawer(
         </div>
         <button id="clear-country" class="clear-button" type="button">Clear</button>
       </div>
-      ${luckBadge(profile, idx)}
+      ${luckBadge(profile, idx, target)}
       <div class="drawer-stats">
         <article>
           <span>Actual ${targetLabel.toLowerCase()}</span>
@@ -136,6 +143,10 @@ function spotlightStrip(extras?: MapTabExtras): string {
   const under = extras?.underperformers ?? [];
   if (over.length === 0 && under.length === 0) return "";
 
+  const positiveIsGood = positiveResidualIsGood(extras?.target ?? "income");
+  const posHeading = positiveIsGood ? "Beating their geography" : "Less unequal than predicted";
+  const negHeading = positiveIsGood ? "Below their geography" : "More unequal than predicted";
+
   const renderItems = (items: SpotlightCountry[], positive: boolean) =>
     items
       .map((c) => {
@@ -148,11 +159,11 @@ function spotlightStrip(extras?: MapTabExtras): string {
   return `
     <div class="spotlight-strip">
       <div class="spotlight-group">
-        <span class="spotlight-heading spotlight-heading-pos">Beating their geography</span>
+        <span class="spotlight-heading spotlight-heading-pos">${posHeading}</span>
         <div class="spotlight-items">${renderItems(over, true)}</div>
       </div>
       <div class="spotlight-group">
-        <span class="spotlight-heading spotlight-heading-neg">Below their geography</span>
+        <span class="spotlight-heading spotlight-heading-neg">${negHeading}</span>
         <div class="spotlight-items">${renderItems(under, false)}</div>
       </div>
     </div>
@@ -170,6 +181,7 @@ export function renderMapTab(
   const selectedMetricView = activeMetricView ?? "actual";
   const selectedDecade = activeDecade ?? 2020;
   const decadeIndex = payload ? payload.decades.indexOf(selectedDecade) : 0;
+  const target = extras?.target ?? "income";
   const targetLabel = extras?.targetLabel ?? "Income rank";
 
   const metricViews = [
@@ -236,12 +248,12 @@ export function renderMapTab(
       <section class="map-panel">
         <div id="map" class="map-frame" aria-label="World map"></div>
         <div class="legend" aria-label="Legend">
-          <span>${selectedMetricView === "residual" ? "Below predicted" : "Lower rank"}</span>
+          <span>${selectedMetricView === "residual" ? (target === "inequality" ? "Less unequal than predicted" : "Below predicted") : "Lower rank"}</span>
           <div class="legend-ramp ${selectedMetricView === "residual" ? "legend-diverging" : ""}"></div>
-          <span>${selectedMetricView === "residual" ? "Above predicted" : "Higher rank"}</span>
+          <span>${selectedMetricView === "residual" ? (target === "inequality" ? "More unequal than predicted" : "Above predicted") : "Higher rank"}</span>
         </div>
       </section>
-      ${drawer(profile, selectedMetricView, targetLabel)}
+      ${drawer(profile, selectedMetricView, targetLabel, target)}
     </section>
     ${leaderboard}
   `;

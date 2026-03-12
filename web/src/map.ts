@@ -20,11 +20,11 @@ function colorForValue(metricId: string, value: number | null): string {
   if (value === null) {
     return NO_DATA_FILL;
   }
-  if (metricId === "residual" || metricId === "residual_income_rank_pct") {
+  if (metricId.startsWith("residual") || metricId === "residual_income_rank_pct") {
     const clipped = Math.max(-0.5, Math.min(0.5, value));
-    if (clipped >= 0) {
-      const lightness = 88 - (clipped / 0.5) * 36;
-      return `hsl(145, 55%, ${lightness}%)`;
+    const positiveIsGood = metricId !== "residual_inequality";
+    if ((positiveIsGood && clipped >= 0) || (!positiveIsGood && clipped < 0)) {
+      return `hsl(145, 55%, ${88 - (Math.abs(clipped) / 0.5) * 36}%)`;
     }
     const lightness = 88 - (Math.abs(clipped) / 0.5) * 36;
     return `hsl(12, 75%, ${lightness}%)`;
@@ -38,7 +38,7 @@ function formatMetricValue(metricId: string, value: number | null): string {
   if (value === null) {
     return "No data";
   }
-  if (metricId === "residual" || metricId === "residual_income_rank_pct") {
+  if (metricId.startsWith("residual") || metricId === "residual_income_rank_pct") {
     return value.toFixed(3);
   }
   return `${Math.round(value * 100)} pct`;

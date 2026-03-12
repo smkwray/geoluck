@@ -207,6 +207,14 @@ export function createScatterChart(canvas: HTMLCanvasElement, data: {
 }
 
 export function createResidualHistogram(canvas: HTMLCanvasElement, residuals: number[]): Chart {
+  return createResidualHistogramWithSemantics(canvas, residuals, true);
+}
+
+export function createResidualHistogramWithSemantics(
+  canvas: HTMLCanvasElement,
+  residuals: number[],
+  positiveIsGood: boolean,
+): Chart {
   const binCount = 20;
   const min = -0.5;
   const max = 0.5;
@@ -235,8 +243,12 @@ export function createResidualHistogram(canvas: HTMLCanvasElement, residuals: nu
           data: bins,
           backgroundColor: bins.map((_, i) => {
             const center = min + (i + 0.5) * binWidth;
-            if (center >= 0) return "hsla(145, 55%, 42%, 0.7)";
-            return "hsla(12, 65%, 55%, 0.7)";
+            if (positiveIsGood) {
+              if (center >= 0) return "hsla(145, 55%, 42%, 0.7)";
+              return "hsla(12, 65%, 55%, 0.7)";
+            }
+            if (center >= 0) return "hsla(12, 65%, 55%, 0.7)";
+            return "hsla(145, 55%, 42%, 0.7)";
           }),
           borderRadius: 3,
         },
@@ -284,7 +296,9 @@ export function createResidualHistogram(canvas: HTMLCanvasElement, residuals: nu
 export function createRegionalResidualChart(canvas: HTMLCanvasElement, data: {
   labels: string[];
   means: number[];
+  positiveIsGood?: boolean;
 }): Chart {
+  const positiveIsGood = data.positiveIsGood ?? true;
   return new Chart(canvas, {
     type: "bar",
     data: {
@@ -294,7 +308,9 @@ export function createRegionalResidualChart(canvas: HTMLCanvasElement, data: {
           label: "Mean residual",
           data: data.means,
           backgroundColor: data.means.map((v) =>
-            v >= 0 ? "hsla(145, 55%, 42%, 0.75)" : "hsla(12, 65%, 55%, 0.75)",
+            positiveIsGood
+              ? v >= 0 ? "hsla(145, 55%, 42%, 0.75)" : "hsla(12, 65%, 55%, 0.75)"
+              : v >= 0 ? "hsla(12, 65%, 55%, 0.75)" : "hsla(145, 55%, 42%, 0.75)",
           ),
           borderRadius: 6,
         },

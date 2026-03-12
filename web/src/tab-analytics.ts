@@ -47,9 +47,14 @@ type RankingsRow = {
   residual: number | null;
 };
 
+function positiveResidualIsGood(target: string): boolean {
+  return target !== "inequality";
+}
+
 function buildRankingsRows(data: AnalyticsData): RankingsRow[] {
   const bundle = data.bundle;
   if (!bundle) return [];
+  const positiveIsGood = positiveResidualIsGood(data.target);
 
   return bundle.countries
     .map((c) => {
@@ -66,17 +71,28 @@ function buildRankingsRows(data: AnalyticsData): RankingsRow[] {
         residual,
       };
     })
-    .sort((a, b) => (b.residual ?? -999) - (a.residual ?? -999));
+    .sort((a, b) => {
+      const ar = a.residual ?? -999;
+      const br = b.residual ?? -999;
+      return positiveIsGood ? br - ar : ar - br;
+    });
 }
 
-function rankingsTableHtml(rows: RankingsRow[]): string {
+function rankingsTableHtml(rows: RankingsRow[], target: string): string {
+  const positiveIsGood = positiveResidualIsGood(target);
   return rows
     .map((r, i) => {
       const cls =
         r.residual !== null
-          ? r.residual > 0.05
-            ? "cell-positive"
+          ? positiveIsGood
+            ? r.residual > 0.05
+              ? "cell-positive"
+              : r.residual < -0.05
+                ? "cell-negative"
+                : ""
             : r.residual < -0.05
+            ? "cell-positive"
+            : r.residual > 0.05
               ? "cell-negative"
               : ""
           : "";
@@ -143,6 +159,19 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
     : "";
 
   const rankingsRows = buildRankingsRows(data);
+  const inequalityTarget = data.target === "inequality";
+  const scatterSubtitle = inequalityTarget
+    ? "Each dot is a country in 2020. Points below the diagonal are less unequal than predicted; points above are more unequal than predicted."
+    : `Each dot is a country in ${decade}. Points above the diagonal beat their geography.`;
+  const residualHistogramSubtitle = inequalityTarget
+    ? "Histogram of residuals (actual minus predicted). Green = less unequal than predicted, red = more unequal than predicted."
+    : "Histogram of residuals (actual minus predicted). Green = outperforming, red = underperforming.";
+  const regionalSubtitle = inequalityTarget
+    ? "Average residual by region. Negative = less unequal than predicted; positive = more unequal than predicted."
+    : "Average residual by region. Positive = outperforms geography.";
+  const rankingsSubtitle = inequalityTarget
+    ? "Click a column header to sort. Negative residual = less unequal than predicted."
+    : "Click a column header to sort. Positive residual = beats geography.";
 
   return `
     <section class="analytics-hero">
@@ -173,7 +202,7 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
     ${bundle ? `
     <section class="analytics-section">
       <h2>Actual vs. predicted</h2>
-      <p class="section-subtitle">Each dot is a country in ${decade}. Points above the diagonal beat their geography.</p>
+      <p class="section-subtitle">${scatterSubtitle}</p>
       <div class="chart-wrap chart-wrap-square">
         <canvas id="scatter-chart"></canvas>
       </div>
@@ -189,7 +218,7 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
 
     <section class="analytics-section">
       <h2>Distribution of luck</h2>
-      <p class="section-subtitle">Histogram of residuals (actual minus predicted). Green = outperforming, red = underperforming.</p>
+      <p class="section-subtitle">${residualHistogramSubtitle}</p>
       <div class="chart-wrap">
         <canvas id="residual-histogram"></canvas>
       </div>
@@ -197,7 +226,7 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
 
     <section class="analytics-section">
       <h2>Regional breakdown</h2>
-      <p class="section-subtitle">Average residual by region. Positive = outperforms geography.</p>
+      <p class="section-subtitle">${regionalSubtitle}</p>
       <div class="chart-wrap chart-wrap-tall">
         <canvas id="regional-residual-chart"></canvas>
       </div>
@@ -207,7 +236,7 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
       <div class="section-header-row">
         <div>
           <h2>Global rankings (${decade})</h2>
-          <p class="section-subtitle">Click a column header to sort. Positive residual = beats geography.</p>
+          <p class="section-subtitle">${rankingsSubtitle}</p>
         </div>
         <button class="export-btn" id="export-rankings-csv">Export CSV</button>
       </div>
@@ -223,7 +252,7 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
               <th class="sortable-th active-sort" data-sort="residual">Residual \u25BE</th>
             </tr>
           </thead>
-          <tbody>${rankingsTableHtml(rankingsRows)}</tbody>
+          <tbody>${rankingsTableHtml(rankingsRows, data.target)}</tbody>
         </table>
       </div>
     </section>

@@ -7,7 +7,7 @@ import {
   createFeatureImportanceChart,
   createModelComparisonChart,
   createRegionalResidualChart,
-  createResidualHistogram,
+  createResidualHistogramWithSemantics,
   createScatterChart,
 } from "./charts";
 import type {
@@ -82,6 +82,10 @@ function tierLabel(tiers: Set<TierFlag>): string {
   if (tiers.has(2)) parts.push("Infrastructure");
   if (tiers.has(3)) parts.push("Society");
   return parts.length > 0 ? parts.join(" + ") : "None";
+}
+
+function positiveResidualIsGood(target: TargetId): boolean {
+  return target !== "inequality";
 }
 
 async function bootstrap(): Promise<void> {
@@ -256,7 +260,7 @@ async function bootstrap(): Promise<void> {
     decade: number,
   ): MetricsPayload {
     return {
-      metric: view,
+      metric: view === "residual" ? `residual_${state.activeTarget}` : view,
       label:
         view === "actual" ? "Actual" : view === "predicted" ? "Predicted" : "Residual",
       description: "",
@@ -335,6 +339,7 @@ async function bootstrap(): Promise<void> {
       let overperformers: SpotlightCountry[] = [];
       let underperformers: SpotlightCountry[] = [];
       if (bundle) {
+        const positiveIsGood = positiveResidualIsGood(state.activeTarget);
         const ranked = bundle.countries
           .filter((c) => c.target_value != null && c.prediction != null)
           .map((c) => ({
@@ -342,12 +347,13 @@ async function bootstrap(): Promise<void> {
             name: c.country_name,
             residual: c.target_value! - c.prediction!,
           }))
-          .sort((a, b) => b.residual - a.residual);
+          .sort((a, b) => positiveIsGood ? b.residual - a.residual : a.residual - b.residual);
         overperformers = ranked.slice(0, 3);
-        underperformers = ranked.slice(-3).sort((a, b) => a.residual - b.residual);
+        underperformers = ranked.slice(-3).sort((a, b) => positiveIsGood ? a.residual - b.residual : b.residual - a.residual);
       }
 
       tabContent = renderMapTab(metadata, activePayload, decade, mapProfile, state.activeMetricView, {
+        target: state.activeTarget,
         targetLabel: TARGET_LABELS[state.activeTarget],
         tierLabel: tierLabel(state.activeTiers),
         r2,
@@ -698,7 +704,11 @@ async function bootstrap(): Promise<void> {
     // Residual histogram
     const histCanvas = document.querySelector<HTMLCanvasElement>("#residual-histogram");
     if (histCanvas) {
-      createResidualHistogram(histCanvas, rows.map((r) => r.residual));
+      createResidualHistogramWithSemantics(
+        histCanvas,
+        rows.map((r) => r.residual),
+        positiveResidualIsGood(state.activeTarget),
+      );
     }
 
     // Regional residual chart
@@ -718,6 +728,7 @@ async function bootstrap(): Promise<void> {
       createRegionalResidualChart(regionCanvas, {
         labels: regionData.map((r) => r.label),
         means: regionData.map((r) => r.mean),
+        positiveIsGood: positiveResidualIsGood(state.activeTarget),
       });
     }
   }
