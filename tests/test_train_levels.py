@@ -1470,6 +1470,36 @@ def test_life_expectancy_target_excludes_direct_wpp_outcome_columns() -> None:
     assert life_feature_sets[0].numeric_columns == ["wpp_total_fertility_rate"]
 
 
+def test_inequality_target_excludes_near_target_fsi_columns() -> None:
+    feature_sets = [
+        FeatureSetSpec(
+            feature_set="demo",
+            numeric_columns=[
+                "fsi_total_score",
+                "fsi_economic_inequality",
+                "fsi_public_services",
+            ],
+            categorical_columns=[],
+        )
+    ]
+
+    income_feature_sets = apply_target_feature_exclusions(
+        feature_sets,
+        get_target_spec("income"),
+    )
+    inequality_feature_sets = apply_target_feature_exclusions(
+        feature_sets,
+        get_target_spec("inequality"),
+    )
+
+    assert income_feature_sets[0].numeric_columns == [
+        "fsi_total_score",
+        "fsi_economic_inequality",
+        "fsi_public_services",
+    ]
+    assert inequality_feature_sets[0].numeric_columns == ["fsi_public_services"]
+
+
 def test_build_leave_region_out_splits_uses_requested_decade_and_regions() -> None:
     frame = pd.DataFrame(make_training_rows())
 

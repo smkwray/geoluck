@@ -301,10 +301,10 @@
           "tier3"
         ],
         "decade": 2020,
-        "r2": 0.681239,
-        "rmse": 0.164513,
-        "mae": 0.12903,
-        "spearman": 0.825652
+        "r2": 0.686682,
+        "rmse": 0.163102,
+        "mae": 0.127551,
+        "spearman": 0.823046
       },
       "bundles": [
         {
@@ -331,14 +331,14 @@
             "tier1",
             "tier3"
           ],
-          "spec_name": "hist_gb__tier1_tier3_without_tier2_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier1_tier3_without_tier2_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 107,
-          "r2": 0.674971,
-          "rmse": 0.166122,
-          "mae": 0.127083,
-          "spearman": 0.819921
+          "r2": 0.66647,
+          "rmse": 0.16828,
+          "mae": 0.131455,
+          "spearman": 0.810458
         },
         {
           "feature_set": "tier2_only_resource_development_v1",
@@ -385,10 +385,10 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 107,
-          "r2": 0.676911,
-          "rmse": 0.165626,
-          "mae": 0.12782,
-          "spearman": 0.819466
+          "r2": 0.678307,
+          "rmse": 0.165267,
+          "mae": 0.126786,
+          "spearman": 0.828126
         },
         {
           "feature_set": "tier3_institutional_cultural_v1",
@@ -403,10 +403,10 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 107,
-          "r2": 0.681239,
-          "rmse": 0.164513,
-          "mae": 0.12903,
-          "spearman": 0.825652
+          "r2": 0.686682,
+          "rmse": 0.163102,
+          "mae": 0.127551,
+          "spearman": 0.823046
         },
         {
           "feature_set": "tier3_only_social_structure_v1",
@@ -419,10 +419,10 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 107,
-          "r2": 0.636637,
-          "rmse": 0.175645,
-          "mae": 0.133757,
-          "spearman": 0.798217
+          "r2": 0.641265,
+          "rmse": 0.174523,
+          "mae": 0.133174,
+          "spearman": 0.800637
         }
       ]
     },

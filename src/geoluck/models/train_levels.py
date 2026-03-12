@@ -250,6 +250,8 @@ TARGET_SPECS = {
             INEQUALITY_RANK_COLUMN,
             INEQUALITY_MARKET_COLUMN,
             INEQUALITY_MARKET_RANK_COLUMN,
+            "fsi_economic_inequality",
+            "fsi_total_score",
         ),
     ),
     "wealth": TargetSpec(

@@ -2458,66 +2458,66 @@
           "spec_name": "gradient_boosting__tier1_tier3_without_tier2_v1",
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
-          "r2": 0.668662,
+          "r2": 0.66647,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
-              "importance": 0.209253,
+              "importance": 0.207234,
               "importance_rank": 1
             },
             {
               "feature_name": "wpp_population_share_15_24_pct",
-              "importance": 0.123381,
+              "importance": 0.155935,
               "importance_rank": 2
             },
             {
               "feature_name": "undp_gii_maternal_mortality_ratio",
-              "importance": 0.112641,
+              "importance": 0.119405,
               "importance_rank": 3
             },
             {
               "feature_name": "representative_latitude",
-              "importance": 0.07002,
+              "importance": 0.091827,
               "importance_rank": 4
             },
             {
-              "feature_name": "abs_latitude",
-              "importance": 0.059788,
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.032979,
               "importance_rank": 5
             },
             {
-              "feature_name": "fsi_economic_inequality",
-              "importance": 0.036218,
+              "feature_name": "cru_wet_days_change_prev_decade",
+              "importance": 0.027204,
               "importance_rank": 6
             },
             {
-              "feature_name": "cru_wet_days_change_prev_decade",
-              "importance": 0.030795,
+              "feature_name": "representative_longitude",
+              "importance": 0.017943,
               "importance_rank": 7
             },
             {
-              "feature_name": "undp_gii_female_secondary_education_pct",
-              "importance": 0.02774,
+              "feature_name": "abs_latitude",
+              "importance": 0.016634,
               "importance_rank": 8
             },
             {
-              "feature_name": "representative_longitude",
-              "importance": 0.022955,
+              "feature_name": "cepii_common_ethno_language_partner_count",
+              "importance": 0.014604,
               "importance_rank": 9
             },
             {
               "feature_name": "cepii_common_ethno_language_partner_share_pct",
-              "importance": 0.020618,
+              "importance": 0.013746,
               "importance_rank": 10
             },
             {
-              "feature_name": "cepii_common_ethno_language_partner_count",
-              "importance": 0.009695,
+              "feature_name": "clim_solar_radiation_kj_m2_day",
+              "importance": 0.011953,
               "importance_rank": 11
             },
             {
-              "feature_name": "cru_temp_decade_std_c",
-              "importance": 0.009402,
+              "feature_name": "geot_coal_power_capacity_mw_owned",
+              "importance": 0.011228,
               "importance_rank": 12
             }
           ],
@@ -2943,66 +2943,66 @@
           "spec_name": "gradient_boosting__tier2_tier3_without_tier1_v1",
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
-          "r2": 0.676911,
+          "r2": 0.678307,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_15_24_pct",
-              "importance": 0.193015,
+              "importance": 0.209873,
               "importance_rank": 1
             },
             {
               "feature_name": "undp_gii_maternal_mortality_ratio",
-              "importance": 0.191819,
+              "importance": 0.201273,
               "importance_rank": 2
             },
             {
-              "feature_name": "fsi_economic_inequality",
-              "importance": 0.068616,
+              "feature_name": "pwt_human_capital_index",
+              "importance": 0.058909,
               "importance_rank": 3
             },
             {
-              "feature_name": "undp_gii_female_secondary_education_pct",
-              "importance": 0.059776,
+              "feature_name": "cepii_common_ethno_language_partner_share_pct",
+              "importance": 0.05867,
               "importance_rank": 4
             },
             {
-              "feature_name": "pwt_human_capital_index",
-              "importance": 0.040163,
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.032873,
               "importance_rank": 5
             },
             {
-              "feature_name": "cepii_common_ethno_language_partner_share_pct",
-              "importance": 0.039919,
+              "feature_name": "pew_christians_pct",
+              "importance": 0.023721,
               "importance_rank": 6
             },
             {
-              "feature_name": "cepii_common_ethno_language_partner_count",
-              "importance": 0.031619,
+              "feature_name": "undp_gii_male_secondary_education_pct",
+              "importance": 0.023252,
               "importance_rank": 7
             },
             {
               "feature_name": "water_stress_pct_available_resources",
-              "importance": 0.020138,
+              "importance": 0.021799,
               "importance_rank": 8
             },
             {
-              "feature_name": "forest_to_agricultural_land_ratio",
-              "importance": 0.015495,
+              "feature_name": "cepii_common_ethno_language_partner_count",
+              "importance": 0.015925,
               "importance_rank": 9
             },
             {
-              "feature_name": "mrds_manganese_site_count",
-              "importance": 0.013412,
+              "feature_name": "fsi_public_services",
+              "importance": 0.015108,
               "importance_rank": 10
             },
             {
-              "feature_name": "forest_area_pct",
-              "importance": 0.013294,
+              "feature_name": "mrds_manganese_site_count",
+              "importance": 0.014034,
               "importance_rank": 11
             },
             {
-              "feature_name": "pew_christians_pct",
-              "importance": 0.011604,
+              "feature_name": "forest_to_agricultural_land_ratio",
+              "importance": 0.01155,
               "importance_rank": 12
             }
           ],
@@ -3106,66 +3106,66 @@
           "spec_name": "gradient_boosting__tier3_institutional_cultural_v1",
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
-          "r2": 0.681239,
+          "r2": 0.686682,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
-              "importance": 0.203061,
+              "importance": 0.198136,
               "importance_rank": 1
             },
             {
               "feature_name": "wpp_population_share_15_24_pct",
-              "importance": 0.122738,
+              "importance": 0.156565,
               "importance_rank": 2
             },
             {
-              "feature_name": "representative_latitude",
-              "importance": 0.122298,
+              "feature_name": "undp_gii_maternal_mortality_ratio",
+              "importance": 0.11808,
               "importance_rank": 3
             },
             {
-              "feature_name": "undp_gii_maternal_mortality_ratio",
-              "importance": 0.120036,
+              "feature_name": "representative_latitude",
+              "importance": 0.08414,
               "importance_rank": 4
             },
             {
-              "feature_name": "fsi_economic_inequality",
-              "importance": 0.03207,
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.037046,
               "importance_rank": 5
             },
             {
-              "feature_name": "undp_gii_female_secondary_education_pct",
-              "importance": 0.031112,
+              "feature_name": "abs_latitude",
+              "importance": 0.022712,
               "importance_rank": 6
             },
             {
               "feature_name": "cru_wet_days_change_prev_decade",
-              "importance": 0.022754,
+              "importance": 0.021116,
               "importance_rank": 7
             },
             {
               "feature_name": "cepii_common_ethno_language_partner_share_pct",
-              "importance": 0.016622,
+              "importance": 0.019784,
               "importance_rank": 8
             },
             {
               "feature_name": "representative_longitude",
-              "importance": 0.015371,
+              "importance": 0.01554,
               "importance_rank": 9
             },
             {
-              "feature_name": "cepii_common_ethno_language_partner_count",
-              "importance": 0.015284,
+              "feature_name": "clim_solar_radiation_kj_m2_day",
+              "importance": 0.015279,
               "importance_rank": 10
             },
             {
-              "feature_name": "forest_to_agricultural_land_ratio",
-              "importance": 0.01284,
+              "feature_name": "geot_coal_power_capacity_mw_owned",
+              "importance": 0.010349,
               "importance_rank": 11
             },
             {
-              "feature_name": "ibtracs_mean_storm_speed_kt",
-              "importance": 0.007466,
+              "feature_name": "cepii_common_ethno_language_partner_count",
+              "importance": 0.009433,
               "importance_rank": 12
             }
           ],
@@ -3267,66 +3267,66 @@
           "spec_name": "gradient_boosting__tier3_only_social_structure_v1",
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
-          "r2": 0.636637,
+          "r2": 0.641265,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_15_24_pct",
-              "importance": 0.21067,
+              "importance": 0.212431,
               "importance_rank": 1
             },
             {
               "feature_name": "undp_gii_maternal_mortality_ratio",
-              "importance": 0.188871,
+              "importance": 0.211436,
               "importance_rank": 2
             },
             {
-              "feature_name": "fsi_economic_inequality",
-              "importance": 0.072605,
+              "feature_name": "pwt_human_capital_index",
+              "importance": 0.058481,
               "importance_rank": 3
             },
             {
               "feature_name": "cepii_common_ethno_language_partner_count",
-              "importance": 0.048219,
+              "importance": 0.044037,
               "importance_rank": 4
             },
             {
-              "feature_name": "pwt_human_capital_index",
-              "importance": 0.040691,
+              "feature_name": "pew_christians_pct",
+              "importance": 0.03952,
               "importance_rank": 5
             },
             {
-              "feature_name": "undp_gii_female_secondary_education_pct",
-              "importance": 0.039174,
+              "feature_name": "cepii_common_ethno_language_partner_share_pct",
+              "importance": 0.035445,
               "importance_rank": 6
             },
             {
-              "feature_name": "pew_christians_pct",
-              "importance": 0.036744,
+              "feature_name": "undp_gii_female_secondary_education_pct",
+              "importance": 0.03499,
               "importance_rank": 7
             },
             {
-              "feature_name": "cepii_common_ethno_language_partner_share_pct",
-              "importance": 0.031097,
+              "feature_name": "fsi_demographic_pressures",
+              "importance": 0.015699,
               "importance_rank": 8
             },
             {
               "feature_name": "undp_gii_secondary_education_gap_pct",
-              "importance": 0.015659,
+              "importance": 0.014924,
               "importance_rank": 9
             },
             {
-              "feature_name": "pwt_import_share_expenditure",
-              "importance": 0.012476,
+              "feature_name": "geot_inactive_asset_share_pct",
+              "importance": 0.011488,
               "importance_rank": 10
             },
             {
-              "feature_name": "geot_inactive_asset_share_pct",
-              "importance": 0.011473,
+              "feature_name": "undp_gii_male_secondary_education_pct",
+              "importance": 0.011082,
               "importance_rank": 11
             },
             {
-              "feature_name": "glottolog_multi_country_language_count",
-              "importance": 0.009851,
+              "feature_name": "fsi_human_flight_and_brain_drain",
+              "importance": 0.010501,
               "importance_rank": 12
             }
           ],
