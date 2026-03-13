@@ -18,12 +18,15 @@ export type CountryTabData = {
   countryNames: Array<{ iso3: string; name: string }>;
 };
 
-const TARGET_IDS = ["income", "wealth", "life_expectancy", "inequality"] as const;
+const TARGET_IDS = ["income", "wealth", "life_expectancy", "inequality", "gender_inequality", "female_lfpr", "women_business_law"] as const;
 const TARGET_LABELS: Record<string, string> = {
   income: "Income",
   wealth: "Wealth",
   life_expectancy: "Life Exp",
   inequality: "Inequality",
+  gender_inequality: "Gender Ineq.",
+  female_lfpr: "Female LFPR",
+  women_business_law: "Women & Law",
 };
 
 const TIER_LABELS: Record<string, string> = {
@@ -51,7 +54,7 @@ function fmtFeature(name: string): string {
 }
 
 function positiveResidualIsGood(target: string): boolean {
-  return target !== "inequality";
+  return target !== "inequality" && target !== "gender_inequality";
 }
 
 const BLOCK_SOURCES: Record<string, string> = {

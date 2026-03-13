@@ -1,6 +1,11 @@
 import pandas as pd
 
+from geoluck.etl.fetch_female_lfpr import FEMALE_LFPR_COLUMN
+from geoluck.etl.fetch_women_business_law import WOMEN_BUSINESS_LAW_COLUMN
 from geoluck.features.build_outcomes_panel import (
+    FEMALE_LFPR_RANK_COLUMN,
+    GENDER_INEQUALITY_COLUMN,
+    GENDER_INEQUALITY_RANK_COLUMN,
     INEQUALITY_COLUMN,
     INEQUALITY_MARKET_COLUMN,
     INEQUALITY_MARKET_RANK_COLUMN,
@@ -10,6 +15,7 @@ from geoluck.features.build_outcomes_panel import (
     WEALTH_COLUMN,
     WEALTH_LOG_COLUMN,
     WEALTH_RANK_COLUMN,
+    WOMEN_BUSINESS_LAW_RANK_COLUMN,
     build_country_decade_outcomes,
 )
 
@@ -174,3 +180,90 @@ def test_build_country_decade_outcomes_merges_wealth_and_ranks() -> None:
         6.908755,
         7.09091,
     ]
+
+
+def test_build_country_decade_outcomes_merges_gender_targets() -> None:
+    income_panel = pd.DataFrame(
+        {
+            "iso3": ["AAA", "BBB", "AAA", "BBB", "AAA", "BBB"],
+            "country_name": ["A", "B", "A", "B", "A", "B"],
+            "region_name": ["R", "S", "R", "S", "R", "S"],
+            "year": [2000, 2000, 2010, 2010, 2020, 2020],
+            "decade": [2000, 2000, 2010, 2010, 2020, 2020],
+            "gdppc": [100.0, 200.0, 120.0, 220.0, 140.0, 260.0],
+            "income_log": [4.6, 5.3, 4.8, 5.4, 4.94, 5.56],
+            "income_rank_pct": [0.0, 1.0, 0.0, 1.0, 0.0, 1.0],
+            "population": [10.0, 20.0, 11.0, 21.0, 12.0, 22.0],
+            "population_log": [2.3, 3.0, 2.4, 3.04, 2.48, 3.09],
+            "population_rank_pct": [0.0, 1.0, 0.0, 1.0, 0.0, 1.0],
+        }
+    )
+    wpp_frame = pd.DataFrame(
+        {
+            "iso3": ["AAA", "BBB", "AAA", "BBB", "AAA", "BBB"],
+            "year": [2000, 2000, 2010, 2010, 2020, 2020],
+            "wpp_life_expectancy_birth_years": [60.0, 80.0, 65.0, 81.0, 66.0, 82.0],
+        }
+    )
+    undp_gii_frame = pd.DataFrame(
+        {
+            "iso3": ["AAA", "BBB"],
+            "undp_gii_value": [0.5, 0.2],
+        }
+    )
+    female_lfpr_frame = pd.DataFrame(
+        {
+            "iso3": ["AAA", "BBB", "AAA", "BBB", "AAA", "BBB"],
+            "year": [2000, 2000, 2010, 2010, 2020, 2020],
+            FEMALE_LFPR_COLUMN: [40.0, 60.0, 42.0, 58.0, 45.0, 55.0],
+        }
+    )
+    women_business_law_frame = pd.DataFrame(
+        {
+            "iso3": ["AAA", "BBB", "AAA", "BBB", "AAA", "BBB"],
+            "year": [2000, 2000, 2010, 2010, 2020, 2020],
+            WOMEN_BUSINESS_LAW_COLUMN: [55.0, 80.0, 60.0, 85.0, 65.0, 90.0],
+        }
+    )
+
+    outcomes = build_country_decade_outcomes(
+        income_panel,
+        wpp_frame,
+        undp_gii_frame=undp_gii_frame,
+        female_lfpr_frame=female_lfpr_frame,
+        women_business_law_frame=women_business_law_frame,
+    )
+
+    assert outcomes.loc[outcomes["decade"] == 2000, GENDER_INEQUALITY_COLUMN].isna().all()
+    assert outcomes.loc[
+        (outcomes["iso3"] == "AAA") & (outcomes["decade"] == 2020),
+        GENDER_INEQUALITY_COLUMN,
+    ].item() == 0.5
+    assert outcomes.loc[
+        (outcomes["iso3"] == "BBB") & (outcomes["decade"] == 2020),
+        GENDER_INEQUALITY_RANK_COLUMN,
+    ].item() == 0.0
+    assert outcomes.loc[
+        (outcomes["iso3"] == "AAA") & (outcomes["decade"] == 2020),
+        GENDER_INEQUALITY_RANK_COLUMN,
+    ].item() == 1.0
+
+    assert outcomes.loc[outcomes["iso3"] == "AAA", FEMALE_LFPR_COLUMN].tolist() == [
+        40.0,
+        42.0,
+        45.0,
+    ]
+    assert outcomes.loc[outcomes["iso3"] == "BBB", FEMALE_LFPR_RANK_COLUMN].tolist() == [
+        1.0,
+        1.0,
+        1.0,
+    ]
+
+    assert outcomes.loc[outcomes["iso3"] == "AAA", WOMEN_BUSINESS_LAW_COLUMN].tolist() == [
+        55.0,
+        60.0,
+        65.0,
+    ]
+    assert outcomes.loc[
+        outcomes["iso3"] == "BBB", WOMEN_BUSINESS_LAW_RANK_COLUMN
+    ].tolist() == [1.0, 1.0, 1.0]

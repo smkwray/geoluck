@@ -17,6 +17,7 @@ __pycache__/
 # Private local agent/project planning files
 AGENTS.md
 geoluck_codex_plan.md
+geoluck-R/
 
 # Private agent workflow state
 do/

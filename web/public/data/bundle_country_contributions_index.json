@@ -31,6 +31,30 @@
       "latest_decade": 2020,
       "bundle_count": 7,
       "top_k": 8
+    },
+    {
+      "target": "gender_inequality",
+      "target_label": "Gender inequality rank percentile",
+      "path": "bundle_country_contributions_gender_inequality.json",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "top_k": 8
+    },
+    {
+      "target": "female_lfpr",
+      "target_label": "Female labor force participation rank percentile",
+      "path": "bundle_country_contributions_female_lfpr.json",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "top_k": 8
+    },
+    {
+      "target": "women_business_law",
+      "target_label": "Women, Business and the Law rank percentile",
+      "path": "bundle_country_contributions_women_business_law.json",
+      "latest_decade": 2020,
+      "bundle_count": 7,
+      "top_k": 8
     }
   ]
 }

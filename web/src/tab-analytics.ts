@@ -50,7 +50,7 @@ type RankingsRow = {
 };
 
 function positiveResidualIsGood(target: string): boolean {
-  return target !== "inequality";
+  return target !== "inequality" && target !== "gender_inequality";
 }
 
 function buildRankingsRows(data: AnalyticsData): RankingsRow[] {

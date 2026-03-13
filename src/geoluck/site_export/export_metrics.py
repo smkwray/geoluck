@@ -16,12 +16,23 @@ from geoluck.feature_columns import (
 )
 
 SMALL_HOLDOUT_THRESHOLD = 5
-BUNDLE_EXPORT_TARGETS = ("income", "life_expectancy", "inequality", "wealth")
+BUNDLE_EXPORT_TARGETS = (
+    "income",
+    "life_expectancy",
+    "inequality",
+    "wealth",
+    "gender_inequality",
+    "female_lfpr",
+    "women_business_law",
+)
 TARGET_LABELS = {
     "income": "Income rank percentile",
     "life_expectancy": "Life expectancy rank percentile",
     "inequality": "Disposable-income Gini rank percentile",
     "wealth": "Produced capital per capita rank percentile",
+    "gender_inequality": "Gender inequality rank percentile",
+    "female_lfpr": "Female labor force participation rank percentile",
+    "women_business_law": "Women, Business and the Law rank percentile",
 }
 
 

@@ -17,7 +17,7 @@ export type MapTabExtras = {
 };
 
 function positiveResidualIsGood(target: string): boolean {
-  return target !== "inequality";
+  return target !== "inequality" && target !== "gender_inequality";
 }
 
 function formatValue(metricView: string, value: number | null): string {

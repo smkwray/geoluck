@@ -20,20 +20,24 @@
 ## Evaluation protocol
 
 - Primary maintained public target: `income_rank_pct`
-- Supported exploratory targets via `train-level-models --target`: `income`, `life_expectancy`, `inequality`, `wealth`
+- Supported exploratory targets via `train-level-models --target`: `income`, `life_expectancy`, `inequality`, `wealth`, `gender_inequality`, `female_lfpr`, `women_business_law`
 - Current target columns behind those names:
   - `income` -> `income_rank_pct`
   - `life_expectancy` -> `life_expectancy_rank_pct`
   - `inequality` -> `gini_disp_rank_pct`
   - `wealth` -> `produced_capital_per_capita_rank_pct`
+  - `gender_inequality` -> `gender_inequality_rank_pct`
+  - `female_lfpr` -> `female_labor_force_participation_rank_pct`
+  - `women_business_law` -> `women_business_law_rank_pct`
 - Target-specific feature guardrails:
   - `life_expectancy` excludes the exact WPP life-expectancy column and the crude-death-rate column from the feature matrix to avoid same-source outcome leakage.
-  - `inequality` excludes the merged SWIID Gini outcome columns from the feature matrix.
+  - `inequality` excludes the merged SWIID Gini outcome columns plus near-target Fragile States Index inequality and total-score columns from the feature matrix.
   - `wealth` excludes the merged Wealth Accounts level/log/rank outcome columns from the feature matrix.
+  - `gender_inequality`, `female_lfpr`, and `women_business_law` exclude the merged gender-target outcome columns plus the UNDP GII feature block from the feature matrix to avoid same-theme target leakage.
 - Unit of training: country within decade
 - Primary split: within-decade cross-validation
 - Current metrics: `r2`, `rmse`, `mae`, `spearman`
-- Additional association exports: numeric feature correlations with income, population, life expectancy, inequality, and wealth target columns when they are present in the shared outcomes table
+- Additional association exports: numeric feature correlations with income, population, life expectancy, inequality, wealth, gender inequality, female LFPR, and Women, Business and the Law target columns when they are present in the shared outcomes table
 - Near-term additions: leave-region-out checks, calibration diagnostics, rank-hit metrics
 
 ## Maintained feature-set experiments

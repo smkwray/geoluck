@@ -134,6 +134,53 @@ body {
   color: #fff;
 }
 
+/* Gender dropdown */
+.gender-dropdown-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.gender-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 800;
+  min-width: 11rem;
+  background: #f4efe5;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.13);
+  padding: 0.3rem 0;
+  flex-direction: column;
+}
+.gender-dropdown-open {
+  display: flex;
+}
+.gender-dropdown-item {
+  all: unset;
+  display: block;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.82rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.12s;
+  white-space: nowrap;
+}
+.gender-dropdown-item:hover {
+  background: rgba(29, 44, 47, 0.06);
+}
+.gender-item-active {
+  font-weight: 600;
+  color: hsl(28, 80%, 46%);
+}
+.gender-item-tip {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 0.1rem;
+}
+
 .tab-toggle {
   border-color: var(--line);
   background: rgba(255, 255, 255, 0.5);

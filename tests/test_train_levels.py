@@ -68,9 +68,15 @@ def make_training_rows() -> list[dict[str, object]]:
                 "life_expectancy_rank_pct": idx / 19,
                 "gini_disp": 25.0 + idx,
                 "gini_disp_rank_pct": idx / 19,
+                "gender_inequality_index": 0.6 - idx / 100,
+                "gender_inequality_rank_pct": 1.0 - idx / 19,
+                "female_labor_force_participation_pct": 35.0 + idx,
+                "female_labor_force_participation_rank_pct": idx / 19,
                 "produced_capital_per_capita_real_2019_usd": 1000.0 + idx * 100,
                 "produced_capital_per_capita_log": 6.9 + idx / 50,
                 "produced_capital_per_capita_rank_pct": idx / 19,
+                "women_business_law_index": 45.0 + idx * 2,
+                "women_business_law_rank_pct": idx / 19,
                 "abs_latitude": float(idx),
                 "representative_latitude": float(idx),
                 "representative_longitude": float(idx) / 2,
@@ -1500,6 +1506,37 @@ def test_inequality_target_excludes_near_target_fsi_columns() -> None:
     assert inequality_feature_sets[0].numeric_columns == ["fsi_public_services"]
 
 
+def test_gender_targets_exclude_gender_related_society_columns() -> None:
+    feature_sets = [
+        FeatureSetSpec(
+            feature_set="demo",
+            numeric_columns=[
+                "undp_gii_value",
+                "undp_gii_female_labor_force_participation_pct",
+                "fsi_public_services",
+            ],
+            categorical_columns=[],
+        )
+    ]
+
+    female_lfpr_feature_sets = apply_target_feature_exclusions(
+        feature_sets,
+        get_target_spec("female_lfpr"),
+    )
+    gender_inequality_feature_sets = apply_target_feature_exclusions(
+        feature_sets,
+        get_target_spec("gender_inequality"),
+    )
+    wbl_feature_sets = apply_target_feature_exclusions(
+        feature_sets,
+        get_target_spec("women_business_law"),
+    )
+
+    assert female_lfpr_feature_sets[0].numeric_columns == ["fsi_public_services"]
+    assert gender_inequality_feature_sets[0].numeric_columns == ["fsi_public_services"]
+    assert wbl_feature_sets[0].numeric_columns == ["fsi_public_services"]
+
+
 def test_build_leave_region_out_splits_uses_requested_decade_and_regions() -> None:
     frame = pd.DataFrame(make_training_rows())
 
@@ -1573,3 +1610,23 @@ def test_train_models_by_decade_supports_life_expectancy_target() -> None:
     assert set(predictions["target_name"]) == {"life_expectancy"}
     assert set(predictions["target_column"]) == {"life_expectancy_rank_pct"}
     assert set(scores["target_name"]) == {"life_expectancy"}
+
+
+def test_train_models_by_decade_supports_female_lfpr_target() -> None:
+    frame = pd.DataFrame(make_training_rows())
+    feature_sets = filter_feature_set_specs(get_feature_set_specs(frame), ["deep_geo_v1"])
+    model_specs = filter_model_specs(
+        get_model_specs(feature_sets),
+        requested_model_families=["baseline"],
+    )
+
+    predictions, scores, _ = train_models_by_decade(
+        frame,
+        target_spec=get_target_spec("female_lfpr"),
+        feature_sets=feature_sets,
+        model_specs=model_specs,
+    )
+
+    assert set(predictions["target_name"]) == {"female_lfpr"}
+    assert set(predictions["target_column"]) == {"female_labor_force_participation_rank_pct"}
+    assert set(scores["target_name"]) == {"female_lfpr"}

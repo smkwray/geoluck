@@ -22,6 +22,7 @@ The UI should read the mirrored `web/public/data/` copies.
   - `bundle_summary_path`
   - `bundle_feature_effects_path`
   - `bundle_country_contributions_index_path`
+  - `bundle_permutation_importance_path`
 
 ### `model_summary.json`
 - Selected public income model diagnostics.
@@ -47,6 +48,9 @@ These are the new UI-builder payloads for all maintained targets and all non-emp
   - `life_expectancy`
   - `inequality`
   - `wealth`
+  - `gender_inequality`
+  - `female_lfpr`
+  - `women_business_law`
 - For each target:
   - `best_overall`
   - `bundles[]`
@@ -87,6 +91,9 @@ Note:
   - `bundle_country_contributions_life_expectancy.json`
   - `bundle_country_contributions_inequality.json`
   - `bundle_country_contributions_wealth.json`
+  - `bundle_country_contributions_gender_inequality.json`
+  - `bundle_country_contributions_female_lfpr.json`
+  - `bundle_country_contributions_women_business_law.json`
 - Each target payload contains `bundles[]`.
 - Each bundle contains `countries[]`.
 - Each country row contains:
@@ -100,6 +107,19 @@ Note:
 Important:
 - `prediction` is aligned to the cross-validated bundle prediction export for the selected contributing spec.
 - For some bundles, the exact best-scoring spec may not have contribution rows. In those cases the payload uses the best available exported spec for that bundle instead of dropping the bundle entirely.
+
+### `bundle_permutation_importance.json`
+- Held-out permutation-importance summary for each target and bundle.
+- Covers the same maintained targets as `bundle_summary.json`.
+- Each target has `bundles[]`.
+- Each bundle includes:
+  - `top_permutation_features`
+  - `block_summary`
+
+Interpretation:
+- `delta_r2_mean` is the mean drop in held-out `R^2` when a feature or feature block is shuffled.
+- Larger positive `delta_r2_mean` means the model depends more on that feature or block for predictive accuracy.
+- This is a predictive-value metric, not a causal-effect estimate and not the same thing as a country-level up/down contribution.
 
 ## Tier semantics
 

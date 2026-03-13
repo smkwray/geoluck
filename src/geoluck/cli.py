@@ -12,6 +12,7 @@ from geoluck.etl.fetch_cepii_geodist import run_fetch as run_fetch_cepii_geodist
 from geoluck.etl.fetch_cru_cy import run_fetch as run_fetch_cru_cy
 from geoluck.etl.fetch_eia_company_imports import run_fetch as run_fetch_eia_company_imports
 from geoluck.etl.fetch_energy_institute_reserves import run_fetch as run_fetch_energy_institute
+from geoluck.etl.fetch_female_lfpr import run_fetch as run_fetch_female_lfpr
 from geoluck.etl.fetch_freedom_house import run_fetch as run_fetch_freedom_house
 from geoluck.etl.fetch_fsi import run_fetch as run_fetch_fsi
 from geoluck.etl.fetch_gcmt import run_fetch as run_fetch_gcmt
@@ -45,6 +46,9 @@ from geoluck.etl.fetch_wdi import run_fetch as run_fetch_wdi
 from geoluck.etl.fetch_wealth_accounts import run_fetch as run_fetch_wealth_accounts
 from geoluck.etl.fetch_wgi import run_fetch as run_fetch_wgi
 from geoluck.etl.fetch_wocqi import run_fetch as run_fetch_wocqi
+from geoluck.etl.fetch_women_business_law import (
+    run_fetch as run_fetch_women_business_law,
+)
 from geoluck.etl.fetch_worldclim import run_fetch as run_fetch_worldclim
 from geoluck.etl.fetch_wpp import run_fetch as run_fetch_wpp
 from geoluck.features.build_alesina_fractionalization_features import (
@@ -156,7 +160,8 @@ TARGET_OPTION = typer.Option(
     "income",
     "--target",
     help=(
-        "Prediction target to use. Available: income, life_expectancy, inequality, wealth."
+        "Prediction target to use. Available: income, life_expectancy, inequality, "
+        "wealth, gender_inequality, female_lfpr, women_business_law."
     ),
 )
 PERMUTATION_IMPORTANCE_OPTION = typer.Option(
@@ -267,14 +272,23 @@ def build_outcomes_panel() -> None:
     typer.echo(f"wpp_input={result.wpp_input_path}")
     if result.swiid_input_path is not None:
         typer.echo(f"swiid_input={result.swiid_input_path}")
+    if result.undp_gii_input_path is not None:
+        typer.echo(f"undp_gii_input={result.undp_gii_input_path}")
+    if result.female_lfpr_input_path is not None:
+        typer.echo(f"female_lfpr_input={result.female_lfpr_input_path}")
     if result.wealth_input_path is not None:
         typer.echo(f"wealth_input={result.wealth_input_path}")
+    if result.women_business_law_input_path is not None:
+        typer.echo(f"women_business_law_input={result.women_business_law_input_path}")
     typer.echo(f"output={result.output_path}")
     typer.echo(f"rows={result.row_count}")
     typer.echo(f"decades={result.decades}")
     typer.echo(f"life_expectancy_rows={result.life_expectancy_rows}")
     typer.echo(f"inequality_rows={result.inequality_rows}")
+    typer.echo(f"gender_inequality_rows={result.gender_inequality_rows}")
+    typer.echo(f"female_lfpr_rows={result.female_lfpr_rows}")
     typer.echo(f"wealth_rows={result.wealth_rows}")
+    typer.echo(f"women_business_law_rows={result.women_business_law_rows}")
 
 
 @app.command("fetch-natural-earth")
@@ -355,6 +369,39 @@ def fetch_undp_gii(
     typer.echo(f"rows={result.row_count}")
     typer.echo(f"countries={result.matched_country_count}")
     typer.echo(f"unmatched_countries={result.unmatched_country_count}")
+
+
+@app.command("fetch-female-lfpr")
+def fetch_female_lfpr(
+    force: bool = typer.Option(False, help="Redownload the female LFPR indicator payload."),
+) -> None:
+    """Fetch and normalize the World Bank / ILO female LFPR series."""
+    result = run_fetch_female_lfpr(force=force)
+    typer.echo(f"raw_countries={result.raw_countries_path}")
+    typer.echo(f"raw_indicators={result.raw_indicators_path}")
+    typer.echo(f"tidy={result.tidy_path}")
+    typer.echo(f"provenance={result.provenance_path}")
+    typer.echo(f"rows={result.row_count}")
+    typer.echo(f"countries={result.country_count}")
+    typer.echo(f"years={result.year_min}-{result.year_max}")
+
+
+@app.command("fetch-women-business-law")
+def fetch_women_business_law(
+    force: bool = typer.Option(
+        False,
+        help="Redownload the Women, Business and the Law indicator payload.",
+    ),
+) -> None:
+    """Fetch and normalize the World Bank Women, Business and the Law index."""
+    result = run_fetch_women_business_law(force=force)
+    typer.echo(f"raw_countries={result.raw_countries_path}")
+    typer.echo(f"raw_indicators={result.raw_indicators_path}")
+    typer.echo(f"tidy={result.tidy_path}")
+    typer.echo(f"provenance={result.provenance_path}")
+    typer.echo(f"rows={result.row_count}")
+    typer.echo(f"countries={result.country_count}")
+    typer.echo(f"years={result.year_min}-{result.year_max}")
 
 
 @app.command("fetch-global-solar-atlas")

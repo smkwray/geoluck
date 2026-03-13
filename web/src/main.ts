@@ -79,6 +79,9 @@ const TARGET_LABELS: Record<TargetId, string> = {
   wealth: "Wealth rank",
   life_expectancy: "Life exp rank",
   inequality: "Inequality rank",
+  gender_inequality: "Gender inequality rank",
+  female_lfpr: "Female LFPR rank",
+  women_business_law: "Women & Law rank",
 };
 
 function tierLabel(tiers: Set<TierFlag>): string {
@@ -90,7 +93,7 @@ function tierLabel(tiers: Set<TierFlag>): string {
 }
 
 function positiveResidualIsGood(target: TargetId): boolean {
-  return target !== "inequality";
+  return target !== "inequality" && target !== "gender_inequality";
 }
 
 async function bootstrap(): Promise<void> {
@@ -204,7 +207,8 @@ async function bootstrap(): Promise<void> {
 
   // Parse URL for deep-link state
   const initialHash = parseHash();
-  const initTarget = (["income", "wealth", "life_expectancy", "inequality"].includes(initialHash.params.get("target") ?? "")
+  const validTargets = ["income", "wealth", "life_expectancy", "inequality", "gender_inequality", "female_lfpr", "women_business_law"];
+  const initTarget = (validTargets.includes(initialHash.params.get("target") ?? "")
     ? initialHash.params.get("target")
     : "income") as TargetId;
   const initTiers = initialHash.params.has("tiers")
@@ -432,12 +436,33 @@ async function bootstrap(): Promise<void> {
     });
 
     // ── Wire target selector ──
-    container!.querySelectorAll<HTMLButtonElement>("#target-pills .tab-pill").forEach((btn) => {
+    container!.querySelectorAll<HTMLButtonElement>("#target-pills .tab-pill[data-target]").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.activeTarget = btn.dataset.target as TargetId;
         render();
       });
     });
+
+    // ── Wire gender dropdown ──
+    const genderTrigger = document.getElementById("gender-dropdown-trigger");
+    const genderDropdown = document.getElementById("gender-dropdown");
+    if (genderTrigger && genderDropdown) {
+      genderTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        genderDropdown.classList.toggle("gender-dropdown-open");
+      });
+      genderDropdown.querySelectorAll<HTMLButtonElement>(".gender-dropdown-item").forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+          state.activeTarget = item.dataset.target as TargetId;
+          genderDropdown.classList.remove("gender-dropdown-open");
+          render();
+        });
+      });
+      document.addEventListener("click", () => {
+        genderDropdown.classList.remove("gender-dropdown-open");
+      });
+    }
 
     // ── Wire tier toggles ──
     container!.querySelectorAll<HTMLButtonElement>("#tier-toggles .tab-toggle").forEach((btn) => {

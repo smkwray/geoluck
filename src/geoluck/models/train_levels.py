@@ -28,6 +28,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from geoluck.config import ProjectPaths, get_paths
+from geoluck.etl.fetch_female_lfpr import FEMALE_LFPR_COLUMN
+from geoluck.etl.fetch_women_business_law import WOMEN_BUSINESS_LAW_COLUMN
 from geoluck.feature_columns import (
     ALESINA_FRACTIONALIZATION_FEATURE_COLUMNS_NUMERIC,
     AQUASTAT_DAMS_FEATURE_COLUMNS_NUMERIC,
@@ -86,6 +88,9 @@ from geoluck.feature_columns import (
     WPP_FEATURE_COLUMNS_NUMERIC,
 )
 from geoluck.features.build_outcomes_panel import (
+    FEMALE_LFPR_RANK_COLUMN,
+    GENDER_INEQUALITY_COLUMN,
+    GENDER_INEQUALITY_RANK_COLUMN,
     INEQUALITY_COLUMN,
     INEQUALITY_MARKET_COLUMN,
     INEQUALITY_MARKET_RANK_COLUMN,
@@ -95,6 +100,7 @@ from geoluck.features.build_outcomes_panel import (
     WEALTH_COLUMN,
     WEALTH_LOG_COLUMN,
     WEALTH_RANK_COLUMN,
+    WOMEN_BUSINESS_LAW_RANK_COLUMN,
 )
 
 DEFAULT_TARGET_NAME = "income"
@@ -110,9 +116,15 @@ TARGET_ASSOCIATION_COLUMNS = [
     INEQUALITY_RANK_COLUMN,
     INEQUALITY_MARKET_COLUMN,
     INEQUALITY_MARKET_RANK_COLUMN,
+    GENDER_INEQUALITY_COLUMN,
+    GENDER_INEQUALITY_RANK_COLUMN,
+    FEMALE_LFPR_COLUMN,
+    FEMALE_LFPR_RANK_COLUMN,
     WEALTH_COLUMN,
     WEALTH_LOG_COLUMN,
     WEALTH_RANK_COLUMN,
+    WOMEN_BUSINESS_LAW_COLUMN,
+    WOMEN_BUSINESS_LAW_RANK_COLUMN,
 ]
 MODEL_OUTPUT_COLUMNS = [
     "iso3",
@@ -220,6 +232,21 @@ class TargetSpec:
     excluded_feature_columns: tuple[str, ...] = ()
 
 
+GENDER_TARGET_EXCLUDED_COLUMNS = tuple(
+    dict.fromkeys(
+        [
+            *UNDP_GII_FEATURE_COLUMNS_NUMERIC,
+            GENDER_INEQUALITY_COLUMN,
+            GENDER_INEQUALITY_RANK_COLUMN,
+            FEMALE_LFPR_COLUMN,
+            FEMALE_LFPR_RANK_COLUMN,
+            WOMEN_BUSINESS_LAW_COLUMN,
+            WOMEN_BUSINESS_LAW_RANK_COLUMN,
+        ]
+    )
+)
+
+
 TARGET_SPECS = {
     DEFAULT_TARGET_NAME: TargetSpec(
         target_name=DEFAULT_TARGET_NAME,
@@ -263,6 +290,24 @@ TARGET_SPECS = {
             WEALTH_LOG_COLUMN,
             WEALTH_RANK_COLUMN,
         ),
+    ),
+    "gender_inequality": TargetSpec(
+        target_name="gender_inequality",
+        target_column=GENDER_INEQUALITY_RANK_COLUMN,
+        target_label="Gender inequality rank percentile",
+        excluded_feature_columns=GENDER_TARGET_EXCLUDED_COLUMNS,
+    ),
+    "female_lfpr": TargetSpec(
+        target_name="female_lfpr",
+        target_column=FEMALE_LFPR_RANK_COLUMN,
+        target_label="Female labor force participation rank percentile",
+        excluded_feature_columns=GENDER_TARGET_EXCLUDED_COLUMNS,
+    ),
+    "women_business_law": TargetSpec(
+        target_name="women_business_law",
+        target_column=WOMEN_BUSINESS_LAW_RANK_COLUMN,
+        target_label="Women, Business and the Law rank percentile",
+        excluded_feature_columns=GENDER_TARGET_EXCLUDED_COLUMNS,
     ),
 }
 

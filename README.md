@@ -2,7 +2,7 @@
 
 **How much of relative country prosperity can be predicted from geography, natural endowments, resource development, and social structure — and who beats their geography?**
 
-Geoluck is an open-source research project that builds a country-decade panel (1900–2020) and trains machine learning models to predict four prosperity outcomes from tiered feature sets. The results are published as an interactive static site.
+Geoluck is an open-source research project that builds a country-decade panel (1900–2020) and trains machine learning models to predict country-level income, wellbeing, inequality, wealth, and gender outcomes from tiered feature sets. The results are published as an interactive static site.
 
 This is explicitly about **predictive association**, not causal effect.
 
@@ -12,14 +12,17 @@ This is explicitly about **predictive association**, not causal effect.
 
 ## What the site shows
 
-The static site models four outcome metrics, each converted to within-decade percentile ranks:
+The static site models seven outcome metrics, each converted to within-decade percentile ranks:
 
 | Outcome | Definition | Source |
 |---|---|---|
 | **Income** | Log GDP per capita rank | Maddison Project Database 2023 |
 | **Wealth** | Produced capital per capita rank | World Bank Changing Wealth of Nations |
 | **Life expectancy** | Life expectancy at birth rank | World Bank WDI / UN Population Division |
-| **Inequality** | Disposable-income Gini rank (higher = more equal) | SWIID |
+| **Inequality** | Disposable-income Gini rank (higher = more unequal) | SWIID |
+| **Gender inequality** | UNDP Gender Inequality Index rank (higher = more unequal) | UNDP HDR 2025 |
+| **Female LFPR** | Female labor-force participation rate rank | World Bank WDI / ILO |
+| **Women, Business and the Law** | Women, Business and the Law index rank | World Bank |
 
 Predictor features are organized into three independently toggleable tiers:
 
