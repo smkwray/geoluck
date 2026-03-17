@@ -33,7 +33,6 @@ import {
   loadCountryProfiles,
   loadMapGeoJson,
   loadMetadata,
-  loadMetrics,
 } from "./data";
 import { ChoroplethMap } from "./map";
 import "./styles.css";
@@ -43,10 +42,28 @@ import { csvForCountry, renderCountryTab } from "./tab-country";
 import { renderFeaturesTab, wireFeaturesTab } from "./tab-features";
 import type { SpotlightCountry } from "./tab-map";
 import { renderMapTab } from "./tab-map";
-import { type TabId, type TargetId, type TierFlag, parseHash, renderTabBar } from "./tabs";
+import {
+  type TabId,
+  type TargetId,
+  type TierFlag,
+  parseHash,
+  renderTabBar,
+  tierKeyFromFlags,
+  tierLabelFromFlags,
+} from "./tabs";
 
 const container = document.querySelector<HTMLDivElement>("#app");
 if (!container) throw new Error("Missing #app mount node");
+
+const VALID_TARGETS: TargetId[] = [
+  "income",
+  "wealth",
+  "life_expectancy",
+  "inequality",
+  "gender_inequality",
+  "female_lfpr",
+  "women_business_law",
+];
 
 type MetricView = "actual" | "predicted" | "residual";
 
@@ -59,19 +76,32 @@ type AppState = {
   activeTiers: Set<TierFlag>;
 };
 
-/** Map a set of active tier flags to the bundle_summary feature_tier key */
-function tierKey(tiers: Set<TierFlag>): string | null {
-  const has1 = tiers.has(1);
-  const has2 = tiers.has(2);
-  const has3 = tiers.has(3);
-  if (has1 && has2 && has3) return "tier3";
-  if (has1 && has2) return "tier2";
-  if (has1 && has3) return "tier13";
-  if (has2 && has3) return "tier23";
-  if (has1) return "tier1";
-  if (has2) return "tier2_only";
-  if (has3) return "tier3_only";
-  return null;
+type LoadingStage = {
+  step: number;
+  total: number;
+  title: string;
+  detail: string;
+};
+
+function renderBootstrapShell(stage: LoadingStage): void {
+  const pct = Math.max(5, Math.round(stage.step / stage.total * 100));
+  container!.innerHTML = `
+    <main class="shell boot-shell">
+      <section class="boot-panel">
+        <p class="boot-kicker">Static research atlas</p>
+        <h1>geoluck</h1>
+        <p class="boot-lede">Estimating how much country outcomes can be predicted from nature, infrastructure, society, and governance.</p>
+        <div class="boot-progress" aria-hidden="true">
+          <div class="boot-progress-bar" style="width:${pct}%"></div>
+        </div>
+        <div class="boot-status-row">
+          <strong>${stage.title}</strong>
+          <span>${pct}%</span>
+        </div>
+        <p class="boot-detail">${stage.detail}</p>
+      </section>
+    </main>
+  `;
 }
 
 const TARGET_LABELS: Record<TargetId, string> = {
@@ -84,12 +114,15 @@ const TARGET_LABELS: Record<TargetId, string> = {
   women_business_law: "Women & Law rank",
 };
 
-function tierLabel(tiers: Set<TierFlag>): string {
-  const parts: string[] = [];
-  if (tiers.has(1)) parts.push("Nature");
-  if (tiers.has(2)) parts.push("Infrastructure");
-  if (tiers.has(3)) parts.push("Society");
-  return parts.length > 0 ? parts.join(" + ") : "None";
+function requestIdle(callback: () => void): void {
+  const win = window as Window & {
+    requestIdleCallback?: (cb: () => void) => number;
+  };
+  if (typeof win.requestIdleCallback === "function") {
+    win.requestIdleCallback(callback);
+    return;
+  }
+  globalThis.setTimeout(callback, 250);
 }
 
 function positiveResidualIsGood(target: TargetId): boolean {
@@ -97,43 +130,51 @@ function positiveResidualIsGood(target: TargetId): boolean {
 }
 
 async function bootstrap(): Promise<void> {
+  renderBootstrapShell({
+    step: 1,
+    total: 4,
+    title: "Loading metadata",
+    detail: "Discovering the published bundle and map payloads.",
+  });
   const metadata = await loadMetadata();
-  const geojson = await loadMapGeoJson(metadata.map_path);
+  renderBootstrapShell({
+    step: 2,
+    total: 4,
+    title: "Loading map and summary bundles",
+    detail: "Fetching the critical assets needed for the first paint.",
+  });
+
+  const [
+    geojson,
+    profiles,
+    loadedBundleSummary,
+    loadedBundleContribIndex,
+  ] = await Promise.all([
+    loadMapGeoJson(metadata.map_path),
+    loadCountryProfiles(metadata.country_profiles_path),
+    metadata.bundle_summary_path
+      ? loadBundleSummary(metadata.bundle_summary_path).catch(() => null)
+      : Promise.resolve(null),
+    metadata.bundle_country_contributions_index_path
+      ? loadBundleCountryContributionsIndex(metadata.bundle_country_contributions_index_path).catch(
+          () => null,
+        )
+      : Promise.resolve(null),
+  ]);
+
+  let bundleSummary: BundleSummaryPayload | null = loadedBundleSummary;
+  let bundleFeatureEffects: BundleFeatureEffectsPayload | null = null;
+  let bundlePermutationImportance: BundlePermutationImportancePayload | null = null;
+  const bundleContribIndex = loadedBundleContribIndex;
+  const bundleContribs = new Map<string, BundleCountryContributionsPayload>();
+  const bundleContribPromises = new Map<string, Promise<BundleCountryContributionsPayload | null>>();
+  const loadingBundleTargets = new Set<string>();
 
   // Build continent lookup from geojson
   const continentLookup = new Map<string, string>();
   for (const feature of geojson.features) {
     const props = feature.properties;
     if (props?.iso3) continentLookup.set(props.iso3, props.continent ?? "Unknown");
-  }
-
-
-  // Load bundle summary (model performance per target+tier)
-  let bundleSummary: BundleSummaryPayload | null = null;
-  if (metadata.bundle_summary_path) {
-    try {
-      bundleSummary = await loadBundleSummary(metadata.bundle_summary_path);
-    } catch {
-      /* optional */
-    }
-  }
-
-  // Load bundle country contributions for all targets
-  const bundleContribs = new Map<string, BundleCountryContributionsPayload>();
-  if (metadata.bundle_country_contributions_index_path) {
-    try {
-      const index = await loadBundleCountryContributionsIndex(
-        metadata.bundle_country_contributions_index_path,
-      );
-      await Promise.all(
-        index.targets.map(async (t) => {
-          const payload = await loadBundleCountryContributions(t.path);
-          bundleContribs.set(t.target, payload);
-        }),
-      );
-    } catch {
-      /* optional */
-    }
   }
 
   // Fill in continents for countries in bundle data but missing from geojson
@@ -147,73 +188,19 @@ async function bootstrap(): Promise<void> {
     "Eastern Europe": "Europe",
     "Western Offshoots": "North America",
   };
-  for (const [, payload] of bundleContribs) {
-    for (const bundle of payload.bundles) {
-      for (const c of bundle.countries) {
-        if (!continentLookup.has(c.iso3) && c.region_name) {
-          continentLookup.set(c.iso3, regionToContinent[c.region_name] ?? "Unknown");
-        }
-      }
-    }
-  }
-
-  // Load bundle feature effects
-  let bundleFeatureEffects: BundleFeatureEffectsPayload | null = null;
-  if (metadata.bundle_feature_effects_path) {
-    try {
-      bundleFeatureEffects = await loadBundleFeatureEffects(metadata.bundle_feature_effects_path);
-    } catch {
-      /* optional */
-    }
-  }
-
-  // Load bundle permutation importance
-  let bundlePermutationImportance: BundlePermutationImportancePayload | null = null;
-  if (metadata.bundle_permutation_importance_path) {
-    try {
-      bundlePermutationImportance = await loadBundlePermutationImportance(
-        metadata.bundle_permutation_importance_path,
-      );
-    } catch {
-      /* optional */
-    }
-  }
-
-  // Load legacy income profiles (for trajectory chart historical data)
-  const profiles = await loadCountryProfiles(metadata.country_profiles_path);
   const profileLookup = new Map(profiles.countries.map((p) => [p.iso3, p]));
-
-  // Load legacy income metrics (for fallback)
-  const legacyActual = await loadMetrics(
-    metadata.metrics.find((m) => m.id === "income_rank_pct")?.path ?? "metrics_income_rank_pct.json",
-  );
-
-  // Build a master country name list from the largest bundle
-  const countryNames: Array<{ iso3: string; name: string }> = [];
-  {
-    const seen = new Set<string>();
-    for (const [, payload] of bundleContribs) {
-      for (const bundle of payload.bundles) {
-        for (const c of bundle.countries) {
-          if (!seen.has(c.iso3)) {
-            seen.add(c.iso3);
-            countryNames.push({ iso3: c.iso3, name: c.country_name });
-          }
-        }
-      }
-    }
-    countryNames.sort((a, b) => a.name.localeCompare(b.name));
-  }
+  const countryNames = profiles.countries
+    .map((country) => ({ iso3: country.iso3, name: country.country_name }))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   // Parse URL for deep-link state
   const initialHash = parseHash();
-  const validTargets = ["income", "wealth", "life_expectancy", "inequality", "gender_inequality", "female_lfpr", "women_business_law"];
-  const initTarget = (validTargets.includes(initialHash.params.get("target") ?? "")
+  const initTarget = (VALID_TARGETS.includes(initialHash.params.get("target") as TargetId)
     ? initialHash.params.get("target")
     : "income") as TargetId;
   const initTiers = initialHash.params.has("tiers")
     ? new Set<TierFlag>(
-        initialHash.params.get("tiers")!.split(",").map(Number).filter((n) => n >= 1 && n <= 3) as TierFlag[],
+        initialHash.params.get("tiers")!.split(",").map(Number).filter((n) => n >= 1 && n <= 4) as TierFlag[],
       )
     : new Set<TierFlag>([1]);
 
@@ -250,11 +237,94 @@ async function bootstrap(): Promise<void> {
   }
 
   let map: ChoroplethMap | null = null;
+  let hasRendered = false;
+  let deferredPayloadsStarted = false;
 
   // ── Helpers ───────────────────────────────────────────────
 
+  function applyContinentFallback(payload: BundleCountryContributionsPayload): void {
+    for (const bundle of payload.bundles) {
+      for (const country of bundle.countries) {
+        if (!continentLookup.has(country.iso3) && country.region_name) {
+          continentLookup.set(
+            country.iso3,
+            regionToContinent[country.region_name] ?? "Unknown",
+          );
+        }
+      }
+    }
+  }
+
+  async function ensureBundleContrib(
+    target: TargetId,
+  ): Promise<BundleCountryContributionsPayload | null> {
+    const existing = bundleContribs.get(target);
+    if (existing) return existing;
+
+    const inflight = bundleContribPromises.get(target);
+    if (inflight) return inflight;
+
+    const indexEntry = bundleContribIndex?.targets.find((entry) => entry.target === target);
+    if (!indexEntry) return null;
+
+    loadingBundleTargets.add(target);
+    const promise = loadBundleCountryContributions(indexEntry.path)
+      .then((payload) => {
+        bundleContribs.set(target, payload);
+        applyContinentFallback(payload);
+        return payload;
+      })
+      .catch(() => null)
+      .finally(() => {
+        loadingBundleTargets.delete(target);
+        bundleContribPromises.delete(target);
+        if (hasRendered) render();
+      });
+
+    bundleContribPromises.set(target, promise);
+    return promise;
+  }
+
+  function startDeferredPayloadLoads(): void {
+    if (deferredPayloadsStarted) return;
+    deferredPayloadsStarted = true;
+    requestIdle(() => {
+      if (metadata.bundle_feature_effects_path) {
+        void loadBundleFeatureEffects(metadata.bundle_feature_effects_path)
+          .then((payload) => {
+            bundleFeatureEffects = payload;
+            if (hasRendered) render();
+          })
+          .catch(() => {
+            /* optional */
+          });
+      }
+      if (metadata.bundle_permutation_importance_path) {
+        void loadBundlePermutationImportance(metadata.bundle_permutation_importance_path)
+          .then((payload) => {
+            bundlePermutationImportance = payload;
+            if (hasRendered) render();
+          })
+          .catch(() => {
+            /* optional */
+          });
+      }
+    });
+  }
+
+  function prefetchCountryBundles(): void {
+    if (state.activeTab !== "country" || !state.selectedIso3) return;
+    requestIdle(() => {
+      for (const target of VALID_TARGETS) {
+        if (target !== state.activeTarget) {
+          void ensureBundleContrib(target);
+        }
+      }
+    });
+  }
+
   function getActiveBundle(): BundleCountryContributionsBundle | null {
-    const tk = tierKey(state.activeTiers);
+    const tk = tierKeyFromFlags(state.activeTiers);
     if (!tk) return null;
     const targetContrib = bundleContribs.get(state.activeTarget);
     if (!targetContrib) return null;
@@ -267,7 +337,7 @@ async function bootstrap(): Promise<void> {
   }
 
   function bundleR2(): number | null {
-    const tk = tierKey(state.activeTiers);
+    const tk = tierKeyFromFlags(state.activeTiers);
     if (!tk) return null;
     const targetData = bundleSummary?.targets.find((t) => t.target === state.activeTarget);
     if (!targetData) return null;
@@ -330,8 +400,18 @@ async function bootstrap(): Promise<void> {
     const tabBar = renderTabBar(state.activeTab, state.activeTarget, state.activeTiers);
     let tabContent: string;
 
+    const activeTierKey = tierKeyFromFlags(state.activeTiers);
+    const activeTierLabel = tierLabelFromFlags(state.activeTiers);
     const bundle = getActiveBundle();
+    const activeTargetLoading = loadingBundleTargets.has(state.activeTarget);
     const decade = getLatestDecade();
+
+    if (activeTierKey && state.activeTab !== "about" && !bundle && !activeTargetLoading) {
+      void ensureBundleContrib(state.activeTarget);
+    }
+    if (state.activeTab === "country" && state.selectedIso3) {
+      prefetchCountryBundles();
+    }
 
     if (state.activeTab === "map") {
       let activePayload: MetricsPayload;
@@ -376,25 +456,27 @@ async function bootstrap(): Promise<void> {
       tabContent = renderMapTab(metadata, activePayload, decade, mapProfile, state.activeMetricView, {
         target: state.activeTarget,
         targetLabel: TARGET_LABELS[state.activeTarget],
-        tierLabel: tierLabel(state.activeTiers),
+        tierLabel: activeTierLabel,
         r2,
         countryCount: bundle?.country_count ?? 0,
         overperformers,
         underperformers,
+        isLoadingData: Boolean(activeTierKey) && !bundle && activeTargetLoading,
       });
     } else if (state.activeTab === "analytics") {
       tabContent = renderAnalyticsTab({
         target: state.activeTarget,
         targetLabel: TARGET_LABELS[state.activeTarget],
-        tierLabel: tierLabel(state.activeTiers),
+        tierLabel: activeTierLabel,
         bundle,
         bundleSummary: bundleSummary?.targets.find((t) => t.target === state.activeTarget) ?? null,
         featureEffects: bundleFeatureEffects?.targets.find((t) => t.target === state.activeTarget) ?? null,
         permutationImportance: bundlePermutationImportance?.targets.find((t) => t.target === state.activeTarget) ?? null,
-        tierKey: tierKey(state.activeTiers),
+        tierKey: activeTierKey,
         r2: bundleR2(),
         decade,
         continentLookup,
+        loadingBundle: Boolean(activeTierKey) && !bundle && activeTargetLoading,
       });
     } else if (state.activeTab === "country") {
       tabContent = renderCountryTab({
@@ -403,21 +485,24 @@ async function bootstrap(): Promise<void> {
         bundleContribs,
         profileLookup,
         activeTarget: state.activeTarget,
-        tierKey: tierKey(state.activeTiers),
-        tierLabel: tierLabel(state.activeTiers),
+        tierKey: activeTierKey,
+        tierLabel: activeTierLabel,
         targetLabel: TARGET_LABELS[state.activeTarget],
         continentLookup,
         countryNames,
+        activeTargetLoading: Boolean(activeTierKey) && activeTargetLoading,
+        loadedTargetCount: bundleContribs.size,
       });
     } else if (state.activeTab === "features") {
       tabContent = renderFeaturesTab({
         bundleContribs,
         featureEffects: bundleFeatureEffects,
         activeTarget: state.activeTarget,
-        tierKey: tierKey(state.activeTiers),
-        tierLabel: tierLabel(state.activeTiers),
+        tierKey: activeTierKey,
+        tierLabel: activeTierLabel,
         targetLabel: TARGET_LABELS[state.activeTarget],
         continentLookup,
+        activeTargetLoading: Boolean(activeTierKey) && activeTargetLoading,
       });
     } else {
       tabContent = renderAboutTab(metadata);
@@ -511,10 +596,11 @@ async function bootstrap(): Promise<void> {
         bundleContribs,
         featureEffects: bundleFeatureEffects,
         activeTarget: state.activeTarget,
-        tierKey: tierKey(state.activeTiers),
-        tierLabel: tierLabel(state.activeTiers),
+        tierKey: activeTierKey,
+        tierLabel: activeTierLabel,
         targetLabel: TARGET_LABELS[state.activeTarget],
         continentLookup,
+        activeTargetLoading: Boolean(activeTierKey) && activeTargetLoading,
       });
     }
   }
@@ -662,17 +748,8 @@ async function bootstrap(): Promise<void> {
     // Model comparison across tiers (from bundle summary)
     const targetSummary = bundleSummary?.targets.find((t) => t.target === state.activeTarget);
     if (targetSummary && targetSummary.bundles.length > 0) {
-      const tierLabels: Record<string, string> = {
-        tier1: "Nature",
-        tier2_only: "Infrastructure",
-        tier3_only: "Society",
-        tier2: "Nature + Infra.",
-        tier13: "Nature + Society",
-        tier23: "Infra. + Society",
-        tier3: "All three",
-      };
       const bundles = targetSummary.bundles;
-      const labels = bundles.map((b) => tierLabels[b.feature_tier ?? ""] ?? b.feature_tier_label ?? "Unknown");
+      const labels = bundles.map((b) => b.feature_tier_label ?? "Unknown");
       const r2 = bundles.map((b) => b.r2 ?? 0);
       const rmse = bundles.map((b) => b.rmse ?? 0);
       const mae = bundles.map((b) => b.mae ?? 0);
@@ -686,7 +763,7 @@ async function bootstrap(): Promise<void> {
     }
 
     // Feature importance for selected tier
-    const tk = tierKey(state.activeTiers);
+    const tk = tierKeyFromFlags(state.activeTiers);
     const targetEffects = bundleFeatureEffects?.targets.find((t) => t.target === state.activeTarget);
     const tierEffects = tk && targetEffects
       ? targetEffects.bundles.find((b) => b.feature_tier === tk)
@@ -964,7 +1041,7 @@ async function bootstrap(): Promise<void> {
     if (exportBtn && state.selectedIso3) {
       const iso3ForExport = state.selectedIso3;
       exportBtn.addEventListener("click", () => {
-        const tk = tierKey(state.activeTiers);
+        const tk = tierKeyFromFlags(state.activeTiers);
         if (!tk) return;
         downloadCsv(
           `geoluck_${iso3ForExport}.csv`,
@@ -976,7 +1053,7 @@ async function bootstrap(): Promise<void> {
     // Feature importance profile chart
     const profileCanvas = document.querySelector<HTMLCanvasElement>("#country-feature-profile-chart");
     if (profileCanvas && state.selectedIso3) {
-      const tk = tierKey(state.activeTiers);
+      const tk = tierKeyFromFlags(state.activeTiers);
       if (tk) {
         const targetPayload = bundleContribs.get(state.activeTarget);
         const bundle = targetPayload?.bundles.find((b) => b.feature_tier === tk);
@@ -1014,15 +1091,41 @@ async function bootstrap(): Promise<void> {
 
   // ── Init ──────────────────────────────────────────────────
 
+  renderBootstrapShell({
+    step: 3,
+    total: 4,
+    title: "Loading active outcome shard",
+    detail: "Fetching the selected target bundle for the first interactive view.",
+  });
+  await ensureBundleContrib(state.activeTarget);
+
   window.addEventListener("hashchange", () => {
     const { tab, params } = parseHash();
     state.activeTab = tab;
+    state.activeTarget = VALID_TARGETS.includes(params.get("target") as TargetId)
+      ? params.get("target") as TargetId
+      : "income";
+    state.activeTiers = params.has("tiers")
+      ? new Set<TierFlag>(
+          params.get("tiers")!.split(",").map(Number).filter((n) => n >= 1 && n <= 4) as TierFlag[],
+        )
+      : new Set<TierFlag>([1]);
     if (params.has("c")) state.selectedIso3 = params.get("c");
+    else state.selectedIso3 = null;
     if (params.has("vs")) state.compareIso3 = params.get("vs");
+    else state.compareIso3 = null;
     render();
   });
 
+  renderBootstrapShell({
+    step: 4,
+    total: 4,
+    title: "Preparing the UI",
+    detail: "Rendering the first view and scheduling secondary analytics payloads.",
+  });
   render();
+  hasRendered = true;
+  startDeferredPayloadLoads();
 }
 
 bootstrap().catch((error: unknown) => {

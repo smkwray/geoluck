@@ -17,16 +17,7 @@ export type AnalyticsData = {
   r2: number | null;
   decade: number;
   continentLookup: Map<string, string>;
-};
-
-const TIER_LABELS: Record<string, string> = {
-  tier1: "Nature",
-  tier2_only: "Infrastructure",
-  tier3_only: "Society",
-  tier2: "Nature + Infra.",
-  tier13: "Nature + Society",
-  tier23: "Infra. + Society",
-  tier3: "All three",
+  loadingBundle?: boolean;
 };
 
 function fmtPct(v: number | null): string {
@@ -115,14 +106,25 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
     return `<div class="analytics-loading"><p>Loading analytics data\u2026</p></div>`;
   }
 
-  const { bundle, bundleSummary, featureEffects, permutationImportance, tierKey, decade, targetLabel, tierLabel, r2 } = data;
+  const {
+    bundle,
+    bundleSummary,
+    featureEffects,
+    permutationImportance,
+    tierKey,
+    decade,
+    targetLabel,
+    tierLabel,
+    r2,
+    loadingBundle,
+  } = data;
 
   const modelCards = bundleSummary
     ? bundleSummary.bundles
         .map(
           (b) => `
         <div class="model-card ${b.feature_tier === tierKey ? "model-card-selected" : ""}">
-          <p class="model-card-label">${TIER_LABELS[b.feature_tier ?? ""] ?? b.feature_tier_label ?? "Unknown"}</p>
+          <p class="model-card-label">${b.feature_tier_label ?? "Unknown"}</p>
           <div class="model-card-stats">
             <div><span>R\u00B2</span><strong>${b.r2 != null ? b.r2.toFixed(3) : "\u2014"}</strong></div>
             <div><span>RMSE</span><strong>${b.rmse != null ? b.rmse.toFixed(4) : "\u2014"}</strong></div>
@@ -154,26 +156,32 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
   const insightText = r2 != null
     ? `Using <strong>${tierLabel.toLowerCase()}</strong> features, we can explain <strong>${(r2 * 100).toFixed(1)}%</strong>
        of the variation in ${targetLabel.toLowerCase()} across countries in ${decade}.`
-    : "Select feature tiers to see model performance.";
+    : loadingBundle
+      ? `Loading the ${targetLabel.toLowerCase()} bundle for <strong>${tierLabel.toLowerCase()}</strong>.`
+      : "Select feature tiers to see model performance.";
 
   const noBundle = !bundle
-    ? `<div class="analytics-loading"><p>Select at least one feature tier to see analytics.</p></div>`
+    ? `<div class="analytics-loading"><p>${
+        loadingBundle
+          ? `Loading ${targetLabel.toLowerCase()} analytics for ${tierLabel.toLowerCase()}.`
+          : "Select at least one feature tier to see analytics."
+      }</p></div>`
     : "";
 
   const rankingsRows = buildRankingsRows(data);
   const inequalityTarget = data.target === "inequality";
   const scatterSubtitle = inequalityTarget
     ? "Each dot is a country in 2020. Points below the diagonal are less unequal than predicted; points above are more unequal than predicted."
-    : `Each dot is a country in ${decade}. Points above the diagonal beat their geography.`;
+    : `Each dot is a country in ${decade}. Points above the diagonal outperform the model's expectation.`;
   const residualHistogramSubtitle = inequalityTarget
     ? "Histogram of residuals (actual minus predicted). Green = less unequal than predicted, red = more unequal than predicted."
     : "Histogram of residuals (actual minus predicted). Green = outperforming, red = underperforming.";
   const regionalSubtitle = inequalityTarget
     ? "Average residual by region. Negative = less unequal than predicted; positive = more unequal than predicted."
-    : "Average residual by region. Positive = outperforms geography.";
+    : "Average residual by region. Positive = outperforms the model's expectation.";
   const rankingsSubtitle = inequalityTarget
     ? "Click a column header to sort. Negative residual = less unequal than predicted."
-    : "Click a column header to sort. Positive residual = beats geography.";
+    : "Click a column header to sort. Positive residual = outperforms the model's expectation.";
 
   return `
     <section class="analytics-hero">

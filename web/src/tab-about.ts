@@ -13,8 +13,8 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
     <section class="about-hero">
       <h1>About geoluck</h1>
       <p class="lede">
-        An open-source research project exploring how much of relative country prosperity
-        can be predicted from nature alone \u2014 and who beats their geography.
+        An open-source research project exploring how much relative country outcomes
+        can be predicted from nature, infrastructure, society, and governance.
       </p>
     </section>
 
@@ -25,8 +25,8 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
           Use the controls in the top bar to explore:
         </p>
         <ul class="feature-list">
-          <li><strong>Outcome selectors</strong> (Income, Wealth, Life Exp, Inequality) \u2014 switch which prosperity metric the models are predicting.</li>
-          <li><strong>Feature tier toggles</strong> (Nature, Infrastructure, Society) \u2014 toggle which categories of predictor variables are included. Combine any subset to see how prediction quality changes.</li>
+          <li><strong>Outcome selectors</strong> (Income, Wealth, Life Exp, Inequality, Gender Inequality, Female LFPR, Women &amp; Law) \u2014 switch which modeled outcome the site is explaining.</li>
+          <li><strong>Feature tier toggles</strong> (Nature, Infrastructure, Society, Governance) \u2014 toggle which categories of predictor variables are included. Combine any subset to compare predictive lift across all 15 non-empty combinations.</li>
         </ul>
         <p>Five tabs give different views into the data:</p>
         <ul class="feature-list">
@@ -38,6 +38,9 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
         </ul>
         <p>
           Every view is shareable \u2014 the URL updates as you navigate, so you can copy and send a link to any specific country, comparison, or configuration.
+        </p>
+        <p>
+          The site is fully static, so it loads in stages: the map and summary bundle arrive first, while heavier country-level contribution shards and deeper analytics follow afterward.
         </p>
       </div>
     </section>
@@ -53,7 +56,7 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
         </p>
         <p>
           Machine learning models (gradient boosting, random forests, extra trees, linear baselines)
-          are trained on feature sets organized into three tiers of increasing human influence.
+          are trained on feature sets organized into four tiers of increasing human influence.
           The models predict each country's expected rank given those features.
         </p>
         <p>
@@ -92,7 +95,7 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
     <section class="about-section">
       <h2>Outcome metrics</h2>
       <div class="about-content">
-        <p>Four prosperity measures are modeled independently, each converted to a within-decade percentile rank:</p>
+        <p>Seven outcome measures are modeled independently, each converted to a within-decade percentile rank:</p>
       </div>
       <div class="table-wrap">
         <table class="about-table">
@@ -120,16 +123,31 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
               <td>Disposable-income Gini coefficient, percentile rank (higher = more unequal)</td>
               <td>Standardized World Income Inequality Database (SWIID)</td>
             </tr>
+            <tr>
+              <td>Gender inequality</td>
+              <td>UNDP Gender Inequality Index, percentile rank (higher = more unequal)</td>
+              <td>UNDP Human Development Reports</td>
+            </tr>
+            <tr>
+              <td>Female LFPR</td>
+              <td>Female labor force participation rate, percentile rank</td>
+              <td>World Bank WDI / ILO</td>
+            </tr>
+            <tr>
+              <td>Women &amp; Law</td>
+              <td>Women, Business and the Law score, percentile rank</td>
+              <td>World Bank Women, Business and the Law</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section class="about-section">
-      <h2>Three-tier feature system</h2>
+      <h2>Four-tier feature system</h2>
       <div class="about-content">
         <p>
-          Predictor features are organized into three tiers, from purely natural to increasingly
+          Predictor features are organized into four tiers, from purely natural to increasingly
           human-influenced. Each tier can be toggled independently to see how much each layer
           of information contributes to prediction.
         </p>
@@ -150,16 +168,20 @@ export function renderAboutTab(metadata: MetadataPayload | null): string {
           </li>
           <li>
             <strong style="color: hsl(310, 45%, 42%)">Society</strong> \u2014
-            Social, institutional, and historical structure: urbanization rate, trade openness,
-            population density, governance indicators (WGI), democracy indices (V-Dem),
-            political rights (Freedom House), state fragility, colonial history, legal origins,
-            ethnic/linguistic/religious fractionalization, gender inequality, demographic structure.
+            Social and historical structure: urbanization rate, trade openness,
+            population density, colonial history, legal origins, ethnic/linguistic/religious
+            fractionalization, gender inequality, demographic structure, and related social context.
+          </li>
+          <li>
+            <strong style="color: hsl(18, 70%, 46%)">Governance</strong> \u2014
+            State capacity, governance, and conflict: World Governance Indicators, V-Dem,
+            Freedom House, the Fragile States Index, Polity5, and organized-violence measures.
           </li>
         </ul>
         <p>
-          Selecting multiple tiers combines their features. For example, <em>Nature + Society</em>
-          uses geographic features alongside social variables but excludes resource rents and
-          infrastructure. All seven combinations are modeled independently.
+          Selecting multiple tiers combines their features. For example, <em>Nature + Governance</em>
+          uses geographic features alongside governance variables while excluding infrastructure and society.
+          All 15 non-empty tier combinations are modeled independently.
         </p>
       </div>
     </section>

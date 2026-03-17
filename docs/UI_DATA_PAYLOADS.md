@@ -123,16 +123,24 @@ Interpretation:
 
 ## Tier semantics
 
-Bundle payloads use these maintained labels:
-- `tier1_pure_nature_v1`: `Tier 1 - Natural Endowment`
-- `tier2_only_resource_development_v1`: `Tier 2 Only - Resource Development & Infrastructure`
-- `tier2_resource_utilization_v1`: `Tier 2 - Resource Development & Infrastructure`
-- `tier3_only_social_structure_v1`: `Tier 3 Only - Social, Institutional & Historical Structure`
-- `tier1_tier3_without_tier2_v1`: `Tier 1 + Tier 3 - No Tier 2`
-- `tier2_tier3_without_tier1_v1`: `Tier 2 + Tier 3 - No Tier 1`
-- `tier3_institutional_cultural_v1`: `Tier 3 - Social, Institutional & Historical Structure`
+Maintained bundle payloads now use deterministic four-tier identifiers:
+- Internal feature-set ids: `tier_bundle_<digits>_v1`
+- Exported tier keys: `tiers_<digits>`
+- Exported `feature_components`: ordered arrays like `["tier1"]`, `["tier1","tier4"]`, `["tier1","tier2","tier3","tier4"]`
 
-The canonical UI should prefer `feature_components` for checkbox state and `feature_tier_label` for display text.
+Canonical components:
+- `tier1`: `Nature`
+- `tier2`: `Infrastructure`
+- `tier3`: `Society`
+- `tier4`: `Governance`
+
+Examples:
+- `tier_bundle_1_v1` -> `tiers_1` -> `Nature`
+- `tier_bundle_14_v1` -> `tiers_14` -> `Nature + Governance`
+- `tier_bundle_23_v1` -> `tiers_23` -> `Infrastructure + Society`
+- `tier_bundle_1234_v1` -> `tiers_1234` -> `All four`
+
+All 15 non-empty combinations are maintained. The canonical UI should prefer `feature_components` for checkbox state and `feature_tier_label` for display text.
 
 ## Important interpretation note
 

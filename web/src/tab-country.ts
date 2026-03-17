@@ -16,6 +16,8 @@ export type CountryTabData = {
   targetLabel: string;
   continentLookup: Map<string, string>;
   countryNames: Array<{ iso3: string; name: string }>;
+  activeTargetLoading?: boolean;
+  loadedTargetCount?: number;
 };
 
 const TARGET_IDS = ["income", "wealth", "life_expectancy", "inequality", "gender_inequality", "female_lfpr", "women_business_law"] as const;
@@ -27,16 +29,6 @@ const TARGET_LABELS: Record<string, string> = {
   gender_inequality: "Gender Ineq.",
   female_lfpr: "Female LFPR",
   women_business_law: "Women & Law",
-};
-
-const TIER_LABELS: Record<string, string> = {
-  tier1: "Nature",
-  tier2_only: "Infrastructure",
-  tier3_only: "Society",
-  tier2: "Nature + Infra.",
-  tier13: "Nature + Society",
-  tier23: "Infra. + Society",
-  tier3: "All three",
 };
 
 function fmtPct(v: number | null): string {
@@ -84,13 +76,17 @@ const BLOCK_SOURCES: Record<string, string> = {
   vdem: "V-Dem \u2014 varieties of democracy indices",
   freedom_house: "Freedom House \u2014 political rights scores",
   fsi: "Fund for Peace \u2014 Fragile States Index",
+  polity5: "Polity5 \u2014 regime characteristics and political authority",
+  barro_lee: "Barro-Lee \u2014 educational attainment",
   alesina_fractionalization: "Alesina et al. \u2014 ethnic/linguistic/religious fractionalization",
+  laporta_legal_origins: "La Porta et al. \u2014 legal origins",
   glottolog: "Glottolog \u2014 language diversity",
   pew_religion: "Pew Research \u2014 religious composition",
   cepii_geodist: "CEPII GeoDist \u2014 colonial links, ethno-linguistic ties",
   pwt: "Penn World Table \u2014 trade openness",
   undp_gii: "UNDP \u2014 Gender Inequality Index components",
   wpp: "UN World Population Prospects \u2014 demographics",
+  ucdp_conflict: "UCDP \u2014 organized violence and conflict intensity",
   other: "Various sources",
 };
 
@@ -207,7 +203,16 @@ function renderCrossTargetTable(
 function renderComparisonSection(
   data: CountryTabData,
 ): string {
-  const { selectedIso3, compareIso3, bundleContribs, activeTarget, tierKey: tk, targetLabel, continentLookup, countryNames } = data;
+  const {
+    selectedIso3,
+    compareIso3,
+    bundleContribs,
+    activeTarget,
+    tierKey: tk,
+    targetLabel,
+    countryNames,
+    tierLabel,
+  } = data;
   if (!selectedIso3 || !compareIso3 || !tk) return "";
 
   const nameA = countryNames.find((c) => c.iso3 === selectedIso3)?.name ?? selectedIso3;
@@ -272,7 +277,7 @@ function renderComparisonSection(
         <h2>${nameA} vs ${nameB}</h2>
         <button class="export-btn" id="clear-compare">Clear comparison</button>
       </div>
-      <p class="section-subtitle">Head-to-head across all outcomes (${TIER_LABELS[tk] ?? tk}).</p>
+      <p class="section-subtitle">Head-to-head across all outcomes (${tierLabel}).</p>
       ${h2hTable}
     </section>
 
@@ -320,7 +325,20 @@ function csvForCountry(
 export { csvForCountry };
 
 export function renderCountryTab(data: CountryTabData): string {
-  const { selectedIso3, compareIso3, bundleContribs, profileLookup, activeTarget, tierKey: tk, tierLabel, targetLabel, continentLookup, countryNames } = data;
+  const {
+    selectedIso3,
+    compareIso3,
+    bundleContribs,
+    profileLookup,
+    activeTarget,
+    tierKey: tk,
+    tierLabel,
+    targetLabel,
+    continentLookup,
+    countryNames,
+    activeTargetLoading,
+    loadedTargetCount,
+  } = data;
 
   const searchHtml = `
     <div class="country-search-wrap country-search-wrap-large">
@@ -356,10 +374,33 @@ export function renderCountryTab(data: CountryTabData): string {
   const continent = continentLookup.get(selectedIso3) ?? "Unknown";
   const profile = profileLookup.get(selectedIso3);
   const region = profile?.region_name ?? "";
+  const activePayload = bundleContribs.get(activeTarget);
+  const activeBundle = activePayload?.bundles.find((b) => b.feature_tier === tk);
+
+  if (!activeBundle) {
+    return `
+      <section class="country-hero">
+        <h1>${name}</h1>
+        <p class="lede">${continent} &middot; ${region}</p>
+        ${searchHtml}
+      </section>
+
+      <section class="country-section">
+        <p class="muted-note">${
+          activeTargetLoading
+            ? `Loading ${targetLabel.toLowerCase()} contributions for ${tierLabel.toLowerCase()}.`
+            : `No ${targetLabel.toLowerCase()} bundle is available for ${tierLabel.toLowerCase()}.`
+        }</p>
+      </section>
+    `;
+  }
 
   const contribCard = renderCountryCard(selectedIso3, activeTarget, tk, bundleContribs);
   const crossTable = renderCrossTargetTable(selectedIso3, tk, bundleContribs);
   const comparisonSection = compareIso3 ? renderComparisonSection(data) : "";
+  const crossTargetSubtitle = loadedTargetCount != null && loadedTargetCount < TARGET_IDS.length
+    ? `Cross-outcome comparisons are partial while more shards load (${loadedTargetCount} of ${TARGET_IDS.length} outcome shards ready).`
+    : null;
 
   const trajectorySection = profile
     ? `
@@ -382,7 +423,7 @@ export function renderCountryTab(data: CountryTabData): string {
 
     <section class="country-section">
       <div class="section-header-row">
-        <h2>Feature contributions \u2014 ${targetLabel} (${TIER_LABELS[tk] ?? tk})</h2>
+        <h2>Feature contributions \u2014 ${targetLabel} (${tierLabel})</h2>
         <button class="export-btn" id="export-country-csv">Export CSV</button>
       </div>
       <p class="section-subtitle">Which features push this country's predicted ${targetLabel.toLowerCase()} up or down.</p>
@@ -396,6 +437,12 @@ export function renderCountryTab(data: CountryTabData): string {
         <canvas id="country-feature-profile-chart"></canvas>
       </div>
     </section>
+
+    ${crossTargetSubtitle ? `
+    <section class="country-section">
+      <p class="muted-note">${crossTargetSubtitle}</p>
+    </section>
+    ` : ""}
 
     ${crossTable}
 

@@ -185,7 +185,7 @@ def test_select_best_model_spec_picks_best_non_baseline_latest_decade() -> None:
             "spec_name": ["a", "b", "c", "d"],
             "model_name": ["baseline_mean", "hist_gb", "ridge", "random_forest"],
             "model_family": ["baseline", "boosted_tree", "linear", "tree_ensemble"],
-            "feature_set": ["x", "x", "y", "tier1_pure_nature_v1"],
+            "feature_set": ["x", "x", "y", "tier_bundle_1_v1"],
             "r2": [0.1, 0.4, 0.3, 0.7],
             "rmse": [0.3, 0.2, 0.25, 0.18],
             "mae": [0.2, 0.15, 0.16, 0.12],
@@ -197,9 +197,9 @@ def test_select_best_model_spec_picks_best_non_baseline_latest_decade() -> None:
 
     assert selected is not None
     assert selected["spec_name"] == "d"
-    assert selected["feature_set"] == "tier1_pure_nature_v1"
-    assert selected["feature_tier"] == "tier1"
-    assert selected["feature_tier_label"] == "Tier 1 - Natural Endowment"
+    assert selected["feature_set"] == "tier_bundle_1_v1"
+    assert selected["feature_tier"] == "tiers_1"
+    assert selected["feature_tier_label"] == "Nature"
 
 
 def test_build_model_metric_frame_merges_panel_context() -> None:
@@ -242,7 +242,7 @@ def test_build_model_summary_payload_includes_selected_diagnostics() -> None:
             "spec_name": ["best_spec", "other_spec"],
             "model_name": ["hist_gb", "ridge"],
             "model_family": ["boosted_tree", "linear"],
-            "feature_set": ["tier2_resource_utilization_v1", "deep_geo"],
+            "feature_set": ["tier_bundle_12_v1", "deep_geo"],
             "r2": [0.7, 0.4],
             "rmse": [0.2, 0.3],
             "mae": [0.15, 0.2],
@@ -253,9 +253,9 @@ def test_build_model_summary_payload_includes_selected_diagnostics() -> None:
         "spec_name": "best_spec",
         "model_name": "hist_gb",
         "model_family": "boosted_tree",
-        "feature_set": "tier2_resource_utilization_v1",
-        "feature_tier": "tier2",
-        "feature_tier_label": "Tier 2 - Resource Development & Infrastructure",
+        "feature_set": "tier_bundle_12_v1",
+        "feature_tier": "tiers_12",
+        "feature_tier_label": "Nature + Infrastructure",
         "feature_components": ["tier1", "tier2"],
         "decade": 2020,
         "r2": 0.7,
@@ -283,7 +283,7 @@ def test_build_model_summary_payload_includes_selected_diagnostics() -> None:
     )
     coverage = pd.DataFrame(
         {
-            "feature_set": ["tier2_resource_utilization_v1", "tier2_resource_utilization_v1"],
+            "feature_set": ["tier_bundle_12_v1", "tier_bundle_12_v1"],
             "decade": [2020, 2020],
             "feature_name": ["freshwater_withdrawals_billion_m3", "clim_aridity_proxy"],
             "feature_kind": ["numeric", "numeric"],
@@ -303,13 +303,13 @@ def test_build_model_summary_payload_includes_selected_diagnostics() -> None:
     tier2_row = next(
         row
         for row in payload["best_by_feature_set"]
-        if row["feature_set"] == "tier2_resource_utilization_v1"
+        if row["feature_set"] == "tier_bundle_12_v1"
     )
 
     assert payload["selected_model_top_features"][0]["feature_name"] == "clim_aridity_proxy"
     assert payload["selected_model_top_coefficients"][0]["feature_name"] == "abs_latitude"
-    assert tier2_row["feature_tier"] == "tier2"
-    assert tier2_row["feature_tier_label"] == "Tier 2 - Resource Development & Infrastructure"
+    assert tier2_row["feature_tier"] == "tiers_12"
+    assert tier2_row["feature_tier_label"] == "Nature + Infrastructure"
     assert tier2_row["feature_components"] == ["tier1", "tier2"]
     assert payload["selected_feature_set_low_coverage"][0]["feature_name"] == (
         "freshwater_withdrawals_billion_m3"
@@ -329,7 +329,7 @@ def test_build_country_contributions_summary_payload_groups_country_effects() ->
             "spec_name": ["best_spec"] * 4,
             "model_name": ["hist_gb"] * 4,
             "model_family": ["boosted_tree"] * 4,
-            "feature_set": ["tier2_tier3_without_tier1_v1"] * 4,
+            "feature_set": ["tier_bundle_23_v1"] * 4,
             "feature_name": ["education", "religion", "institutions", "education"],
             "feature_block": ["barro_lee", "pew_religion", "wgi", "barro_lee"],
             "base_value": [0.5, 0.5, 0.5, 0.3],
@@ -350,8 +350,8 @@ def test_build_country_contributions_summary_payload_groups_country_effects() ->
     assert payload["selected_model_spec"] == "best_spec"
     assert payload["country_count"] == 2
     country_a = next(row for row in payload["countries"] if row["iso3"] == "AAA")
-    assert country_a["feature_tier"] == "tier23"
-    assert country_a["feature_tier_label"] == "Tier 2 + Tier 3 - No Tier 1"
+    assert country_a["feature_tier"] == "tiers_23"
+    assert country_a["feature_tier_label"] == "Infrastructure + Society"
     assert country_a["feature_components"] == ["tier2", "tier3"]
     assert country_a["top_absolute"][0]["feature_name"] == "education"
     assert country_a["top_positive"][0]["feature_name"] == "education"
@@ -366,9 +366,9 @@ def test_build_bundle_summary_payload_groups_targets_and_bundles() -> None:
             "model_name": ["hist_gb", "ridge", "gradient_boosting"],
             "model_family": ["boosted_tree", "linear", "boosted_tree"],
             "feature_set": [
-                "tier2_only_resource_development_v1",
-                "tier2_only_resource_development_v1",
-                "tier3_only_social_structure_v1",
+                "tier_bundle_2_v1",
+                "tier_bundle_2_v1",
+                "tier_bundle_3_v1",
             ],
             "row_count": [100, 100, 100],
             "r2": [0.7, 0.4, 0.8],
@@ -383,7 +383,7 @@ def test_build_bundle_summary_payload_groups_targets_and_bundles() -> None:
     assert payload["available_targets"] == ["income"]
     assert payload["targets"][0]["bundle_count"] == 2
     assert payload["targets"][0]["best_overall"]["spec_name"] == "best_b"
-    assert payload["targets"][0]["bundles"][0]["feature_tier"] == "tier2_only"
+    assert payload["targets"][0]["bundles"][0]["feature_tier"] == "tiers_2"
 
 
 def test_build_bundle_feature_effects_payload_uses_best_spec_per_bundle() -> None:
@@ -394,8 +394,8 @@ def test_build_bundle_feature_effects_payload_uses_best_spec_per_bundle() -> Non
             "model_name": ["hist_gb", "gradient_boosting"],
             "model_family": ["boosted_tree", "boosted_tree"],
             "feature_set": [
-                "tier2_only_resource_development_v1",
-                "tier3_only_social_structure_v1",
+                "tier_bundle_2_v1",
+                "tier_bundle_3_v1",
             ],
             "row_count": [100, 100],
             "r2": [0.7, 0.8],
@@ -407,7 +407,10 @@ def test_build_bundle_feature_effects_payload_uses_best_spec_per_bundle() -> Non
     feature_importance = pd.DataFrame(
         {
             "spec_name": ["best_a", "best_b"],
-            "feature_name": ["resource_feature", "social_feature"],
+            "feature_name": [
+                "wgi_control_of_corruption_estimate",
+                "polity5_durable",
+            ],
             "importance": [0.4, 0.5],
             "abs_importance": [0.4, 0.5],
             "importance_rank": [1, 1],
@@ -416,11 +419,14 @@ def test_build_bundle_feature_effects_payload_uses_best_spec_per_bundle() -> Non
     coverage = pd.DataFrame(
         {
             "feature_set": [
-                "tier2_only_resource_development_v1",
-                "tier3_only_social_structure_v1",
+                "tier_bundle_2_v1",
+                "tier_bundle_3_v1",
             ],
             "decade": [2020, 2020],
-            "feature_name": ["resource_feature", "social_feature"],
+            "feature_name": [
+                "wgi_control_of_corruption_estimate",
+                "polity5_durable",
+            ],
             "feature_kind": ["numeric", "numeric"],
             "available_row_count": [100, 100],
             "non_null_count": [80, 90],
@@ -437,8 +443,10 @@ def test_build_bundle_feature_effects_payload_uses_best_spec_per_bundle() -> Non
     )
 
     assert payload["target"] == "income"
-    assert payload["bundles"][0]["top_feature_importance"][0]["feature_name"] == "resource_feature"
-    assert payload["bundles"][1]["lowest_coverage_features"][0]["feature_name"] == "social_feature"
+    assert payload["bundles"][0]["top_feature_importance"][0]["feature_name"] == "wgi_control_of_corruption_estimate"
+    assert payload["bundles"][0]["top_feature_importance"][0]["feature_block"] == "wgi"
+    assert payload["bundles"][1]["lowest_coverage_features"][0]["feature_name"] == "polity5_durable"
+    assert payload["bundles"][1]["lowest_coverage_features"][0]["feature_block"] == "polity5"
 
 
 def test_build_bundle_country_contributions_payload_and_index() -> None:
@@ -449,8 +457,8 @@ def test_build_bundle_country_contributions_payload_and_index() -> None:
             "model_name": ["hist_gb", "gradient_boosting"],
             "model_family": ["boosted_tree", "boosted_tree"],
             "feature_set": [
-                "tier2_only_resource_development_v1",
-                "tier3_only_social_structure_v1",
+                "tier_bundle_2_v1",
+                "tier_bundle_3_v1",
             ],
             "row_count": [2, 2],
             "r2": [0.7, 0.8],
@@ -472,10 +480,10 @@ def test_build_bundle_country_contributions_payload_and_index() -> None:
             "model_name": ["hist_gb", "hist_gb", "gradient_boosting", "gradient_boosting"],
             "model_family": ["boosted_tree"] * 4,
             "feature_set": [
-                "tier2_only_resource_development_v1",
-                "tier2_only_resource_development_v1",
-                "tier3_only_social_structure_v1",
-                "tier3_only_social_structure_v1",
+                "tier_bundle_2_v1",
+                "tier_bundle_2_v1",
+                "tier_bundle_3_v1",
+                "tier_bundle_3_v1",
             ],
             "feature_name": ["resource_a", "resource_b", "social_a", "social_b"],
             "feature_block": ["wdi_resources", "aquastat_dams", "wgi", "pew_religion"],

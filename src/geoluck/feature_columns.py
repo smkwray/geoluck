@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from itertools import combinations
+
 
 def _dedupe(columns: list[str]) -> list[str]:
     return list(dict.fromkeys(columns))
@@ -840,7 +842,6 @@ TIER2_EXCLUDED_NUMERIC_COLUMNS = {
     "aquastat_feature_non_null_count",
 }
 TIER3_EXCLUDED_NUMERIC_COLUMNS = {
-    "wgi_governance_feature_non_null_count",
     "wpp_feature_non_null_count",
     "undp_gii_feature_non_null_count",
     "barro_lee_population_thousands",
@@ -851,12 +852,14 @@ TIER3_EXCLUDED_NUMERIC_COLUMNS = {
     "glottolog_feature_non_null_count",
     "cepii_feature_non_null_count",
     "pew_religion_feature_non_null_count",
+}
+TIER4_EXCLUDED_NUMERIC_COLUMNS = {
+    "wgi_governance_feature_non_null_count",
     "freedom_house_feature_non_null_count",
     "fsi_feature_non_null_count",
     "polity5_feature_non_null_count",
     "vdem_feature_non_null_count",
     "ucdp_conflict_feature_non_null_count",
-    "geot_feature_non_null_count",
 }
 
 TIER1_PURE_NATURE_NUMERIC = _dedupe(
@@ -935,6 +938,7 @@ TIER2_RESOURCE_UTILIZATION_NUMERIC = _dedupe(
     + EIA_OIL_QUALITY_FEATURE_COLUMNS_NUMERIC
     + GOGET_FEATURE_COLUMNS_NUMERIC
     + GCMT_FEATURE_COLUMNS_NUMERIC
+    + GEOT_FEATURE_COLUMNS_NUMERIC
     + OPEC_ASB_FEATURE_COLUMNS_NUMERIC
     + WOCQI_FEATURE_COLUMNS_NUMERIC
     + MRDS_FEATURE_COLUMNS_NUMERIC
@@ -943,14 +947,9 @@ TIER2_RESOURCE_UTILIZATION_NUMERIC = _dedupe(
 )
 TIER2_RESOURCE_UTILIZATION_CATEGORICAL: list[str] = []
 
-TIER3_INSTITUTIONAL_CULTURAL_NUMERIC = _dedupe(
+TIER3_SOCIETY_NUMERIC = _dedupe(
     TIER2_RESOURCE_UTILIZATION_NUMERIC
     + ["urban_population_pct"]
-    + [
-        column
-        for column in WGI_FEATURE_COLUMNS_NUMERIC
-        if column not in TIER3_EXCLUDED_NUMERIC_COLUMNS
-    ]
     + [
         column
         for column in WPP_FEATURE_COLUMNS_NUMERIC
@@ -996,38 +995,8 @@ TIER3_INSTITUTIONAL_CULTURAL_NUMERIC = _dedupe(
         for column in PEW_RELIGION_FEATURE_COLUMNS_NUMERIC
         if column not in TIER3_EXCLUDED_NUMERIC_COLUMNS
     ]
-    + [
-        column
-        for column in FREEDOM_HOUSE_FEATURE_COLUMNS_NUMERIC
-        if column not in TIER3_EXCLUDED_NUMERIC_COLUMNS
-    ]
-    + [
-        column
-        for column in FSI_FEATURE_COLUMNS_NUMERIC
-        if column not in TIER3_EXCLUDED_NUMERIC_COLUMNS
-    ]
-    + [
-        column
-        for column in POLITY5_FEATURE_COLUMNS_NUMERIC
-        if column not in TIER3_EXCLUDED_NUMERIC_COLUMNS
-    ]
-    + [
-        column
-        for column in VDEM_FEATURE_COLUMNS_NUMERIC
-        if column not in TIER3_EXCLUDED_NUMERIC_COLUMNS
-    ]
-    + [
-        column
-        for column in UCDP_CONFLICT_FEATURE_COLUMNS_NUMERIC
-        if column not in TIER3_EXCLUDED_NUMERIC_COLUMNS
-    ]
-    + [
-        column
-        for column in GEOT_FEATURE_COLUMNS_NUMERIC
-        if column not in TIER3_EXCLUDED_NUMERIC_COLUMNS
-    ]
 )
-TIER3_INSTITUTIONAL_CULTURAL_CATEGORICAL: list[str] = []
+TIER3_SOCIETY_CATEGORICAL: list[str] = []
 
 TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC = _dedupe(
     [
@@ -1038,51 +1007,129 @@ TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC = _dedupe(
 )
 TIER2_ONLY_RESOURCE_DEVELOPMENT_CATEGORICAL: list[str] = []
 
-TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC = _dedupe(
+TIER3_ONLY_SOCIETY_NUMERIC = _dedupe(
     [
         column
-        for column in TIER3_INSTITUTIONAL_CULTURAL_NUMERIC
+        for column in TIER3_SOCIETY_NUMERIC
         if column not in set(TIER2_RESOURCE_UTILIZATION_NUMERIC)
     ]
 )
-TIER3_ONLY_SOCIAL_STRUCTURE_CATEGORICAL: list[str] = []
+TIER3_ONLY_SOCIETY_CATEGORICAL: list[str] = []
 
-TIER1_TIER3_WITHOUT_TIER2_NUMERIC = _dedupe(
-    [*TIER1_PURE_NATURE_NUMERIC, *TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC]
+TIER4_GOVERNANCE_NUMERIC = _dedupe(
+    TIER3_SOCIETY_NUMERIC
+    + [
+        column
+        for column in WGI_FEATURE_COLUMNS_NUMERIC
+        if column not in TIER4_EXCLUDED_NUMERIC_COLUMNS
+    ]
+    + [
+        column
+        for column in FREEDOM_HOUSE_FEATURE_COLUMNS_NUMERIC
+        if column not in TIER4_EXCLUDED_NUMERIC_COLUMNS
+    ]
+    + [
+        column
+        for column in FSI_FEATURE_COLUMNS_NUMERIC
+        if column not in TIER4_EXCLUDED_NUMERIC_COLUMNS
+    ]
+    + [
+        column
+        for column in POLITY5_FEATURE_COLUMNS_NUMERIC
+        if column not in TIER4_EXCLUDED_NUMERIC_COLUMNS
+    ]
+    + [
+        column
+        for column in VDEM_FEATURE_COLUMNS_NUMERIC
+        if column not in TIER4_EXCLUDED_NUMERIC_COLUMNS
+    ]
+    + [
+        column
+        for column in UCDP_CONFLICT_FEATURE_COLUMNS_NUMERIC
+        if column not in TIER4_EXCLUDED_NUMERIC_COLUMNS
+    ]
 )
-TIER1_TIER3_WITHOUT_TIER2_CATEGORICAL: list[str] = []
+TIER4_GOVERNANCE_CATEGORICAL: list[str] = []
 
-TIER2_TIER3_WITHOUT_TIER1_NUMERIC = _dedupe(
-    [*TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC, *TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC]
+TIER4_ONLY_GOVERNANCE_NUMERIC = _dedupe(
+    [
+        column
+        for column in TIER4_GOVERNANCE_NUMERIC
+        if column not in set(TIER3_SOCIETY_NUMERIC)
+    ]
 )
-TIER2_TIER3_WITHOUT_TIER1_CATEGORICAL: list[str] = []
+TIER4_ONLY_GOVERNANCE_CATEGORICAL: list[str] = []
 
-FEATURE_SET_TIER_KEYS = {
-    "tier1_pure_nature_v1": "tier1",
-    "tier2_only_resource_development_v1": "tier2_only",
-    "tier2_resource_utilization_v1": "tier2",
-    "tier3_only_social_structure_v1": "tier3_only",
-    "tier1_tier3_without_tier2_v1": "tier13",
-    "tier2_tier3_without_tier1_v1": "tier23",
-    "tier3_institutional_cultural_v1": "tier3",
+INDEPENDENT_TIER_COMPONENTS = ("tier1", "tier2", "tier3", "tier4")
+INDEPENDENT_TIER_LABELS = {
+    "tier1": "Nature",
+    "tier2": "Infrastructure",
+    "tier3": "Society",
+    "tier4": "Governance",
+}
+INDEPENDENT_TIER_MIN_DECADE = {
+    "tier1": 1910,
+    "tier2": 1960,
+    "tier3": 1960,
+    "tier4": 1960,
+}
+INDEPENDENT_TIER_NUMERIC_COLUMNS = {
+    "tier1": TIER1_PURE_NATURE_NUMERIC,
+    "tier2": TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC,
+    "tier3": TIER3_ONLY_SOCIETY_NUMERIC,
+    "tier4": TIER4_ONLY_GOVERNANCE_NUMERIC,
+}
+INDEPENDENT_TIER_CATEGORICAL_COLUMNS = {
+    "tier1": TIER1_PURE_NATURE_CATEGORICAL,
+    "tier2": TIER2_ONLY_RESOURCE_DEVELOPMENT_CATEGORICAL,
+    "tier3": TIER3_ONLY_SOCIETY_CATEGORICAL,
+    "tier4": TIER4_ONLY_GOVERNANCE_CATEGORICAL,
 }
 
-FEATURE_SET_TIER_LABELS = {
-    "tier1_pure_nature_v1": "Tier 1 - Natural Endowment",
-    "tier2_only_resource_development_v1": "Tier 2 Only - Resource Development & Infrastructure",
-    "tier2_resource_utilization_v1": "Tier 2 - Resource Development & Infrastructure",
-    "tier3_only_social_structure_v1": "Tier 3 Only - Social, Institutional & Historical Structure",
-    "tier1_tier3_without_tier2_v1": "Tier 1 + Tier 3 - No Tier 2",
-    "tier2_tier3_without_tier1_v1": "Tier 2 + Tier 3 - No Tier 1",
-    "tier3_institutional_cultural_v1": "Tier 3 - Social, Institutional & Historical Structure",
-}
+
+def tier_bundle_feature_set_name(components: tuple[str, ...]) -> str:
+    suffix = "".join(component.removeprefix("tier") for component in components)
+    return f"tier_bundle_{suffix}_v1"
+
+
+def tier_bundle_export_key(components: tuple[str, ...]) -> str:
+    suffix = "".join(component.removeprefix("tier") for component in components)
+    return f"tiers_{suffix}"
+
+
+def tier_bundle_label(components: tuple[str, ...]) -> str:
+    if len(components) == len(INDEPENDENT_TIER_COMPONENTS):
+        return "All four"
+    return " + ".join(INDEPENDENT_TIER_LABELS[component] for component in components)
+
+
+def tier_bundle_min_decade(components: tuple[str, ...]) -> int:
+    return max(INDEPENDENT_TIER_MIN_DECADE[component] for component in components)
+
 
 FEATURE_SET_COMPONENTS = {
-    "tier1_pure_nature_v1": ("tier1",),
-    "tier2_only_resource_development_v1": ("tier2",),
-    "tier2_resource_utilization_v1": ("tier1", "tier2"),
-    "tier3_only_social_structure_v1": ("tier3",),
-    "tier1_tier3_without_tier2_v1": ("tier1", "tier3"),
-    "tier2_tier3_without_tier1_v1": ("tier2", "tier3"),
-    "tier3_institutional_cultural_v1": ("tier1", "tier2", "tier3"),
+    tier_bundle_feature_set_name(components): components
+    for size in range(1, len(INDEPENDENT_TIER_COMPONENTS) + 1)
+    for components in combinations(INDEPENDENT_TIER_COMPONENTS, size)
 }
+FEATURE_SET_TIER_KEYS = {
+    feature_set: tier_bundle_export_key(components)
+    for feature_set, components in FEATURE_SET_COMPONENTS.items()
+}
+FEATURE_SET_TIER_LABELS = {
+    feature_set: tier_bundle_label(components)
+    for feature_set, components in FEATURE_SET_COMPONENTS.items()
+}
+
+# Backward-compatible aliases for older call sites that still reason in terms of the former
+# three-tier surface. They now point at the split Society/Governance definitions.
+TIER3_INSTITUTIONAL_CULTURAL_NUMERIC = TIER4_GOVERNANCE_NUMERIC
+TIER3_INSTITUTIONAL_CULTURAL_CATEGORICAL = TIER4_GOVERNANCE_CATEGORICAL
+TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC = TIER3_ONLY_SOCIETY_NUMERIC
+TIER3_ONLY_SOCIAL_STRUCTURE_CATEGORICAL = TIER3_ONLY_SOCIETY_CATEGORICAL
+TIER1_TIER3_WITHOUT_TIER2_NUMERIC = _dedupe([*TIER1_PURE_NATURE_NUMERIC, *TIER3_ONLY_SOCIETY_NUMERIC])
+TIER1_TIER3_WITHOUT_TIER2_CATEGORICAL: list[str] = []
+TIER2_TIER3_WITHOUT_TIER1_NUMERIC = _dedupe(
+    [*TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC, *TIER3_ONLY_SOCIETY_NUMERIC]
+)
+TIER2_TIER3_WITHOUT_TIER1_CATEGORICAL: list[str] = []

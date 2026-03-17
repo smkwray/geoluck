@@ -11,6 +11,7 @@ export type FeaturesTabData = {
   tierLabel: string;
   targetLabel: string;
   continentLookup: Map<string, string>;
+  activeTargetLoading?: boolean;
 };
 
 /* ── Block metadata ─────────────────────────────── */
@@ -42,13 +43,17 @@ const BLOCK_SOURCES: Record<string, string> = {
   vdem: "V-Dem \u2014 varieties of democracy indices",
   freedom_house: "Freedom House \u2014 political rights scores",
   fsi: "Fund for Peace \u2014 Fragile States Index",
+  polity5: "Polity5 \u2014 regime characteristics and political authority",
+  barro_lee: "Barro-Lee \u2014 educational attainment",
   alesina_fractionalization: "Alesina et al. \u2014 ethnic/linguistic/religious fractionalization",
+  laporta_legal_origins: "La Porta et al. \u2014 legal origins",
   glottolog: "Glottolog \u2014 language diversity",
   pew_religion: "Pew Research \u2014 religious composition",
   cepii_geodist: "CEPII GeoDist \u2014 colonial links, ethno-linguistic ties",
   pwt: "Penn World Table \u2014 trade openness",
   undp_gii: "UNDP \u2014 Gender Inequality Index components",
   wpp: "UN World Population Prospects \u2014 demographics",
+  ucdp_conflict: "UCDP \u2014 organized violence and conflict intensity",
   other: "Various sources",
 };
 
@@ -79,13 +84,17 @@ const BLOCK_LABELS: Record<string, string> = {
   vdem: "Democracy",
   freedom_house: "Political Rights",
   fsi: "State Fragility",
+  polity5: "Political Regime",
+  barro_lee: "Education",
   alesina_fractionalization: "Ethnic Diversity",
+  laporta_legal_origins: "Legal Origins",
   glottolog: "Languages",
   pew_religion: "Religion",
   cepii_geodist: "Colonial History",
   pwt: "Trade",
   undp_gii: "Gender Equality",
   wpp: "Population",
+  ucdp_conflict: "Conflict",
   other: "Other",
 };
 
@@ -95,9 +104,9 @@ const BLOCK_TIER: Record<string, number> = {
   openei_wind: 1, eez: 1, ibtracs: 1,
   aquastat_dams: 2, wdi_agri_water: 2, wdi_resources: 2, mrds: 2,
   gcmt: 2, goget: 2, geot: 2, eia_oil_quality: 2, wocqi: 2,
-  wdi_controls: 3, wgi: 3, vdem: 3, freedom_house: 3, fsi: 3,
-  alesina_fractionalization: 3, glottolog: 3, pew_religion: 3,
-  cepii_geodist: 3, pwt: 3, undp_gii: 3, wpp: 3,
+  wdi_controls: 3, barro_lee: 3, alesina_fractionalization: 3, laporta_legal_origins: 3,
+  glottolog: 3, pew_religion: 3, cepii_geodist: 3, pwt: 3, undp_gii: 3, wpp: 3,
+  wgi: 4, vdem: 4, freedom_house: 4, fsi: 4, polity5: 4, ucdp_conflict: 4,
   other: 0,
 };
 
@@ -107,15 +116,16 @@ const BLOCK_ORDER = [
   "openei_wind", "eez", "ibtracs",
   "aquastat_dams", "wdi_agri_water", "wdi_resources", "mrds",
   "gcmt", "goget", "geot", "eia_oil_quality", "wocqi",
-  "wdi_controls", "wgi", "vdem", "freedom_house", "fsi",
-  "alesina_fractionalization", "glottolog", "pew_religion",
-  "cepii_geodist", "pwt", "undp_gii", "wpp",
+  "wdi_controls", "barro_lee", "alesina_fractionalization", "laporta_legal_origins",
+  "glottolog", "pew_religion", "cepii_geodist", "pwt", "undp_gii", "wpp",
+  "wgi", "vdem", "freedom_house", "fsi", "polity5", "ucdp_conflict",
 ];
 
 const TIER_COLOR: Record<number, string> = {
   1: "hsl(145, 55%, 42%)",
   2: "hsl(215, 55%, 45%)",
   3: "hsl(310, 45%, 42%)",
+  4: "hsl(18, 70%, 46%)",
   0: "hsl(0, 0%, 50%)",
 };
 
@@ -123,6 +133,7 @@ const TIER_NAME: Record<number, string> = {
   1: "Nature",
   2: "Infrastructure",
   3: "Society",
+  4: "Governance",
   0: "Mixed",
 };
 
@@ -193,10 +204,13 @@ export function collectFeatureData(data: FeaturesTabData): {
       const fi = allFeatures.get(row.feature_name);
       if (fi) {
         fi.importance = row.importance ?? null;
+        if ((fi.block === "other" || !fi.block) && row.feature_block) {
+          fi.block = row.feature_block;
+        }
       } else {
         allFeatures.set(row.feature_name, {
           featureName: row.feature_name,
-          block: "other",
+          block: row.feature_block ?? "other",
           importance: row.importance ?? null,
           impacts: [],
         });
@@ -237,6 +251,18 @@ export function renderFeaturesTab(data: FeaturesTabData): string {
       <section class="feat-hero">
         <h1>Feature Explorer</h1>
         <p class="lede">Select at least one feature tier to explore.</p>
+      </section>
+    `;
+  }
+
+  if (data.activeTargetLoading) {
+    return `
+      <section class="feat-hero">
+        <h1>Feature Explorer</h1>
+        <p class="lede">Loading ${data.targetLabel.toLowerCase()} feature effects for ${data.tierLabel.toLowerCase()}.</p>
+      </section>
+      <section class="feat-section">
+        <p class="muted-note">The active outcome shard is still loading. Feature blocks will appear once the country contribution data is ready.</p>
       </section>
     `;
   }
@@ -297,7 +323,7 @@ export function renderFeaturesTab(data: FeaturesTabData): string {
     </section>
 
     <section class="feat-section">
-      ${blockGridHtml}
+      ${blockGridHtml || '<p class="muted-note">No feature contribution records are available for this outcome-tier combination yet.</p>'}
     </section>
 
     <section class="feat-section feat-panel" id="feat-chips-section" style="display:none">
@@ -319,6 +345,7 @@ export function renderFeaturesTab(data: FeaturesTabData): string {
 /* ── Wiring helper (called from main.ts) ─────────── */
 
 export function wireFeaturesTab(data: FeaturesTabData): void {
+  if (data.activeTargetLoading) return;
   const { blocks, allFeatures } = collectFeatureData(data);
   if (blocks.size === 0) return;
 

@@ -42,6 +42,7 @@ from geoluck.feature_columns import (
     EIA_OIL_QUALITY_FEATURE_COLUMNS_NUMERIC,
     ENERGY_INSTITUTE_RESERVES_FEATURE_COLUMNS_NUMERIC,
     FREEDOM_HOUSE_FEATURE_COLUMNS_NUMERIC,
+    FEATURE_SET_COMPONENTS,
     FSI_FEATURE_COLUMNS_NUMERIC,
     GCMT_FEATURE_COLUMNS_NUMERIC,
     GEOT_FEATURE_COLUMNS_NUMERIC,
@@ -52,6 +53,8 @@ from geoluck.feature_columns import (
     HYDRO_TERRAIN_FEATURE_COLUMNS_NUMERIC,
     HYDROATLAS_FEATURE_COLUMNS_NUMERIC,
     IBTRACS_FEATURE_COLUMNS_NUMERIC,
+    INDEPENDENT_TIER_CATEGORICAL_COLUMNS,
+    INDEPENDENT_TIER_NUMERIC_COLUMNS,
     KISZEWSKI_FEATURE_COLUMNS_NUMERIC,
     LA_PORTA_LEGAL_ORIGINS_FEATURE_COLUMNS_NUMERIC,
     MARINE_REGIONS_EEZ_FEATURE_COLUMNS_NUMERIC,
@@ -61,21 +64,14 @@ from geoluck.feature_columns import (
     OPEN_MINE_PRODUCTION_FEATURE_COLUMNS_NUMERIC,
     OPENEI_WIND_FEATURE_COLUMNS_NUMERIC,
     PEW_RELIGION_FEATURE_COLUMNS_NUMERIC,
+    POLITY5_FEATURE_COLUMNS_NUMERIC,
     PWT_FEATURE_COLUMNS_NUMERIC,
     TIER1_PURE_NATURE_CATEGORICAL,
     TIER1_PURE_NATURE_NUMERIC,
-    TIER1_TIER3_WITHOUT_TIER2_CATEGORICAL,
-    TIER1_TIER3_WITHOUT_TIER2_NUMERIC,
     TIER2_ONLY_RESOURCE_DEVELOPMENT_CATEGORICAL,
     TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC,
     TIER2_RESOURCE_UTILIZATION_CATEGORICAL,
     TIER2_RESOURCE_UTILIZATION_NUMERIC,
-    TIER2_TIER3_WITHOUT_TIER1_CATEGORICAL,
-    TIER2_TIER3_WITHOUT_TIER1_NUMERIC,
-    TIER3_INSTITUTIONAL_CULTURAL_CATEGORICAL,
-    TIER3_INSTITUTIONAL_CULTURAL_NUMERIC,
-    TIER3_ONLY_SOCIAL_STRUCTURE_CATEGORICAL,
-    TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC,
     UCDP_CONFLICT_FEATURE_COLUMNS_NUMERIC,
     UNDP_GII_FEATURE_COLUMNS_NUMERIC,
     USGS_EARTHQUAKE_FEATURE_COLUMNS_NUMERIC,
@@ -86,6 +82,7 @@ from geoluck.feature_columns import (
     WGI_FEATURE_COLUMNS_NUMERIC,
     WOCQI_FEATURE_COLUMNS_NUMERIC,
     WPP_FEATURE_COLUMNS_NUMERIC,
+    tier_bundle_min_decade,
 )
 from geoluck.features.build_outcomes_panel import (
     FEMALE_LFPR_RANK_COLUMN,
@@ -977,83 +974,32 @@ def get_feature_set_specs(frame: pd.DataFrame) -> list[FeatureSetSpec]:
         and frame[AQUASTAT_DAMS_FEATURE_COLUMNS_NUMERIC].notna().any().any()
     ):
         feature_sets.append(aquastat_dams_spec)
-    tier1_spec = FeatureSetSpec(
-        feature_set="tier1_pure_nature_v1",
-        numeric_columns=TIER1_PURE_NATURE_NUMERIC,
-        categorical_columns=TIER1_PURE_NATURE_CATEGORICAL,
-        min_decade=1910,
-    )
-    if (
-        tier1_spec.is_available(frame)
-        and frame[TIER1_PURE_NATURE_NUMERIC].notna().any().any()
-    ):
-        feature_sets.append(tier1_spec)
-    tier2_only_spec = FeatureSetSpec(
-        feature_set="tier2_only_resource_development_v1",
-        numeric_columns=TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC,
-        categorical_columns=TIER2_ONLY_RESOURCE_DEVELOPMENT_CATEGORICAL,
-        min_decade=1960,
-    )
-    if (
-        tier2_only_spec.is_available(frame)
-        and frame[TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC].notna().any().any()
-    ):
-        feature_sets.append(tier2_only_spec)
-    tier2_spec = FeatureSetSpec(
-        feature_set="tier2_resource_utilization_v1",
-        numeric_columns=TIER2_RESOURCE_UTILIZATION_NUMERIC,
-        categorical_columns=TIER2_RESOURCE_UTILIZATION_CATEGORICAL,
-        min_decade=1960,
-    )
-    if (
-        tier2_spec.is_available(frame)
-        and frame[TIER2_RESOURCE_UTILIZATION_NUMERIC].notna().any().any()
-    ):
-        feature_sets.append(tier2_spec)
-    tier3_only_spec = FeatureSetSpec(
-        feature_set="tier3_only_social_structure_v1",
-        numeric_columns=TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC,
-        categorical_columns=TIER3_ONLY_SOCIAL_STRUCTURE_CATEGORICAL,
-        min_decade=1960,
-    )
-    if (
-        tier3_only_spec.is_available(frame)
-        and frame[TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC].notna().any().any()
-    ):
-        feature_sets.append(tier3_only_spec)
-    tier1_tier3_spec = FeatureSetSpec(
-        feature_set="tier1_tier3_without_tier2_v1",
-        numeric_columns=TIER1_TIER3_WITHOUT_TIER2_NUMERIC,
-        categorical_columns=TIER1_TIER3_WITHOUT_TIER2_CATEGORICAL,
-        min_decade=1960,
-    )
-    if (
-        tier1_tier3_spec.is_available(frame)
-        and frame[TIER1_TIER3_WITHOUT_TIER2_NUMERIC].notna().any().any()
-    ):
-        feature_sets.append(tier1_tier3_spec)
-    tier2_tier3_spec = FeatureSetSpec(
-        feature_set="tier2_tier3_without_tier1_v1",
-        numeric_columns=TIER2_TIER3_WITHOUT_TIER1_NUMERIC,
-        categorical_columns=TIER2_TIER3_WITHOUT_TIER1_CATEGORICAL,
-        min_decade=1960,
-    )
-    if (
-        tier2_tier3_spec.is_available(frame)
-        and frame[TIER2_TIER3_WITHOUT_TIER1_NUMERIC].notna().any().any()
-    ):
-        feature_sets.append(tier2_tier3_spec)
-    tier3_spec = FeatureSetSpec(
-        feature_set="tier3_institutional_cultural_v1",
-        numeric_columns=TIER3_INSTITUTIONAL_CULTURAL_NUMERIC,
-        categorical_columns=TIER3_INSTITUTIONAL_CULTURAL_CATEGORICAL,
-        min_decade=1960,
-    )
-    if (
-        tier3_spec.is_available(frame)
-        and frame[TIER3_INSTITUTIONAL_CULTURAL_NUMERIC].notna().any().any()
-    ):
-        feature_sets.append(tier3_spec)
+    for feature_set_name, components in FEATURE_SET_COMPONENTS.items():
+        numeric_columns = list(
+            dict.fromkeys(
+                column
+                for component in components
+                for column in INDEPENDENT_TIER_NUMERIC_COLUMNS[component]
+            )
+        )
+        categorical_columns = list(
+            dict.fromkeys(
+                column
+                for component in components
+                for column in INDEPENDENT_TIER_CATEGORICAL_COLUMNS[component]
+            )
+        )
+        tier_spec = FeatureSetSpec(
+            feature_set=feature_set_name,
+            numeric_columns=numeric_columns,
+            categorical_columns=categorical_columns,
+            min_decade=tier_bundle_min_decade(components),
+        )
+        if (
+            tier_spec.is_available(frame)
+            and frame[numeric_columns].notna().any().any()
+        ):
+            feature_sets.append(tier_spec)
     natural_endowment_spec = FeatureSetSpec(
         feature_set="natural_endowment_full_v1",
         numeric_columns=[
@@ -2274,6 +2220,8 @@ def feature_block_name(feature_name: str) -> str:
         return "freedom_house"
     if feature_name in FSI_FEATURE_COLUMNS_NUMERIC:
         return "fsi"
+    if feature_name in POLITY5_FEATURE_COLUMNS_NUMERIC:
+        return "polity5"
     if feature_name in VDEM_FEATURE_COLUMNS_NUMERIC:
         return "vdem"
     if feature_name in UCDP_CONFLICT_FEATURE_COLUMNS_NUMERIC:

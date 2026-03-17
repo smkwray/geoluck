@@ -4,19 +4,17 @@ import pandas as pd
 import pytest
 
 from geoluck.feature_columns import (
+    FEATURE_SET_COMPONENTS,
     TIER1_PURE_NATURE_CATEGORICAL,
     TIER1_PURE_NATURE_NUMERIC,
-    TIER1_TIER3_WITHOUT_TIER2_CATEGORICAL,
-    TIER1_TIER3_WITHOUT_TIER2_NUMERIC,
     TIER2_ONLY_RESOURCE_DEVELOPMENT_CATEGORICAL,
     TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC,
     TIER2_RESOURCE_UTILIZATION_CATEGORICAL,
     TIER2_RESOURCE_UTILIZATION_NUMERIC,
-    TIER2_TIER3_WITHOUT_TIER1_CATEGORICAL,
-    TIER2_TIER3_WITHOUT_TIER1_NUMERIC,
-    TIER3_INSTITUTIONAL_CULTURAL_CATEGORICAL,
-    TIER3_ONLY_SOCIAL_STRUCTURE_CATEGORICAL,
-    TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC,
+    TIER3_ONLY_SOCIETY_CATEGORICAL,
+    TIER3_ONLY_SOCIETY_NUMERIC,
+    TIER4_ONLY_GOVERNANCE_CATEGORICAL,
+    TIER4_ONLY_GOVERNANCE_NUMERIC,
 )
 from geoluck.features.build_wdi_features import (
     WDI_DECADE_FEATURE_COLUMNS,
@@ -1275,24 +1273,30 @@ def test_get_feature_set_specs_includes_independent_tier_bundles() -> None:
     frame = pd.DataFrame(make_training_rows())
     missing_columns: dict[str, float] = {}
     for columns in (
+        TIER1_PURE_NATURE_NUMERIC,
         TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC,
-        TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC,
-        TIER1_TIER3_WITHOUT_TIER2_NUMERIC,
-        TIER2_TIER3_WITHOUT_TIER1_NUMERIC,
+        TIER3_ONLY_SOCIETY_NUMERIC,
+        TIER4_ONLY_GOVERNANCE_NUMERIC,
     ):
         for column in columns:
             if column not in frame.columns:
                 missing_columns[column] = 1.0
     if missing_columns:
-        frame = frame.assign(**missing_columns)
+        frame = pd.concat(
+            [frame, pd.DataFrame(missing_columns, index=frame.index)],
+            axis=1,
+        )
 
     feature_sets = get_feature_set_specs(frame)
     names = {spec.feature_set for spec in feature_sets}
 
-    assert "tier2_only_resource_development_v1" in names
-    assert "tier3_only_social_structure_v1" in names
-    assert "tier1_tier3_without_tier2_v1" in names
-    assert "tier2_tier3_without_tier1_v1" in names
+    assert set(FEATURE_SET_COMPONENTS).issubset(names)
+    assert "tier_bundle_2_v1" in names
+    assert "tier_bundle_3_v1" in names
+    assert "tier_bundle_4_v1" in names
+    assert "tier_bundle_13_v1" in names
+    assert "tier_bundle_23_v1" in names
+    assert "tier_bundle_1234_v1" in names
 
 
 def test_target_correlations_include_population_targets() -> None:
@@ -1430,20 +1434,48 @@ def test_tier1_excludes_extractive_development_blocks() -> None:
 def test_independent_tier_bundles_are_orthogonal() -> None:
     tier1 = set(TIER1_PURE_NATURE_NUMERIC)
     tier2_only = set(TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC)
-    tier3_only = set(TIER3_ONLY_SOCIAL_STRUCTURE_NUMERIC)
+    tier3_only = set(TIER3_ONLY_SOCIETY_NUMERIC)
+    tier4_only = set(TIER4_ONLY_GOVERNANCE_NUMERIC)
 
     assert tier1.isdisjoint(tier2_only)
     assert tier1.isdisjoint(tier3_only)
+    assert tier1.isdisjoint(tier4_only)
     assert tier2_only.isdisjoint(tier3_only)
-    assert set(TIER1_TIER3_WITHOUT_TIER2_NUMERIC) == tier1 | tier3_only
-    assert set(TIER2_TIER3_WITHOUT_TIER1_NUMERIC) == tier2_only | tier3_only
+    assert tier2_only.isdisjoint(tier4_only)
+    assert tier3_only.isdisjoint(tier4_only)
     assert TIER1_PURE_NATURE_CATEGORICAL == []
     assert TIER2_ONLY_RESOURCE_DEVELOPMENT_CATEGORICAL == []
     assert TIER2_RESOURCE_UTILIZATION_CATEGORICAL == []
-    assert TIER3_ONLY_SOCIAL_STRUCTURE_CATEGORICAL == []
-    assert TIER1_TIER3_WITHOUT_TIER2_CATEGORICAL == []
-    assert TIER2_TIER3_WITHOUT_TIER1_CATEGORICAL == []
-    assert TIER3_INSTITUTIONAL_CULTURAL_CATEGORICAL == []
+    assert TIER3_ONLY_SOCIETY_CATEGORICAL == []
+    assert TIER4_ONLY_GOVERNANCE_CATEGORICAL == []
+
+
+def test_governance_tier_contains_governance_blocks_and_geot_stays_infrastructure() -> None:
+    assert "fsi_public_services" in TIER4_ONLY_GOVERNANCE_NUMERIC
+    assert "wgi_government_effectiveness_estimate" in TIER4_ONLY_GOVERNANCE_NUMERIC
+    assert "vdem_electoral_democracy_index" in TIER4_ONLY_GOVERNANCE_NUMERIC
+    assert "ucdp_total_deaths_best_mean" in TIER4_ONLY_GOVERNANCE_NUMERIC
+    assert "fsi_public_services" not in TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC
+    assert "fsi_public_services" not in TIER3_ONLY_SOCIETY_NUMERIC
+
+    assert "geot_owned_power_capacity_mw_total" in TIER2_ONLY_RESOURCE_DEVELOPMENT_NUMERIC
+    assert "geot_owned_power_capacity_mw_total" not in TIER1_PURE_NATURE_NUMERIC
+    assert "geot_owned_power_capacity_mw_total" not in TIER3_ONLY_SOCIETY_NUMERIC
+    assert "geot_owned_power_capacity_mw_total" not in TIER4_ONLY_GOVERNANCE_NUMERIC
+
+
+def test_all_non_empty_four_tier_bundle_components_are_generated() -> None:
+    assert len(FEATURE_SET_COMPONENTS) == 15
+    assert FEATURE_SET_COMPONENTS["tier_bundle_1_v1"] == ("tier1",)
+    assert FEATURE_SET_COMPONENTS["tier_bundle_4_v1"] == ("tier4",)
+    assert FEATURE_SET_COMPONENTS["tier_bundle_14_v1"] == ("tier1", "tier4")
+    assert FEATURE_SET_COMPONENTS["tier_bundle_234_v1"] == ("tier2", "tier3", "tier4")
+    assert FEATURE_SET_COMPONENTS["tier_bundle_1234_v1"] == (
+        "tier1",
+        "tier2",
+        "tier3",
+        "tier4",
+    )
 
 
 def test_life_expectancy_target_excludes_direct_wpp_outcome_columns() -> None:

@@ -5,7 +5,7 @@
       "target_label": "Income rank percentile",
       "path": "bundle_country_contributions_income.json",
       "latest_decade": 2020,
-      "bundle_count": 7,
+      "bundle_count": 15,
       "top_k": 8
     },
     {
@@ -13,7 +13,7 @@
       "target_label": "Life expectancy rank percentile",
       "path": "bundle_country_contributions_life_expectancy.json",
       "latest_decade": 2020,
-      "bundle_count": 7,
+      "bundle_count": 15,
       "top_k": 8
     },
     {
@@ -21,7 +21,7 @@
       "target_label": "Disposable-income Gini rank percentile",
       "path": "bundle_country_contributions_inequality.json",
       "latest_decade": 2020,
-      "bundle_count": 7,
+      "bundle_count": 15,
       "top_k": 8
     },
     {
@@ -29,7 +29,7 @@
       "target_label": "Produced capital per capita rank percentile",
       "path": "bundle_country_contributions_wealth.json",
       "latest_decade": 2020,
-      "bundle_count": 7,
+      "bundle_count": 15,
       "top_k": 8
     },
     {
@@ -37,7 +37,7 @@
       "target_label": "Gender inequality rank percentile",
       "path": "bundle_country_contributions_gender_inequality.json",
       "latest_decade": 2020,
-      "bundle_count": 7,
+      "bundle_count": 15,
       "top_k": 8
     },
     {
@@ -45,7 +45,7 @@
       "target_label": "Female labor force participation rank percentile",
       "path": "bundle_country_contributions_female_lfpr.json",
       "latest_decade": 2020,
-      "bundle_count": 7,
+      "bundle_count": 15,
       "top_k": 8
     },
     {
@@ -53,7 +53,7 @@
       "target_label": "Women, Business and the Law rank percentile",
       "path": "bundle_country_contributions_women_business_law.json",
       "latest_decade": 2020,
-      "bundle_count": 7,
+      "bundle_count": 15,
       "top_k": 8
     }
   ]

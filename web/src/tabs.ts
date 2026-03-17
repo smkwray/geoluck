@@ -26,7 +26,47 @@ export function parseHash(): { tab: TabId; params: URLSearchParams } {
 export type TargetId =
   | "income" | "wealth" | "life_expectancy" | "inequality"
   | "gender_inequality" | "female_lfpr" | "women_business_law";
-export type TierFlag = 1 | 2 | 3;
+export type TierFlag = 1 | 2 | 3 | 4;
+
+export type TierComponent = "tier1" | "tier2" | "tier3" | "tier4";
+
+export const TIER_COMPONENT_BY_FLAG: Record<TierFlag, TierComponent> = {
+  1: "tier1",
+  2: "tier2",
+  3: "tier3",
+  4: "tier4",
+};
+
+export const TIER_LABEL_BY_COMPONENT: Record<TierComponent, string> = {
+  tier1: "Nature",
+  tier2: "Infrastructure",
+  tier3: "Society",
+  tier4: "Governance",
+};
+
+export function tierComponents(activeTiers: Set<TierFlag>): TierComponent[] {
+  return [...activeTiers]
+    .sort((a, b) => a - b)
+    .map((flag) => TIER_COMPONENT_BY_FLAG[flag]);
+}
+
+export function tierKeyFromFlags(activeTiers: Set<TierFlag>): string | null {
+  const components = tierComponents(activeTiers);
+  if (components.length === 0) return null;
+  return `tiers_${components.map((component) => component.replace("tier", "")).join("")}`;
+}
+
+export function tierLabelFromComponents(components: string[]): string {
+  if (components.length === 0) return "None";
+  if (components.length === Object.keys(TIER_LABEL_BY_COMPONENT).length) return "All four";
+  return components
+    .map((component) => TIER_LABEL_BY_COMPONENT[component as TierComponent] ?? component)
+    .join(" + ");
+}
+
+export function tierLabelFromFlags(activeTiers: Set<TierFlag>): string {
+  return tierLabelFromComponents(tierComponents(activeTiers));
+}
 
 const TARGETS: Array<{ id: TargetId; label: string; title: string }> = [
   { id: "income", label: "Income", title: "Within-decade percentile of logged GDP per capita" },
@@ -49,7 +89,8 @@ export function isGenderTarget(id: string): boolean {
 const TIERS: Array<{ flag: TierFlag; label: string; title: string }> = [
   { flag: 1, label: "Nature", title: "Pure geography: latitude, land area, coastline, climate normals, terrain, malaria ecology" },
   { flag: 2, label: "Infrastructure", title: "Resource utilization & infrastructure: dams, irrigation, forest rents, mineral rents, agricultural land use" },
-  { flag: 3, label: "Society", title: "Social structure: urbanization, trade openness, governance, historical & institutional factors" },
+  { flag: 3, label: "Society", title: "Social structure: demographics, education, trade openness, culture, religion, historical and legal context" },
+  { flag: 4, label: "Governance", title: "State capacity, governance, democracy, fragility, political order, and conflict" },
 ];
 
 export function renderTabBar(

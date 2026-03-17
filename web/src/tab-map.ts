@@ -14,6 +14,7 @@ export type MapTabExtras = {
   countryCount: number;
   overperformers: SpotlightCountry[];
   underperformers: SpotlightCountry[];
+  isLoadingData?: boolean;
 };
 
 function positiveResidualIsGood(target: string): boolean {
@@ -222,21 +223,35 @@ export function renderMapTab(
     : `
       <section class="leaderboards">
         <article class="rank-card loading-card">
-          <p class="rank-label">Select at least one feature tier</p>
+          <p class="rank-label">${
+            extras?.isLoadingData
+              ? `Loading ${targetLabel.toLowerCase()} for ${extras?.tierLabel?.toLowerCase() ?? "the selected bundle"}`
+              : "Select at least one feature tier"
+          }</p>
         </article>
       </section>
     `;
 
+  const loadingBanner = extras?.isLoadingData
+    ? `
+      <section class="loading-inline-panel">
+        <strong>Loading ${targetLabel.toLowerCase()} bundle</strong>
+        <p>Fetching the country shard for ${extras.tierLabel.toLowerCase()}. The map and rankings will populate when it arrives.</p>
+      </section>
+    `
+    : "";
+
   return `
     <section class="map-hero">
-      <h1>Who beats their geography?</h1>
+      <h1>Which countries outperform expectations?</h1>
       <p class="lede">
-        How much of a country's prosperity is written in its geography, resources, and institutions?
-        Toggle feature tiers to see what each layer of information predicts\u2014and who defies it.
+        Compare actual outcomes with model-based expectations built from nature, infrastructure, society, and governance.
+        Toggle feature tiers to see what each layer predicts and where countries land above or below that baseline.
       </p>
       ${statsRow}
       ${spotlightStrip(extras)}
     </section>
+    ${loadingBanner}
     <section class="map-controls">
       <div class="pill-group" id="metric-pills">${metricPills}</div>
       <div class="country-search-wrap">

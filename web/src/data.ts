@@ -200,6 +200,7 @@ export type BundleSummaryPayload = {
 
 export type BundleFeatureEffectRow = {
   feature_name: string;
+  feature_block?: string | null;
   importance?: number | null;
   importance_rank?: number | null;
   coefficient?: number | null;

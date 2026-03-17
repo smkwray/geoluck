@@ -14,6 +14,7 @@ from geoluck.feature_columns import (
     FEATURE_SET_TIER_KEYS,
     FEATURE_SET_TIER_LABELS,
 )
+from geoluck.models.train_levels import feature_block_name
 
 SMALL_HOLDOUT_THRESHOLD = 5
 BUNDLE_EXPORT_TARGETS = (
@@ -576,6 +577,7 @@ def build_bundle_feature_effects_payload(
                 "top_feature_importance": [
                     {
                         "feature_name": _clean_text(item.feature_name),
+                        "feature_block": feature_block_name(str(item.feature_name)),
                         "importance": _clean_number(item.importance),
                         "importance_rank": _clean_int(item.importance_rank),
                     }
@@ -584,6 +586,7 @@ def build_bundle_feature_effects_payload(
                 "top_coefficients": [
                     {
                         "feature_name": _clean_text(item.feature_name),
+                        "feature_block": feature_block_name(str(item.feature_name)),
                         "coefficient": _clean_number(item.coefficient),
                         "coefficient_rank": _clean_int(item.coefficient_rank),
                     }
@@ -592,6 +595,7 @@ def build_bundle_feature_effects_payload(
                 "lowest_coverage_features": [
                     {
                         "feature_name": _clean_text(item.feature_name),
+                        "feature_block": feature_block_name(str(item.feature_name)),
                         "feature_kind": _clean_text(item.feature_kind),
                         "non_null_share": _clean_number(item.non_null_share),
                         "non_null_count": _clean_int(item.non_null_count),

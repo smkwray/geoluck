@@ -1,6 +1,6 @@
 # geoluck &nbsp; <img src="logo/geoduck.png" alt="" width="36" />
 
-**How much of relative country prosperity can be predicted from geography, natural endowments, resource development, and social structure — and who beats their geography?**
+**How much of relative country outcomes can be predicted from geography, natural endowments, resource development, social structure, and governance — and who outperforms those expectations?**
 
 Geoluck is an open-source research project that builds a country-decade panel (1900–2020) and trains machine learning models to predict country-level income, wellbeing, inequality, wealth, and gender outcomes from tiered feature sets. The results are published as an interactive static site.
 
@@ -24,13 +24,14 @@ The static site models seven outcome metrics, each converted to within-decade pe
 | **Female LFPR** | Female labor-force participation rate rank | World Bank WDI / ILO |
 | **Women, Business and the Law** | Women, Business and the Law index rank | World Bank |
 
-Predictor features are organized into three independently toggleable tiers:
+Predictor features are organized into four independently toggleable tiers:
 
 - **Nature** — Pure geography: latitude, climate normals, terrain, soil, malaria ecology, seismic activity, wind/solar potential, ocean productivity, cyclone exposure.
 - **Infrastructure** — Resource development: dams, irrigation, oil/gas/coal/mineral extraction, agricultural land use, energy assets.
-- **Society** — Social and institutional structure: governance, democracy, trade openness, colonial history, ethnic/religious fractionalization, gender inequality, demographics.
+- **Society** — Social and historical structure: trade openness, colonial history, legal origins, ethnic/religious fractionalization, gender inequality, demographics.
+- **Governance** — State capacity, political order, democracy, fragility, and conflict: WGI, V-Dem, Freedom House, FSI, Polity5, UCDP.
 
-All seven non-empty tier combinations are modeled independently for each outcome (28 model bundles). The site supports interactive choropleth maps, model comparison, country-level SHAP feature contributions, country-vs-country comparison, feature exploration by data source, full sortable rankings with CSV export, and shareable deep links.
+All 15 non-empty tier combinations are modeled independently for each outcome (105 model bundles across the seven maintained targets). The site supports interactive choropleth maps, model comparison, country-level SHAP feature contributions, country-vs-country comparison, feature exploration by data source, full sortable rankings with CSV export, staged loading on slower connections, and shareable deep links.
 
 ---
 
