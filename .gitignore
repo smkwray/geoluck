@@ -18,9 +18,11 @@ __pycache__/
 AGENTS.md
 geoluck_codex_plan.md
 geoluck-R/
+todo.md
 
 # Private agent workflow state
 do/
+output/
 
 # Local/generated data artifacts
 data_raw/**

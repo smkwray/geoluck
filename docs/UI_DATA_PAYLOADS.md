@@ -23,6 +23,18 @@ The UI should read the mirrored `web/public/data/` copies.
   - `bundle_feature_effects_path`
   - `bundle_country_contributions_index_path`
   - `bundle_permutation_importance_path`
+  - `data_manifest_path`
+  - `data_export_id`
+  - `data_payload_version`
+
+### `data_manifest.json`
+- Shared export manifest for the published `web/public/data/` bundle.
+- Includes:
+  - `export_id`
+  - `payload_version`
+  - `generated_at_utc`
+  - `files[]` with per-file hashes
+- Use it to verify that `metadata.json`, `bundle_summary.json`, and the built `dist/data` bundle all come from the same export set.
 
 ### `model_summary.json`
 - Selected public income model diagnostics.
@@ -67,6 +79,9 @@ These are the new UI-builder payloads for all maintained targets and all non-emp
   - `rmse`
   - `mae`
   - `spearman`
+  - `has_feature_effects`
+  - `has_permutation_importance`
+  - `has_country_contributions`
 
 ### `bundle_feature_effects.json`
 - Global factor/effect summary for each target and bundle.
@@ -82,20 +97,14 @@ Note:
 - Current maintained bundle runs are tree-heavy, so coefficient arrays may be empty.
 
 ### `bundle_country_contributions_index.json`
-- Small index file for per-target country contribution shards.
-- Use this first, then lazy-load the target shard.
+- Small index file for per-bundle country contribution shards.
+- Use this first, then lazy-load the selected `target + tier` shard.
 
-### `bundle_country_contributions_<target>.json`
-- One file per target:
-  - `bundle_country_contributions_income.json`
-  - `bundle_country_contributions_life_expectancy.json`
-  - `bundle_country_contributions_inequality.json`
-  - `bundle_country_contributions_wealth.json`
-  - `bundle_country_contributions_gender_inequality.json`
-  - `bundle_country_contributions_female_lfpr.json`
-  - `bundle_country_contributions_women_business_law.json`
-- Each target payload contains `bundles[]`.
-- Each bundle contains `countries[]`.
+### `bundle_country_contributions_<target>_<tier>.json`
+- One file per maintained `target + tier` pair, for example:
+  - `bundle_country_contributions_income_tiers_123.json`
+  - `bundle_country_contributions_wealth_tiers_14.json`
+- Each bundle payload contains one selected display spec plus `countries[]`.
 - Each country row contains:
   - `prediction`
   - `base_value`
@@ -105,8 +114,8 @@ Note:
   - `top_negative`
 
 Important:
-- `prediction` is aligned to the cross-validated bundle prediction export for the selected contributing spec.
-- For some bundles, the exact best-scoring spec may not have contribution rows. In those cases the payload uses the best available exported spec for that bundle instead of dropping the bundle entirely.
+- `prediction` is aligned to the cross-validated bundle prediction export for the selected display spec.
+- Maintained bundles should not publish missing country-contribution states. Export must fail before shipping a bundle that cannot populate this shard.
 
 ### `bundle_permutation_importance.json`
 - Held-out permutation-importance summary for each target and bundle.
@@ -144,6 +153,4 @@ All 15 non-empty combinations are maintained. The canonical UI should prefer `fe
 
 ## Important interpretation note
 
-`bundle_summary.json` uses the absolute best non-baseline spec per target/bundle.
-
-The effects and country-contribution payloads use the best available exported spec for that target/bundle when the exact best-scoring spec had no contribution rows. This preserves full bundle coverage without forcing another heavy rerun. The main remaining case is the `wealth` bundle frontier, where the best `hist_gb` spec does not currently have a contribution payload, so the country-level shard falls back to the best exported contributing spec for that bundle.
+`bundle_summary.json` uses the published display spec per target/bundle, not a separate score-only winner. The same `spec_name` must also appear in `bundle_feature_effects.json`, `bundle_permutation_importance.json`, and the per-bundle country-contribution shard for that target+tier.

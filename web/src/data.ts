@@ -26,6 +26,9 @@ export type MetricsPayload = {
 
 export type MetadataPayload = {
   generated_at_utc: string;
+  data_export_id?: string | null;
+  data_payload_version?: string | null;
+  data_manifest_path?: string | null;
   metric_default: string;
   decades: number[];
   country_count_geometry: number;
@@ -55,6 +58,19 @@ export type MetadataPayload = {
   bundle_feature_effects_path?: string | null;
   bundle_permutation_importance_path?: string | null;
   bundle_country_contributions_index_path?: string | null;
+};
+
+export type DataManifestFile = {
+  path: string;
+  sha256: string;
+  byte_count: number | null;
+};
+
+export type DataManifestPayload = {
+  generated_at_utc: string;
+  export_id: string;
+  payload_version: string;
+  files: DataManifestFile[];
 };
 
 export type CountryFeatureProperties = {
@@ -181,6 +197,9 @@ export type BundleSummaryRow = {
   rmse: number | null;
   mae: number | null;
   spearman: number | null;
+  has_feature_effects: boolean;
+  has_permutation_importance: boolean;
+  has_country_contributions: boolean;
 };
 
 export type BundleSummaryTarget = {
@@ -220,6 +239,8 @@ export type BundleFeatureEffectsBundle = {
   model_name: string;
   model_family: string;
   r2: number | null;
+  data_status: "ready" | "missing";
+  missing_reason: string | null;
   top_feature_importance: BundleFeatureEffectRow[];
   top_coefficients: BundleFeatureEffectRow[];
   lowest_coverage_features: BundleFeatureEffectRow[];
@@ -266,6 +287,8 @@ export type BundlePermutationImportanceBundle = {
   model_name: string;
   model_family: string;
   r2: number | null;
+  data_status: "ready" | "missing";
+  missing_reason: string | null;
   top_permutation_features: BundlePermutationImportanceRow[];
   block_summary: BundlePermutationBlockSummaryRow[];
 };
@@ -297,6 +320,8 @@ export type BundleCountryContributionsBundle = {
   spearman: number | null;
   row_count: number | null;
   country_count: number | null;
+  data_status?: "ready" | "missing";
+  missing_reason?: string | null;
   countries: CountryContributionSummary[];
 };
 
@@ -307,19 +332,114 @@ export type BundleCountryContributionsPayload = {
   top_k: number;
   bundle_count: number;
   bundles: BundleCountryContributionsBundle[];
+  feature_set?: string;
+  feature_tier?: string | null;
+  feature_tier_label?: string | null;
+  feature_components?: string[];
+  spec_name?: string;
+  model_name?: string;
+  model_family?: string;
+  r2?: number | null;
+  rmse?: number | null;
+  mae?: number | null;
+  spearman?: number | null;
+  row_count?: number | null;
+  country_count?: number | null;
+  data_status?: "ready" | "missing";
+  missing_reason?: string | null;
+  countries?: CountryContributionSummary[];
 };
 
 export type BundleCountryContributionsIndexEntry = {
   target: string;
   target_label: string;
+  feature_set?: string;
+  feature_tier?: string | null;
+  feature_tier_label?: string | null;
+  feature_components?: string[];
+  spec_name?: string;
+  model_name?: string;
+  model_family?: string;
+  r2?: number | null;
+  rmse?: number | null;
+  mae?: number | null;
+  spearman?: number | null;
+  row_count?: number | null;
+  country_count?: number | null;
+  data_status?: "ready" | "missing";
+  missing_reason?: string | null;
   path: string;
   latest_decade: number | null;
-  bundle_count: number | null;
+  bundle_count?: number | null;
   top_k: number | null;
 };
 
 export type BundleCountryContributionsIndexPayload = {
-  targets: BundleCountryContributionsIndexEntry[];
+  targets?: BundleCountryContributionsIndexEntry[];
+  bundles: BundleCountryContributionsIndexEntry[];
+};
+
+export type RobustnessBestRow = {
+  holdout_label: string | null;
+  spec_name: string | null;
+  model_name: string | null;
+  model_family: string | null;
+  feature_set: string | null;
+  feature_tier: string | null;
+  feature_tier_label: string | null;
+  r2: number | null;
+  rmse: number | null;
+  mae: number | null;
+  spearman: number | null;
+  train_row_count: number | null;
+  test_row_count: number | null;
+  is_small_sample_holdout: boolean;
+};
+
+export type RobustnessCountryRow = {
+  holdout_label: string | null;
+  iso3: string | null;
+  country_name: string | null;
+  region_name: string | null;
+  mean_abs_residual: number | null;
+  mean_residual: number | null;
+  row_count: number | null;
+};
+
+export type RobustnessFeatureSetScore = {
+  feature_set: string;
+  feature_tier: string | null;
+  feature_tier_label: string | null;
+  model_family: string | null;
+  mean_r2: number | null;
+  mean_rmse: number | null;
+  mean_mae: number | null;
+  mean_spearman: number | null;
+  holdout_count: number | null;
+};
+
+export type RobustnessStrategy = {
+  strategy: string;
+  score_count: number;
+  holdout_count: number;
+  small_sample_holdout_threshold: number;
+  small_sample_holdout_count: number;
+  best_overall: RobustnessBestRow;
+  mean_scores_by_feature_set: RobustnessFeatureSetScore[];
+  mean_scores_by_feature_set_large_holdouts: RobustnessFeatureSetScore[];
+  best_holdouts: RobustnessBestRow[];
+  weakest_holdouts: RobustnessBestRow[];
+  weakest_countries?: RobustnessCountryRow[];
+  weakest_holdout_countries?: Array<{
+    holdout_label: string;
+    countries: RobustnessCountryRow[];
+  }>;
+};
+
+export type RobustnessSummaryPayload = {
+  latest_decade: number;
+  decades: number[];
+  strategies: RobustnessStrategy[];
 };
 
 async function loadJson<T>(path: string): Promise<T> {
@@ -341,6 +461,10 @@ export function loadMetadata(): Promise<MetadataPayload> {
   return loadJson<MetadataPayload>(dataPath("data/metadata.json"));
 }
 
+export function loadDataManifest(path: string): Promise<DataManifestPayload> {
+  return loadJson<DataManifestPayload>(dataPath(`data/${path}`));
+}
+
 export function loadMetrics(path: string): Promise<MetricsPayload> {
   return loadJson<MetricsPayload>(dataPath(`data/${path}`));
 }
@@ -355,6 +479,12 @@ export function loadCountryProfiles(path: string): Promise<CountryProfilesPayloa
 
 export function loadModelSummary(path: string): Promise<ModelSummaryPayload> {
   return loadJson<ModelSummaryPayload>(dataPath(`data/${path}`));
+}
+
+export function loadRobustnessSummary(
+  path: string,
+): Promise<RobustnessSummaryPayload> {
+  return loadJson<RobustnessSummaryPayload>(dataPath(`data/${path}`));
 }
 
 export function loadCountryContributionsSummary(

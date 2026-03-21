@@ -1,0 +1,632 @@
+{
+  "generated_at_utc": "2026-03-21T12:52:37.754326+00:00",
+  "export_id": "4d6fbc145fad6f7d9b6ccb56e1533dbf0fd92188b62ad9d12098610616de2ea1",
+  "payload_version": "display-spec-v1",
+  "files": [
+    {
+      "path": "bundle_country_contributions_female_lfpr.json",
+      "sha256": "70d03d52382c12544729a6f2a6e6982dd8e133794d4486d2fa15bd10124af826",
+      "byte_count": 15663764
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_1.json",
+      "sha256": "c7a30235b9bbc288665ed9d7b40b03078ebb2e7ba199b4f0f7ed5bc09a9ba3d1",
+      "byte_count": 929234
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_12.json",
+      "sha256": "67a3d7facdb2b3ffa9113e15eef3ccdc3b48158d87107abf237f11c683c53c6e",
+      "byte_count": 945134
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_123.json",
+      "sha256": "fcf87ebf712666fc336323e3563085262e9cda29d44c9389757a280c83286d92",
+      "byte_count": 939847
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_1234.json",
+      "sha256": "0826699585f3c61cd18ea87715225a48949af1126f5c662d4df3ebc2ca98ebc4",
+      "byte_count": 932959
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_124.json",
+      "sha256": "ce9b5ca8303792b9d07fe9bad24ea11470991bcfae9381d9c87a61fb9daafa63",
+      "byte_count": 935144
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_13.json",
+      "sha256": "cf878bf337f1771be69bf8f10a566ae19cacd4442bde479b6eccacacb12d8317",
+      "byte_count": 925930
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_134.json",
+      "sha256": "5ee4b752c9c09ebf1f9193cdcdff4f320d93fc3201630b439c90339b6a22b722",
+      "byte_count": 924734
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_14.json",
+      "sha256": "52e938613690ab4e6471d7f44ff3df244c7b3a02608f14a4adfc82ba67c65d50",
+      "byte_count": 914854
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_2.json",
+      "sha256": "acb8471fe624da5cdb0a7d1182e06c3d81bb327fb9d562c27fcbaa298b6863ad",
+      "byte_count": 946631
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_23.json",
+      "sha256": "452ea66712b690c999d43728fab27201f7dd06aa2645444cf0bbadce7e5c2baa",
+      "byte_count": 938429
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_234.json",
+      "sha256": "a5798fa5f68af49fccc3033fd60e131d4d4f3c6766aa914a9c987ed0c0ffe4cc",
+      "byte_count": 933964
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_24.json",
+      "sha256": "55b9588a80ab8d48188db80c2cddb95259a2c71e5a4b8726d7200056e0c3a284",
+      "byte_count": 926701
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_3.json",
+      "sha256": "144ea9eaa9f26bd94c9ff1c191a9c78d625a7a2d81601b4a87cc22f8ce3749f0",
+      "byte_count": 922213
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_34.json",
+      "sha256": "c3ce4090f141ed00a72996c016f70dc051664f48bb871275f8b59f6ef2e9ca52",
+      "byte_count": 916269
+    },
+    {
+      "path": "bundle_country_contributions_female_lfpr_tiers_4.json",
+      "sha256": "cc965f56ea07f9ad222d3671c21b100f8a2247872bf78529971d16bcae7ae2a0",
+      "byte_count": 890094
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality.json",
+      "sha256": "3444f711e0f5f98b1f627d9e899577c0154e76a6675403583ebef6e49f362001",
+      "byte_count": 14661240
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_1.json",
+      "sha256": "1708a9747af234eabab62df9cd58adbe35cc60ce272859a75324b35e7f2366d1",
+      "byte_count": 878001
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_12.json",
+      "sha256": "9b25ab851d377c0082f52b2c7318f4bb71d86d8130ff40446b257b9321edd4b7",
+      "byte_count": 882878
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_123.json",
+      "sha256": "6c8dde30a0c4a5269fbdaca0a1a70c70168d250bb25f304fbb3d387fbe2342d9",
+      "byte_count": 870746
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_1234.json",
+      "sha256": "6760e66ac0455326045640da4f7b0aac388c20b35dab1f00705a3e485024a5c3",
+      "byte_count": 865106
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_124.json",
+      "sha256": "25f143bf60fcc4d20ae6320480df97ef31e3868bd5cd1e2c9850a7ce9249944d",
+      "byte_count": 869730
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_13.json",
+      "sha256": "3efe6d03c2a315c7f18403a83e8b4c8b6d14fb70d22a8892bcee49b673562390",
+      "byte_count": 863618
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_134.json",
+      "sha256": "0c36503b1fdac7611f091b8a6423994c952fc62f3afe0b3aeb526742a50a26d6",
+      "byte_count": 864304
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_14.json",
+      "sha256": "6e5e9cc345edecb77844daffc0768a6d26db172a0f05eaba1ccf394728bf7ac0",
+      "byte_count": 861879
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_2.json",
+      "sha256": "b7245e8d2e62f529d1ecfa681b39ccefcd90f13e7ca019627e6dfb33fabaa289",
+      "byte_count": 887349
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_23.json",
+      "sha256": "02ff8f5e4b78055451263c8033a7ad9da3b3b4f8703688f32ca30ebe17b3c752",
+      "byte_count": 867240
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_234.json",
+      "sha256": "08d72d09a3d193f724ed2979d78fc04693f1de837614d846f514d0fc54bb1a8a",
+      "byte_count": 865815
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_24.json",
+      "sha256": "ab321a8a8655e8fabaf7ad6d8410dc2ccddbe9ab4c9364345f87dc1aed80b773",
+      "byte_count": 865638
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_3.json",
+      "sha256": "2eceed1ec8b99bcb0920c58e3db58dd9c90c4e33793593bcebb96bb7e9468502",
+      "byte_count": 860729
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_34.json",
+      "sha256": "8ea7f43fba0e6fd42e5663521de2a08a37ff44c731f57289d76473255ac0bb0a",
+      "byte_count": 858528
+    },
+    {
+      "path": "bundle_country_contributions_gender_inequality_tiers_4.json",
+      "sha256": "24e4d0bc206e6f696ca18de7e04b1cf97ac8e707b16eceb51a118f80ec429f0b",
+      "byte_count": 843430
+    },
+    {
+      "path": "bundle_country_contributions_income.json",
+      "sha256": "9e35dc445e72c5e4d80e719db5b18640746bc976612463c5f6fadc8b0b853737",
+      "byte_count": 15948760
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_1.json",
+      "sha256": "3454d4835f1429f9924211ff1395202a6802be0db3e9718fc5acf3015eb80abe",
+      "byte_count": 952392
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_12.json",
+      "sha256": "5b7c82523bbcded2286802e08b9b95ac818d71bd00314779dd87d1a8f262bf73",
+      "byte_count": 957078
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_123.json",
+      "sha256": "bb78967e78b9d70d86d8abc1978d78ec29e7550989b4b0791b76357c87ba009d",
+      "byte_count": 952203
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_1234.json",
+      "sha256": "4ec5d06f5c5955560b5fb06da85cca70019da8f4d6a7b11ee7321fd42d1bd911",
+      "byte_count": 940087
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_124.json",
+      "sha256": "a8ccbf18bbe15ae88a83272ad9869dc77f159bf191748e83593325c168c0d293",
+      "byte_count": 940848
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_13.json",
+      "sha256": "9b0e572208fe5f062377f7a586414c9d5809ec220f6a0c98fd16848bf6657cd6",
+      "byte_count": 946226
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_134.json",
+      "sha256": "0d90ea67f7345cd5824a541698c6449a8d1adf47fc0fada79ce069e647efe2d3",
+      "byte_count": 939663
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_14.json",
+      "sha256": "bd234cea0fb5c618e4b3a4eb218ab8e2caa84cef61c7170e30b2ff208d5cdadc",
+      "byte_count": 931247
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_2.json",
+      "sha256": "589ca060f0021ef41fdd059a04538b38e3f427f21bb38877c6e765d7ace83aa4",
+      "byte_count": 955403
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_23.json",
+      "sha256": "9236635919915cd27380c9f59e25cc889e8d6846b3d2bde83f8883570df213dc",
+      "byte_count": 946808
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_234.json",
+      "sha256": "795f0157326b01c2724264bff101bd46a3c4e77f4ebddff9e7bdc310bd54d27e",
+      "byte_count": 942957
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_24.json",
+      "sha256": "452614d63ec0daede564a4045e205c8840072fa44575f01b86ee0cff7beed551",
+      "byte_count": 938164
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_3.json",
+      "sha256": "efe19d0a11653ec2de6495472361d8e9282805a8981681312e1b8769988ddec1",
+      "byte_count": 941549
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_34.json",
+      "sha256": "3e5f79ac3f2ede5ffb7bd6a452531808b1d362b2ccb4c2af678ef4163f52b353",
+      "byte_count": 936165
+    },
+    {
+      "path": "bundle_country_contributions_income_tiers_4.json",
+      "sha256": "c129c3cae641e23e43174b2f4bd991ca112ef7a8a42ded82ddaa0f53c6f5fc67",
+      "byte_count": 921781
+    },
+    {
+      "path": "bundle_country_contributions_index.json",
+      "sha256": "099f7d829b09fcac9060dece075fedf17871f9cc6556ca9bf31dadb23908bb95",
+      "byte_count": 83283
+    },
+    {
+      "path": "bundle_country_contributions_inequality.json",
+      "sha256": "fcbe30a185db7b505654e85776b2dbec1d2cc8b588a1cec120d967dec95ff065",
+      "byte_count": 10244501
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_1.json",
+      "sha256": "877a445639a81677ba8986b097a480e5d6dc017f5258706bb412a925b3689473",
+      "byte_count": 603558
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_12.json",
+      "sha256": "cc1769308cfca45b7ef2b707d93796890e87b344b1fe83475a315a4139cc6c23",
+      "byte_count": 607944
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_123.json",
+      "sha256": "5bfe3585597b6cab28376000ca3ce4bf98446333ab86bab1ced36fd7a4fdef05",
+      "byte_count": 613033
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_1234.json",
+      "sha256": "726b05c94465db2d98999b103145cce5c0b79dd348918272039e7bebe2c3d08d",
+      "byte_count": 609629
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_124.json",
+      "sha256": "aa5228148a6ff8674d38c0fa91e744775cf5ce11ec63a4981b762443090aeb97",
+      "byte_count": 606731
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_13.json",
+      "sha256": "4e049b2e4579b1f6700e6f1383b8f827090c63b98affc78caa586973ea69b7d7",
+      "byte_count": 607633
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_134.json",
+      "sha256": "7769d1945638a6b06d73f3909b49270fe8023e6d0655bf4f164082ae5f2b399f",
+      "byte_count": 607565
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_14.json",
+      "sha256": "f8f6ab9ccf1ea10cc3fa07ebc09a9743540d255610f5c2fe30398ec093ea3e0c",
+      "byte_count": 601475
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_2.json",
+      "sha256": "8a0edc019ba41915a10322a3bac0b68f90bd739f899f6eca2e9fa66485f365c2",
+      "byte_count": 607531
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_23.json",
+      "sha256": "8097c226bf35232a7fbbd9d74650cdc0c891535541b6524749a0db23d565c737",
+      "byte_count": 616083
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_234.json",
+      "sha256": "642e752921913051aeb823cb0367abea0fe84c742ad55e1b3ae7a9eb28086229",
+      "byte_count": 617043
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_24.json",
+      "sha256": "fb376f285eee390cfd52fac754909c87d65213b48e3f83ee4a339f2acd8bd845",
+      "byte_count": 604139
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_3.json",
+      "sha256": "918c11ddb5b490a9f6d38eb63b936043e584af4c84183a9c7a68d338c9c54f0d",
+      "byte_count": 607785
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_34.json",
+      "sha256": "747558fbd43754c318c1d91a0748a58d52c5d2be98a8866aa0efc86b8080cd78",
+      "byte_count": 606801
+    },
+    {
+      "path": "bundle_country_contributions_inequality_tiers_4.json",
+      "sha256": "4f776fef43147286997450de2bc4288b27e5d9c98b6bae9a2f24d5f29073a86a",
+      "byte_count": 584298
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy.json",
+      "sha256": "b9b6f3e921764b2190dd1af8110a0451383fc31f700d45df5cd3709640d6d690",
+      "byte_count": 15664665
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_1.json",
+      "sha256": "7baac312d666ddaf9fb37a7f1db2e6e21a53fcce1d6e2d71ce67d1bdbba7c59e",
+      "byte_count": 942035
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_12.json",
+      "sha256": "0f2ad5bc1e4ec20846d7d3e2d9b8696cc2a344ffd07e93e1ce35a4dfe9732f34",
+      "byte_count": 950378
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_123.json",
+      "sha256": "059749c6cbf2ba1de2625a7845bff7628a9c5310196ff72f14c560c1dc0d680a",
+      "byte_count": 930204
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_1234.json",
+      "sha256": "7c3b690099cb24987f0b0c98f96392334c87a34b8791ac53681fde08d14ed124",
+      "byte_count": 924102
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_124.json",
+      "sha256": "bb65e726116a4ac027b7306c247bb6ed2754f4cf81e1326e0da8ef712c62be65",
+      "byte_count": 927589
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_13.json",
+      "sha256": "86238e390970f7a8a9f17c4c7938e241a0f63db81c6124277ccc39b7ec4867af",
+      "byte_count": 924630
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_134.json",
+      "sha256": "6222f790f21008199263ca4287ea66943e092d2d532296ac7a4626b2e0290e6a",
+      "byte_count": 923442
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_14.json",
+      "sha256": "264d5b5504b82315a39baec623fbd7239ba64dbbb782adbe4ad7d4039e101240",
+      "byte_count": 918450
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_2.json",
+      "sha256": "b6abfa3a8adc425c64d6c27cb41475d87da321de92bb38d923afbba2cc017fec",
+      "byte_count": 946965
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_23.json",
+      "sha256": "cb4351ae696d4238594fb2f47ef933ddacfb35d6920458aee5ed86b7d0e8bf7e",
+      "byte_count": 926439
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_234.json",
+      "sha256": "2bf39a5b8fd0212b824202392bfdc709dd30edddaecb55c94c1743c616534875",
+      "byte_count": 926022
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_24.json",
+      "sha256": "e5e5458326cf036969d35deb4c344bd18e31241cad12308794b5181513f81fd2",
+      "byte_count": 920212
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_3.json",
+      "sha256": "437530c9e8ce8c35f19fb6379a337fcde2cf059b27f9a409b6aa747fcd5f7a4f",
+      "byte_count": 920819
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_34.json",
+      "sha256": "555ebf1b24b219ebda0c9786ed8cc1e06a95edd7736440a0530b4122c8ab87c5",
+      "byte_count": 917901
+    },
+    {
+      "path": "bundle_country_contributions_life_expectancy_tiers_4.json",
+      "sha256": "e2b3c6d591109b3af47f9611590d245611410940e0ff93572f73305fc1efb165",
+      "byte_count": 902292
+    },
+    {
+      "path": "bundle_country_contributions_wealth.json",
+      "sha256": "55d3904aa47190c2e83aba1809649651e6b489cb82cfc220e33b0d90b9a62347",
+      "byte_count": 13646668
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_1.json",
+      "sha256": "3e35249f4156fedfaf2e8cce5d031f564d61c55319e05092e90997e913d2dbd8",
+      "byte_count": 819500
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_12.json",
+      "sha256": "5b8b2bf5c4f3ee769f4ec1784d19fc27708a5665b0bc4b198e940fd3fc16b0bb",
+      "byte_count": 825431
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_123.json",
+      "sha256": "d872c7aeebec1c83cb4b3d4d3c910733e73768ba57941b32ac62d30485b02954",
+      "byte_count": 810715
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_1234.json",
+      "sha256": "1b823f29c88d989bde5c8854e34c47e19a0deb10c2999c45f77d8f6a9dcdb433",
+      "byte_count": 805655
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_124.json",
+      "sha256": "75124f05942add1e72ed7d7b0803b334530a9c287709acb6dd2dd07629b73213",
+      "byte_count": 809210
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_13.json",
+      "sha256": "76ede82c3a1e05b6a2da76873f51885c2fd300c115033a7c0a0f2d31d7b9533e",
+      "byte_count": 805114
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_134.json",
+      "sha256": "deba617c412f69c81dcf9520dfbc9c355e17531c610bf4d82ae0d2adb2252c96",
+      "byte_count": 804011
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_14.json",
+      "sha256": "6767437d9841555d1ba03d4fb5ade66f0d47c7334ffe30dfde13e86f0a9b0217",
+      "byte_count": 800545
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_2.json",
+      "sha256": "286cac6c534e21c3127f13d58a96b24a6cbd6f1e672fedffebc0e643dce54a46",
+      "byte_count": 822755
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_23.json",
+      "sha256": "a17b4d3749d6e3a3d1cf986d289af90bc7be5151714bab49e233273c63f63928",
+      "byte_count": 807409
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_234.json",
+      "sha256": "5a233339124f1b9227d9ceb90eede9ecb0f9e93692f5663b948b70a1fca1a409",
+      "byte_count": 807534
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_24.json",
+      "sha256": "4c3cc3f7dac06e2290f3e4cb14e91e1fbbcefc1643fbe1feed7abf05d5cc1f33",
+      "byte_count": 803385
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_3.json",
+      "sha256": "ea2b62a6bb907bdd62cc23f3a1398f0a83fc172708b4dfa37151b233291ae8ae",
+      "byte_count": 801068
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_34.json",
+      "sha256": "022f31a57404bf4b17ecb4d4db185d3fe7c82491767cc20c0643913714602e50",
+      "byte_count": 799260
+    },
+    {
+      "path": "bundle_country_contributions_wealth_tiers_4.json",
+      "sha256": "06b12d9b911f02a251c0d46dee60a5f483510f7499fb0e81da44e7c053fce318",
+      "byte_count": 786381
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law.json",
+      "sha256": "01f6c431be0297390a20f3b780c0e5ee35a89eb635b3e7087c48cc0fb3359377",
+      "byte_count": 15460318
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_1.json",
+      "sha256": "9d543a152bcd263b61ad59193314c15b202c363e1b55cd52fb8a4d2a48561124",
+      "byte_count": 933187
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_12.json",
+      "sha256": "4680c54df42f4d43074efbbe726c0b9529bd1a35f782b6b4c20906d63d86b041",
+      "byte_count": 941471
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_123.json",
+      "sha256": "9cbf453c28185432723dadd8b94e4a8bac272d93e3129019346eff2c6b1c6f05",
+      "byte_count": 928193
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_1234.json",
+      "sha256": "6fce50005d3e2389e69a793689c32a74b2b88876a387aca47024ba74729fa937",
+      "byte_count": 910105
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_124.json",
+      "sha256": "ecfcc9f4f59fcf7b7a032860a6032ffa833eb5278c71e5448c45726680c30a8d",
+      "byte_count": 921036
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_13.json",
+      "sha256": "5046cef2fc08c83f296d23d61f626cc0c9a89d4597b8c99b18a9111415d19e21",
+      "byte_count": 920377
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_134.json",
+      "sha256": "b9def2fc41fdd2c903ebaf37cf42b0af4b87b07eb6ba46681e2e01beab4f1b3c",
+      "byte_count": 909354
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_14.json",
+      "sha256": "d751adee6a0665c30af2511286362b63302d85d7ad53a6e80d0dd2d81548c4ea",
+      "byte_count": 908125
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_2.json",
+      "sha256": "77f1f23f67900763df832feb988648413656f7e96daa33b8d018cf45b37eba76",
+      "byte_count": 930810
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_23.json",
+      "sha256": "bc81401f72ab2faa117c12c9b8f90fa786ff217705e8e04c062af2ffe151701e",
+      "byte_count": 918922
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_234.json",
+      "sha256": "2f3e065eda1c9f98b882fea66d896eb4c7f7d8f97c7540120e894238cfbccf98",
+      "byte_count": 908641
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_24.json",
+      "sha256": "c96cdc85769d4f4942878043fd9c7342aef1f1da7d2ba8547944be0c89b7afa4",
+      "byte_count": 910247
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_3.json",
+      "sha256": "dcb73f5d598837ecfbec10a01e8ee35796f5a3659c40f0bbd246f09cf9f8909a",
+      "byte_count": 909204
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_34.json",
+      "sha256": "eb38ae31cb5964c64ec5755eb746c75d9b8296e29e1bed7d6e4a4dbef84c3549",
+      "byte_count": 898366
+    },
+    {
+      "path": "bundle_country_contributions_women_business_law_tiers_4.json",
+      "sha256": "7944b102b500965dfb678fe9d2f76dcf44fc2023201086a28ebdd7cd50abd6ab",
+      "byte_count": 881369
+    },
+    {
+      "path": "bundle_feature_effects.json",
+      "sha256": "01a3b05658216edb53c63e8de21ca412f37188b773ecc041048c37c8454af341",
+      "byte_count": 697619
+    },
+    {
+      "path": "bundle_permutation_importance.json",
+      "sha256": "08fad44ca55a5360e467cf2fc925d53533e20c9ff358326ddfac5c7fa7e56089",
+      "byte_count": 1375377
+    },
+    {
+      "path": "bundle_summary.json",
+      "sha256": "4aa6bbbb1c193dc788bde5b12eb4d9e67163c1f2f7954cf1fde0a67b8c230db0",
+      "byte_count": 75958
+    },
+    {
+      "path": "countries_2020.geojson",
+      "sha256": "fab04902f4113867067a0e8bc127eebd50f8f9bd024bc5af7ef05e366e1ed364",
+      "byte_count": 517708
+    },
+    {
+      "path": "country_contributions_summary.json",
+      "sha256": "6f0e82a97944f98fa192d08b9d248a4ec6b7e040527f2c4fab73f475c0c351df",
+      "byte_count": 966639
+    },
+    {
+      "path": "country_profiles.json",
+      "sha256": "aede7099188735d172aeee56dc783157130e0346df22d4642b8c3e8709647ffb",
+      "byte_count": 265731
+    },
+    {
+      "path": "metadata.json",
+      "sha256": "e4ec423927a97fa0440aabe0cedbe11ae59385f1f8ca5f5fcd1afbce7012857d",
+      "byte_count": 2127
+    },
+    {
+      "path": "metrics_income_rank_pct.json",
+      "sha256": "7da86161db553a52a89f189cbf37cdbe25d6306f5839bb48d74d3e53a06e67ab",
+      "byte_count": 273111
+    },
+    {
+      "path": "metrics_income_rank_pct_predicted.json",
+      "sha256": "bc2a122ed3ef2720a4082a0eee928f5481f2df39cab38af98936d497b4efcf6d",
+      "byte_count": 271790
+    },
+    {
+      "path": "metrics_income_rank_pct_residual.json",
+      "sha256": "98a07aad38602a5f2363a73d266b6bbf5e8196e6c6d6450c12eff7294ee1b0bf",
+      "byte_count": 272273
+    },
+    {
+      "path": "model_summary.json",
+      "sha256": "a42d342623a2a452b77d863fde1ec02b144f8415e3f26ec9888fb6da2ee285c8",
+      "byte_count": 5531
+    },
+    {
+      "path": "robustness_summary.json",
+      "sha256": "04b5d0d536f09f1e7eea6265e33f81dd84fca9960e80bc038eabd7034aa34ff8",
+      "byte_count": 75143
+    }
+  ]
+}

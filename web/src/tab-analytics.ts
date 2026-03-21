@@ -3,6 +3,7 @@ import type {
   BundleFeatureEffectsTarget,
   BundlePermutationImportanceTarget,
   BundleSummaryTarget,
+  RobustnessSummaryPayload,
 } from "./data";
 
 export type AnalyticsData = {
@@ -13,6 +14,7 @@ export type AnalyticsData = {
   bundleSummary: BundleSummaryTarget | null;
   featureEffects: BundleFeatureEffectsTarget | null;
   permutationImportance: BundlePermutationImportanceTarget | null;
+  robustnessSummary: RobustnessSummaryPayload | null;
   tierKey: string | null;
   r2: number | null;
   decade: number;
@@ -28,6 +30,34 @@ function fmtPct(v: number | null): string {
 function fmtResidual(v: number | null): string {
   if (v === null) return "\u2014";
   return (v > 0 ? "+" : "") + v.toFixed(3);
+}
+
+function fmtDecimal(v: number | null, digits = 3): string {
+  if (v === null) return "\u2014";
+  return v.toFixed(digits);
+}
+
+function fmtInt(v: number | null | undefined): string {
+  if (v == null) return "\u2014";
+  return v.toLocaleString();
+}
+
+function strategyLabel(value: string): string {
+  return value === "decade_holdout"
+    ? "Within-decade holdouts"
+    : value === "leave_region_out"
+      ? "Leave-region-out"
+      : value.replace(/_/g, " ");
+}
+
+function prettyLabel(value: string | null | undefined): string {
+  if (!value) return "\u2014";
+  return value.replace(/_/g, " ");
+}
+
+function shortSpec(value: string | null | undefined, maxLength = 44): string {
+  if (!value) return "\u2014";
+  return value.length <= maxLength ? value : `${value.slice(0, maxLength - 1)}\u2026`;
 }
 
 type RankingsRow = {
@@ -84,10 +114,10 @@ function rankingsTableHtml(rows: RankingsRow[], target: string): string {
                 ? "cell-negative"
                 : ""
             : r.residual < -0.05
-            ? "cell-positive"
-            : r.residual > 0.05
-              ? "cell-negative"
-              : ""
+              ? "cell-positive"
+              : r.residual > 0.05
+                ? "cell-negative"
+                : ""
           : "";
       return `<tr data-actual="${r.actual ?? ""}" data-predicted="${r.predicted ?? ""}" data-residual="${r.residual ?? ""}" data-name="${r.name}" data-continent="${r.continent}">
         <td class="rank-num">${i + 1}</td>
@@ -154,7 +184,7 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
       : "";
 
   const insightText = r2 != null
-    ? `Using <strong>${tierLabel.toLowerCase()}</strong> features, we can explain <strong>${(r2 * 100).toFixed(1)}%</strong>
+    ? `Using <strong>${tierLabel.toLowerCase()}</strong> features, this bundle accounts for <strong>${(r2 * 100).toFixed(1)}%</strong>
        of the variation in ${targetLabel.toLowerCase()} across countries in ${decade}.`
     : loadingBundle
       ? `Loading the ${targetLabel.toLowerCase()} bundle for <strong>${tierLabel.toLowerCase()}</strong>.`
@@ -182,6 +212,51 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
   const rankingsSubtitle = inequalityTarget
     ? "Click a column header to sort. Negative residual = less unequal than predicted."
     : "Click a column header to sort. Positive residual = outperforms the model's expectation.";
+  const robustnessSection = (() => {
+    if (!data.robustnessSummary) return "";
+    if (data.target !== "income") return "";
+    return `
+    <section class="analytics-section analytics-footer-section">
+      <h2>Robustness checks</h2>
+      <p class="section-subtitle">Supplemental validation beyond the main bundle comparison. These checks do not change the selected result shown above.</p>
+      <div class="analytics-robustness-grid">
+        ${data.robustnessSummary.strategies.map((strategy) => {
+          const selectedTierRow =
+            strategy.mean_scores_by_feature_set_large_holdouts.find((row) => row.feature_tier === tierKey) ??
+            strategy.mean_scores_by_feature_set.find((row) => row.feature_tier === tierKey) ??
+            null;
+          const scoreLabel = selectedTierRow
+            ? `Selected bundle avg R² ${fmtDecimal(selectedTierRow.mean_r2)}`
+            : `Best overall R² ${fmtDecimal(strategy.best_overall.r2)}`;
+          const metaLabel = selectedTierRow
+            ? `${selectedTierRow.feature_tier_label ?? tierLabel} · ${fmtInt(selectedTierRow.holdout_count ?? null)} holdouts`
+            : `${strategy.best_overall.feature_tier_label ?? prettyLabel(strategy.best_overall.feature_tier)} · ${strategy.best_overall.model_name ?? "Unknown model"}`;
+          return `
+          <article class="analytics-robustness-card">
+            <h3>${strategyLabel(strategy.strategy)}</h3>
+            <p class="analytics-robustness-score">${scoreLabel}</p>
+            <p class="analytics-robustness-meta">${metaLabel}</p>
+            <div class="analytics-note-list">
+              <div class="analytics-note-item">
+                <strong>Best overall</strong>
+                <span title="${strategy.best_overall.spec_name ?? ""}">${strategy.best_overall.feature_tier_label ?? prettyLabel(strategy.best_overall.feature_tier)} · ${strategy.best_overall.model_name ?? "Unknown model"} · ${shortSpec(strategy.best_overall.spec_name)}</span>
+              </div>
+              <div class="analytics-note-item">
+                <strong>Weakest holdouts</strong>
+                <span>${strategy.weakest_holdouts.slice(0, 3).map((row) => `${row.holdout_label ?? "Unknown"} (${fmtDecimal(row.r2)})`).join(" · ") || "—"}</span>
+              </div>
+              <div class="analytics-note-item">
+                <strong>Weakest countries</strong>
+                <span>${(strategy.weakest_countries ?? []).slice(0, 3).map((row) => `${row.country_name ?? row.iso3 ?? "Unknown"} (${fmtDecimal(row.mean_abs_residual)})`).join(" · ") || "—"}</span>
+              </div>
+            </div>
+          </article>
+          `;
+        }).join("")}
+      </div>
+    </section>
+    `;
+  })();
 
   return `
     <section class="analytics-hero">
@@ -303,5 +378,7 @@ export function renderAnalyticsTab(data: AnalyticsData | null): string {
       </div>
     </section>
     ` : ""}
+
+    ${robustnessSection}
   `;
 }
