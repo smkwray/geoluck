@@ -23,7 +23,7 @@ jobs:
         run: uv sync --all-extras
 
       - name: Run tests
-        run: uv run python -B -m pytest
+        run: uv run python -B -m pytest -p no:cacheprovider
 
       - uses: actions/setup-node@v6
         with:

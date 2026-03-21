@@ -15,14 +15,17 @@ import {
 } from "./charts";
 import type {
   BundleCountryContributionsBundle,
+  BundleCountryContributionsIndexEntry,
   BundleCountryContributionsPayload,
   BundleFeatureEffectsPayload,
   BundlePermutationImportancePayload,
   BundleSummaryPayload,
   CountryContributionSummary,
   CountryProfile,
+  DataManifestPayload,
   MetricCountry,
   MetricsPayload,
+  RobustnessSummaryPayload,
 } from "./data";
 import {
   loadBundleCountryContributions,
@@ -31,8 +34,10 @@ import {
   loadBundlePermutationImportance,
   loadBundleSummary,
   loadCountryProfiles,
+  loadDataManifest,
   loadMapGeoJson,
   loadMetadata,
+  loadRobustnessSummary,
 } from "./data";
 import { ChoroplethMap } from "./map";
 import "./styles.css";
@@ -147,11 +152,15 @@ async function bootstrap(): Promise<void> {
   const [
     geojson,
     profiles,
+    loadedDataManifest,
     loadedBundleSummary,
     loadedBundleContribIndex,
   ] = await Promise.all([
     loadMapGeoJson(metadata.map_path),
     loadCountryProfiles(metadata.country_profiles_path),
+    metadata.data_manifest_path
+      ? loadDataManifest(metadata.data_manifest_path).catch(() => null)
+      : Promise.resolve(null),
     metadata.bundle_summary_path
       ? loadBundleSummary(metadata.bundle_summary_path).catch(() => null)
       : Promise.resolve(null),
@@ -165,6 +174,8 @@ async function bootstrap(): Promise<void> {
   let bundleSummary: BundleSummaryPayload | null = loadedBundleSummary;
   let bundleFeatureEffects: BundleFeatureEffectsPayload | null = null;
   let bundlePermutationImportance: BundlePermutationImportancePayload | null = null;
+  let robustnessSummary: RobustnessSummaryPayload | null = null;
+  let dataManifest: DataManifestPayload | null = loadedDataManifest;
   const bundleContribIndex = loadedBundleContribIndex;
   const bundleContribs = new Map<string, BundleCountryContributionsPayload>();
   const bundleContribPromises = new Map<string, Promise<BundleCountryContributionsPayload | null>>();
@@ -192,6 +203,7 @@ async function bootstrap(): Promise<void> {
   const countryNames = profiles.countries
     .map((country) => ({ iso3: country.iso3, name: country.country_name }))
     .sort((a, b) => a.name.localeCompare(b.name));
+  verifyMetadataAgainstManifest();
 
   // Parse URL for deep-link state
   const initialHash = parseHash();
@@ -239,11 +251,105 @@ async function bootstrap(): Promise<void> {
   let map: ChoroplethMap | null = null;
   let hasRendered = false;
   let deferredPayloadsStarted = false;
+  let hasWarnedDataDrift = false;
 
   // ── Helpers ───────────────────────────────────────────────
 
+  function manifestHasPath(path: string | null | undefined): boolean {
+    if (!dataManifest || !path) return true;
+    return dataManifest.files.some((entry) => entry.path === path);
+  }
+
+  function warnDataDrift(reason: string): void {
+    if (hasWarnedDataDrift) return;
+    hasWarnedDataDrift = true;
+    console.warn(`[geoluck] data manifest mismatch: ${reason}`);
+  }
+
+  function verifyManifestCoverage(path: string | null | undefined, label: string): void {
+    if (!path || !dataManifest) return;
+    if (!manifestHasPath(path)) {
+      warnDataDrift(`${label} is missing from data_manifest.json (${path})`);
+    }
+  }
+
+  function verifyMetadataAgainstManifest(): void {
+    if (!dataManifest) return;
+    if (metadata.data_export_id && metadata.data_export_id !== dataManifest.export_id) {
+      warnDataDrift("metadata.json and data_manifest.json disagree on export id");
+      return;
+    }
+    if (
+      metadata.data_payload_version &&
+      metadata.data_payload_version !== dataManifest.payload_version
+    ) {
+      warnDataDrift("metadata.json and data_manifest.json disagree on payload version");
+      return;
+    }
+    verifyManifestCoverage(metadata.bundle_summary_path, "bundle summary");
+    verifyManifestCoverage(metadata.bundle_feature_effects_path, "bundle feature effects");
+    verifyManifestCoverage(
+      metadata.bundle_permutation_importance_path,
+      "bundle permutation importance",
+    );
+    verifyManifestCoverage(
+      metadata.bundle_country_contributions_index_path,
+      "bundle contribution index",
+    );
+    verifyManifestCoverage(metadata.robustness_summary_path, "robustness summary");
+  }
+
+  function bundleCacheKey(target: TargetId, tierKey: string | null): string {
+    return `${target}::${tierKey ?? "none"}`;
+  }
+
+  function normalizeBundlePayload(
+    payload: BundleCountryContributionsPayload,
+  ): BundleCountryContributionsPayload {
+    if (payload.bundles) return payload;
+    return {
+      target: payload.target,
+      target_label: payload.target_label,
+      latest_decade: payload.latest_decade,
+      top_k: payload.top_k,
+      bundle_count: payload.feature_tier ? 1 : 0,
+      bundles: payload.feature_tier
+        ? [
+            {
+              feature_set: payload.feature_set ?? "unknown",
+              feature_tier: payload.feature_tier ?? null,
+              feature_tier_label: payload.feature_tier_label ?? null,
+              feature_components: payload.feature_components ?? [],
+              spec_name: payload.spec_name ?? "unknown",
+              model_name: payload.model_name ?? "unknown",
+              model_family: payload.model_family ?? "unknown",
+              r2: payload.r2 ?? null,
+              rmse: payload.rmse ?? null,
+              mae: payload.mae ?? null,
+              spearman: payload.spearman ?? null,
+              row_count: payload.row_count ?? null,
+              country_count: payload.country_count ?? null,
+              data_status: payload.data_status,
+              missing_reason: payload.missing_reason,
+              countries: payload.countries ?? [],
+            },
+          ]
+        : [],
+    };
+  }
+
+  function currentBundleIndexEntry(target: TargetId): BundleCountryContributionsIndexEntry | null {
+    const tk = tierKeyFromFlags(state.activeTiers);
+    if (!tk || !bundleContribIndex) return null;
+    return (
+      bundleContribIndex.bundles.find(
+        (entry) => entry.target === target && entry.feature_tier === tk,
+      ) ?? null
+    );
+  }
+
   function applyContinentFallback(payload: BundleCountryContributionsPayload): void {
-    for (const bundle of payload.bundles) {
+    for (const bundle of payload.bundles ?? []) {
       for (const country of bundle.countries) {
         if (!continentLookup.has(country.iso3) && country.region_name) {
           continentLookup.set(
@@ -258,30 +364,36 @@ async function bootstrap(): Promise<void> {
   async function ensureBundleContrib(
     target: TargetId,
   ): Promise<BundleCountryContributionsPayload | null> {
-    const existing = bundleContribs.get(target);
-    if (existing) return existing;
+    const tk = tierKeyFromFlags(state.activeTiers);
+    if (!tk) return null;
 
-    const inflight = bundleContribPromises.get(target);
+    const existing = bundleContribs.get(target);
+    if (existing?.bundles?.some((bundle) => bundle.feature_tier === tk)) return existing;
+
+    const cacheKey = bundleCacheKey(target, tk);
+    const inflight = bundleContribPromises.get(cacheKey);
     if (inflight) return inflight;
 
-    const indexEntry = bundleContribIndex?.targets.find((entry) => entry.target === target);
+    const indexEntry = currentBundleIndexEntry(target);
     if (!indexEntry) return null;
+    verifyManifestCoverage(indexEntry.path, `bundle contribution shard for ${target}/${tk}`);
 
     loadingBundleTargets.add(target);
     const promise = loadBundleCountryContributions(indexEntry.path)
       .then((payload) => {
-        bundleContribs.set(target, payload);
-        applyContinentFallback(payload);
-        return payload;
+        const normalized = normalizeBundlePayload(payload);
+        bundleContribs.set(target, normalized);
+        applyContinentFallback(normalized);
+        return normalized;
       })
       .catch(() => null)
       .finally(() => {
         loadingBundleTargets.delete(target);
-        bundleContribPromises.delete(target);
+        bundleContribPromises.delete(cacheKey);
         if (hasRendered) render();
       });
 
-    bundleContribPromises.set(target, promise);
+    bundleContribPromises.set(cacheKey, promise);
     return promise;
   }
 
@@ -290,6 +402,7 @@ async function bootstrap(): Promise<void> {
     deferredPayloadsStarted = true;
     requestIdle(() => {
       if (metadata.bundle_feature_effects_path) {
+        verifyManifestCoverage(metadata.bundle_feature_effects_path, "bundle feature effects");
         void loadBundleFeatureEffects(metadata.bundle_feature_effects_path)
           .then((payload) => {
             bundleFeatureEffects = payload;
@@ -300,9 +413,24 @@ async function bootstrap(): Promise<void> {
           });
       }
       if (metadata.bundle_permutation_importance_path) {
+        verifyManifestCoverage(
+          metadata.bundle_permutation_importance_path,
+          "bundle permutation importance",
+        );
         void loadBundlePermutationImportance(metadata.bundle_permutation_importance_path)
           .then((payload) => {
             bundlePermutationImportance = payload;
+            if (hasRendered) render();
+          })
+          .catch(() => {
+            /* optional */
+          });
+      }
+      if (metadata.robustness_summary_path) {
+        verifyManifestCoverage(metadata.robustness_summary_path, "robustness summary");
+        void loadRobustnessSummary(metadata.robustness_summary_path)
+          .then((payload) => {
+            robustnessSummary = payload;
             if (hasRendered) render();
           })
           .catch(() => {
@@ -332,6 +460,8 @@ async function bootstrap(): Promise<void> {
   }
 
   function getLatestDecade(): number {
+    const targetSummary = bundleSummary?.targets.find((t) => t.target === state.activeTarget);
+    if (targetSummary?.latest_decade) return targetSummary.latest_decade;
     const targetContrib = bundleContribs.get(state.activeTarget);
     return targetContrib?.latest_decade ?? 2020;
   }
@@ -472,6 +602,7 @@ async function bootstrap(): Promise<void> {
         bundleSummary: bundleSummary?.targets.find((t) => t.target === state.activeTarget) ?? null,
         featureEffects: bundleFeatureEffects?.targets.find((t) => t.target === state.activeTarget) ?? null,
         permutationImportance: bundlePermutationImportance?.targets.find((t) => t.target === state.activeTarget) ?? null,
+        robustnessSummary,
         tierKey: activeTierKey,
         r2: bundleR2(),
         decade,

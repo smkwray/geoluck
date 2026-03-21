@@ -20,6 +20,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.853959,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -207,6 +209,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.841681,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_15_24_pct",
@@ -394,6 +398,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.855691,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -580,6 +586,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.725358,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "forest_rents_pct_gdp",
@@ -767,6 +775,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.853506,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -953,6 +963,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.82847,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_15_24_pct",
@@ -1139,6 +1151,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.8327,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -1324,6 +1338,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.525796,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "abs_latitude",
@@ -1511,6 +1527,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.852622,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -1697,6 +1715,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.843655,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_15_24_pct",
@@ -1883,6 +1903,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.856885,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -2068,6 +2090,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.684352,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "forest_rents_pct_gdp",
@@ -2254,6 +2278,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.857544,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -2439,6 +2465,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.841499,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_15_24_pct",
@@ -2624,6 +2652,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.824762,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -2820,6 +2850,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.887432,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -3007,6 +3039,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.887113,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -3194,6 +3228,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.858392,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_demographic_pressures",
@@ -3380,6 +3416,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.761932,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "forest_rents_pct_gdp",
@@ -3567,6 +3605,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.886672,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -3753,6 +3793,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.882411,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -3939,6 +3981,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.843476,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_demographic_pressures",
@@ -4124,6 +4168,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.656744,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "kiszewski_malaria_ecology_index",
@@ -4311,6 +4357,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.888572,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -4497,6 +4545,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.881798,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -4683,6 +4733,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.8515,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_demographic_pressures",
@@ -4868,6 +4920,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.671213,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "forest_rents_pct_gdp",
@@ -5054,6 +5108,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.878132,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -5239,6 +5295,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.87207,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -5424,6 +5482,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.837272,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_demographic_pressures",
@@ -5620,6 +5680,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.676979,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
@@ -5807,6 +5869,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.672082,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
@@ -5994,6 +6058,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.647639,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
@@ -6180,6 +6246,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.654215,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
@@ -6367,6 +6435,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.659917,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
@@ -6553,6 +6623,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.64093,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
@@ -6739,6 +6811,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.62755,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
@@ -6924,6 +6998,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.649644,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_isothermality",
@@ -7111,6 +7187,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.679399,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_15_24_pct",
@@ -7297,6 +7375,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.661396,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "undp_gii_maternal_mortality_ratio",
@@ -7483,6 +7563,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.538207,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -7668,6 +7750,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.434353,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "geot_asset_record_count",
@@ -7854,6 +7938,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.627922,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_15_24_pct",
@@ -8039,6 +8125,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.642774,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "undp_gii_maternal_mortality_ratio",
@@ -8224,6 +8312,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.419467,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -8420,6 +8510,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.876252,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -8607,6 +8699,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.873077,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -8794,6 +8888,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.85973,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_flight_and_brain_drain",
@@ -8980,6 +9076,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.784668,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "kiszewski_malaria_ecology_index",
@@ -9167,6 +9265,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.874327,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -9353,6 +9453,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.875221,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -9539,6 +9641,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.843256,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_flight_and_brain_drain",
@@ -9724,6 +9828,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.679947,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "kiszewski_malaria_ecology_index",
@@ -9911,6 +10017,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.880758,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -10097,6 +10205,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.873056,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -10283,6 +10393,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.851569,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_flight_and_brain_drain",
@@ -10468,6 +10580,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.706051,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "forest_rents_pct_gdp",
@@ -10654,6 +10768,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.875917,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -10839,6 +10955,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.880654,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -11024,6 +11142,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.812538,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_flight_and_brain_drain",
@@ -11220,6 +11340,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.893607,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -11407,6 +11529,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.878331,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -11594,6 +11718,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.884201,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -11780,6 +11906,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.765153,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "abs_latitude",
@@ -11967,6 +12095,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.903677,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -12153,6 +12283,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.878226,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -12339,6 +12471,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.87979,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -12524,6 +12658,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.674578,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "abs_latitude",
@@ -12711,6 +12847,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.883023,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -12897,6 +13035,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.87152,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -13083,6 +13223,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.870481,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -13268,6 +13410,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.61359,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "forest_rents_pct_gdp",
@@ -13454,6 +13598,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.894259,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -13639,6 +13785,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.878994,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_median_age_years",
@@ -13824,6 +13972,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.878187,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_public_services",
@@ -14020,6 +14170,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.381896,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "pew_muslims_pct",
@@ -14207,6 +14359,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.404194,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "pew_muslims_pct",
@@ -14394,6 +14548,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.353053,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "water_stress_pct_available_resources",
@@ -14580,6 +14736,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.32372,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "water_stress_pct_available_resources",
@@ -14767,6 +14925,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.373503,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "pew_muslims_pct",
@@ -14953,6 +15113,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.409666,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "pew_muslims_pct",
@@ -15139,6 +15301,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.355943,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_precip_warmest_quarter_mm",
@@ -15324,6 +15488,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.241534,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_precip_warmest_quarter_mm",
@@ -15511,6 +15677,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.397098,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "pew_muslims_pct",
@@ -15697,6 +15865,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.405692,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "pew_muslims_pct",
@@ -15883,6 +16053,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.331268,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "water_stress_pct_available_resources",
@@ -16068,6 +16240,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.260541,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "water_stress_pct_available_resources",
@@ -16254,6 +16428,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.442393,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "pew_muslims_pct",
@@ -16439,6 +16615,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.44181,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "pew_muslims_pct",
@@ -16624,6 +16802,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.25763,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_economic_inequality",
@@ -16820,6 +17000,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.638112,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_rights",
@@ -17007,6 +17189,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.598721,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_65_plus_pct",
@@ -17194,6 +17378,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.600174,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_rights",
@@ -17380,6 +17566,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.513212,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_mean_temp_warmest_quarter_c",
@@ -17567,6 +17755,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.607331,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_rights",
@@ -17753,6 +17943,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.545803,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_65_plus_pct",
@@ -17939,6 +18131,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.557042,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_rights",
@@ -18124,6 +18318,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.408983,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "clim_mean_temp_warmest_quarter_c",
@@ -18311,6 +18507,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.639838,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_rights",
@@ -18497,6 +18695,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.614347,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_65_plus_pct",
@@ -18683,6 +18883,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.603872,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_rights",
@@ -18868,6 +19070,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.478236,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "aquastat_irrigation_share_pct",
@@ -19054,6 +19258,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.581862,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_65_plus_pct",
@@ -19239,6 +19445,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.55108,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "wpp_population_share_65_plus_pct",
@@ -19424,6 +19632,8 @@
           "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "r2": 0.545079,
+          "data_status": "ready",
+          "missing_reason": null,
           "top_feature_importance": [
             {
               "feature_name": "fsi_human_rights",

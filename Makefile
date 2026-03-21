@@ -1,41 +1,31 @@
 SHELL := /bin/bash
-.ONESHELL:
 
-.PHONY: sync test lint fmt web-install web-build check
+.PHONY: sync test lint fmt web-install web-build web-preview-local check
 
-define load_env
-if [ -f .env ]; then
-  set -a
-  source ./.env
-  set +a
-fi
-endef
+VENV_PATH ?= /Users/shanewray/venvs/geoluck
+VENV_PYTHON := $(VENV_PATH)/bin/python
+VENV_PIP := $(VENV_PATH)/bin/pip
+LOAD_ENV = if [ -f .env ]; then set -a; . ./.env; set +a; fi;
 
 sync:
-	$(load_env)
-	uv sync
+	$(LOAD_ENV) if command -v uv >/dev/null 2>&1; then uv sync; else "$(VENV_PIP)" install -e ".[dev]"; fi
 
 test:
-	$(load_env)
-	uv run python -B -m pytest
+	$(LOAD_ENV) if command -v uv >/dev/null 2>&1; then uv run python -B -m pytest; else "$(VENV_PYTHON)" -B -m pytest; fi
 
 lint:
-	$(load_env)
-	uv run ruff check .
+	$(LOAD_ENV) if command -v uv >/dev/null 2>&1; then uv run ruff check .; else "$(VENV_PYTHON)" -m ruff check .; fi
 
 fmt:
-	$(load_env)
-	uv run ruff format .
+	$(LOAD_ENV) if command -v uv >/dev/null 2>&1; then uv run ruff format .; else "$(VENV_PYTHON)" -m ruff format .; fi
 
 web-install:
-	$(load_env)
-	cd web
-	npm install
+	$(LOAD_ENV) cd web && npm install
 
 web-build:
-	$(load_env)
-	cd web
-	npm run build
+	$(LOAD_ENV) cd web && npm run build
+
+web-preview-local:
+	$(LOAD_ENV) python3 scripts/web_preview_local.py --port $${PORT:-4173}
 
 check: test web-build
-

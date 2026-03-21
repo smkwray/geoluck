@@ -38,7 +38,8 @@
 - Primary split: within-decade cross-validation
 - Current metrics: `r2`, `rmse`, `mae`, `spearman`
 - Additional association exports: numeric feature correlations with income, population, life expectancy, inequality, wealth, gender inequality, female LFPR, and Women, Business and the Law target columns when they are present in the shared outcomes table
-- Near-term additions: leave-region-out checks, calibration diagnostics, rank-hit metrics
+- Public robustness exports currently include both `decade_holdout` and `leave_region_out` diagnostics for the flagship income target
+- Near-term additions: calibration diagnostics and rank-hit metrics
 
 ## Maintained feature-set experiments
 
@@ -68,5 +69,8 @@
 - No model gets reported without a baseline comparison.
 - Source coverage and missingness must be inspectable by feature block.
 - Latest-decade diagnostics should expose top tree importances, top linear coefficients, and weakest-coverage features for the selected public model.
+- Public bundle analytics must keep performance, feature effects, permutation importance, and country contributions aligned to one display spec for each target+tier pair.
+- The display spec is the best-scoring non-baseline spec that has the full exported analytics bundle required by the site. Export should fail loudly if no such spec exists for a published target+tier.
+- Published diagnostics such as provenance, coverage, and robustness are supplemental UI context only. They should never replace or block the primary result set for a maintained bundle.
 - Sensitive controls should be evaluated separately from the "nature alone" model family.
 - Public claims should prefer stable multi-model patterns over a single best score.

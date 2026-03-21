@@ -6,8 +6,8 @@
       "latest_decade": 2020,
       "bundle_count": 15,
       "best_overall": {
-        "spec_name": "hist_gb__tier_bundle_34_v1",
-        "model_name": "hist_gb",
+        "spec_name": "gradient_boosting__tier_bundle_34_v1",
+        "model_name": "gradient_boosting",
         "model_family": "boosted_tree",
         "feature_set": "tier_bundle_34_v1",
         "feature_tier": "tiers_34",
@@ -17,10 +17,10 @@
           "tier4"
         ],
         "decade": 2020,
-        "r2": 0.864035,
-        "rmse": 0.107076,
-        "mae": 0.077929,
-        "spearman": 0.929208
+        "r2": 0.857544,
+        "rmse": 0.109602,
+        "mae": 0.079207,
+        "spearman": 0.925436
       },
       "bundles": [
         {
@@ -40,7 +40,10 @@
           "r2": 0.853959,
           "rmse": 0.110973,
           "mae": 0.080123,
-          "spearman": 0.92345
+          "spearman": 0.92345,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_123_v1",
@@ -51,14 +54,17 @@
             "tier2",
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_123_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_123_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 169,
-          "r2": 0.844625,
-          "rmse": 0.114464,
-          "mae": 0.084333,
-          "spearman": 0.917784
+          "r2": 0.841681,
+          "rmse": 0.115543,
+          "mae": 0.087974,
+          "spearman": 0.915454,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_124_v1",
@@ -76,7 +82,10 @@
           "r2": 0.855691,
           "rmse": 0.110313,
           "mae": 0.081676,
-          "spearman": 0.925444
+          "spearman": 0.925444,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_12_v1",
@@ -93,7 +102,10 @@
           "r2": 0.725358,
           "rmse": 0.152182,
           "mae": 0.119026,
-          "spearman": 0.852387
+          "spearman": 0.852387,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_134_v1",
@@ -104,14 +116,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_134_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_134_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 169,
-          "r2": 0.859023,
-          "rmse": 0.109032,
-          "mae": 0.079641,
-          "spearman": 0.925541
+          "r2": 0.853506,
+          "rmse": 0.111145,
+          "mae": 0.080352,
+          "spearman": 0.923634,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_13_v1",
@@ -121,14 +136,17 @@
             "tier1",
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_13_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_13_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 169,
-          "r2": 0.849926,
-          "rmse": 0.112495,
-          "mae": 0.084506,
-          "spearman": 0.919596
+          "r2": 0.82847,
+          "rmse": 0.120268,
+          "mae": 0.090146,
+          "spearman": 0.906718,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_14_v1",
@@ -145,7 +163,10 @@
           "r2": 0.8327,
           "rmse": 0.118776,
           "mae": 0.087197,
-          "spearman": 0.909443
+          "spearman": 0.909443,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_1_v1",
@@ -161,7 +182,10 @@
           "r2": 0.525796,
           "rmse": 0.199969,
           "mae": 0.154508,
-          "spearman": 0.724742
+          "spearman": 0.724742,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_234_v1",
@@ -179,7 +203,10 @@
           "r2": 0.852622,
           "rmse": 0.11148,
           "mae": 0.080522,
-          "spearman": 0.922455
+          "spearman": 0.922455,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_23_v1",
@@ -189,14 +216,17 @@
             "tier2",
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_23_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_23_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 169,
-          "r2": 0.843863,
-          "rmse": 0.114745,
-          "mae": 0.083975,
-          "spearman": 0.917565
+          "r2": 0.843655,
+          "rmse": 0.114821,
+          "mae": 0.087363,
+          "spearman": 0.918537,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_24_v1",
@@ -213,7 +243,10 @@
           "r2": 0.856885,
           "rmse": 0.109855,
           "mae": 0.080392,
-          "spearman": 0.926916
+          "spearman": 0.926916,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_2_v1",
@@ -229,7 +262,10 @@
           "r2": 0.684352,
           "rmse": 0.163148,
           "mae": 0.123469,
-          "spearman": 0.818201
+          "spearman": 0.818201,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_34_v1",
@@ -239,14 +275,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_34_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_34_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 169,
-          "r2": 0.864035,
-          "rmse": 0.107076,
-          "mae": 0.077929,
-          "spearman": 0.929208
+          "r2": 0.857544,
+          "rmse": 0.109602,
+          "mae": 0.079207,
+          "spearman": 0.925436,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_3_v1",
@@ -255,14 +294,17 @@
           "feature_components": [
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_3_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_3_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 169,
-          "r2": 0.852885,
-          "rmse": 0.11138,
-          "mae": 0.081803,
-          "spearman": 0.922619
+          "r2": 0.841499,
+          "rmse": 0.11561,
+          "mae": 0.08551,
+          "spearman": 0.91443,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_4_v1",
@@ -278,7 +320,10 @@
           "r2": 0.824762,
           "rmse": 0.121561,
           "mae": 0.088489,
-          "spearman": 0.90494
+          "spearman": 0.90494,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         }
       ]
     },
@@ -323,7 +368,10 @@
           "r2": 0.887432,
           "rmse": 0.097443,
           "mae": 0.075427,
-          "spearman": 0.940125
+          "spearman": 0.940125,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_123_v1",
@@ -341,7 +389,10 @@
           "r2": 0.887113,
           "rmse": 0.097581,
           "mae": 0.079306,
-          "spearman": 0.937467
+          "spearman": 0.937467,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_124_v1",
@@ -359,7 +410,10 @@
           "r2": 0.858392,
           "rmse": 0.109291,
           "mae": 0.081479,
-          "spearman": 0.924537
+          "spearman": 0.924537,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_12_v1",
@@ -376,7 +430,10 @@
           "r2": 0.761932,
           "rmse": 0.141707,
           "mae": 0.112654,
-          "spearman": 0.871132
+          "spearman": 0.871132,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_134_v1",
@@ -394,7 +451,10 @@
           "r2": 0.886672,
           "rmse": 0.097771,
           "mae": 0.074998,
-          "spearman": 0.939115
+          "spearman": 0.939115,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_13_v1",
@@ -411,7 +471,10 @@
           "r2": 0.882411,
           "rmse": 0.099592,
           "mae": 0.080377,
-          "spearman": 0.936313
+          "spearman": 0.936313,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_14_v1",
@@ -428,7 +491,10 @@
           "r2": 0.843476,
           "rmse": 0.114903,
           "mae": 0.084455,
-          "spearman": 0.917748
+          "spearman": 0.917748,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_1_v1",
@@ -444,7 +510,10 @@
           "r2": 0.656744,
           "rmse": 0.170157,
           "mae": 0.132097,
-          "spearman": 0.817396
+          "spearman": 0.817396,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_234_v1",
@@ -462,7 +531,10 @@
           "r2": 0.888572,
           "rmse": 0.096948,
           "mae": 0.074453,
-          "spearman": 0.939871
+          "spearman": 0.939871,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_23_v1",
@@ -479,7 +551,10 @@
           "r2": 0.881798,
           "rmse": 0.099851,
           "mae": 0.080998,
-          "spearman": 0.935397
+          "spearman": 0.935397,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_24_v1",
@@ -496,7 +571,10 @@
           "r2": 0.8515,
           "rmse": 0.111919,
           "mae": 0.083882,
-          "spearman": 0.920354
+          "spearman": 0.920354,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_2_v1",
@@ -512,7 +590,10 @@
           "r2": 0.671213,
           "rmse": 0.166532,
           "mae": 0.130819,
-          "spearman": 0.811127
+          "spearman": 0.811127,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_34_v1",
@@ -522,14 +603,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_34_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_34_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 165,
-          "r2": 0.879844,
-          "rmse": 0.100673,
-          "mae": 0.080421,
-          "spearman": 0.935316
+          "r2": 0.878132,
+          "rmse": 0.101388,
+          "mae": 0.07839,
+          "spearman": 0.933879,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_3_v1",
@@ -538,14 +622,17 @@
           "feature_components": [
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_3_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_3_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 165,
-          "r2": 0.872265,
-          "rmse": 0.1038,
-          "mae": 0.08165,
-          "spearman": 0.93171
+          "r2": 0.87207,
+          "rmse": 0.103879,
+          "mae": 0.082299,
+          "spearman": 0.929896,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_4_v1",
@@ -561,7 +648,10 @@
           "r2": 0.837272,
           "rmse": 0.117158,
           "mae": 0.089967,
-          "spearman": 0.913264
+          "spearman": 0.913264,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         }
       ]
     },
@@ -606,7 +696,10 @@
           "r2": 0.676979,
           "rmse": 0.165608,
           "mae": 0.130509,
-          "spearman": 0.81925
+          "spearman": 0.81925,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_123_v1",
@@ -624,7 +717,10 @@
           "r2": 0.672082,
           "rmse": 0.166859,
           "mae": 0.128925,
-          "spearman": 0.815145
+          "spearman": 0.815145,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_124_v1",
@@ -635,14 +731,17 @@
             "tier2",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_124_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_124_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 107,
-          "r2": 0.649789,
-          "rmse": 0.172437,
-          "mae": 0.135758,
-          "spearman": 0.802674
+          "r2": 0.647639,
+          "rmse": 0.172966,
+          "mae": 0.133818,
+          "spearman": 0.80362,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_12_v1",
@@ -659,7 +758,10 @@
           "r2": 0.654215,
           "rmse": 0.171344,
           "mae": 0.134927,
-          "spearman": 0.808851
+          "spearman": 0.808851,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_134_v1",
@@ -670,14 +772,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_134_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_134_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 107,
-          "r2": 0.671551,
-          "rmse": 0.166994,
-          "mae": 0.126775,
-          "spearman": 0.820014
+          "r2": 0.659917,
+          "rmse": 0.169926,
+          "mae": 0.130303,
+          "spearman": 0.805991,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_13_v1",
@@ -694,7 +799,10 @@
           "r2": 0.64093,
           "rmse": 0.174605,
           "mae": 0.135085,
-          "spearman": 0.796101
+          "spearman": 0.796101,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_14_v1",
@@ -704,14 +812,17 @@
             "tier1",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_14_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_14_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 107,
-          "r2": 0.640912,
-          "rmse": 0.174609,
-          "mae": 0.133904,
-          "spearman": 0.799569
+          "r2": 0.62755,
+          "rmse": 0.177828,
+          "mae": 0.135815,
+          "spearman": 0.788729,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_1_v1",
@@ -727,7 +838,10 @@
           "r2": 0.649644,
           "rmse": 0.172473,
           "mae": 0.137276,
-          "spearman": 0.807822
+          "spearman": 0.807822,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_234_v1",
@@ -745,7 +859,10 @@
           "r2": 0.679399,
           "rmse": 0.164987,
           "mae": 0.126269,
-          "spearman": 0.822875
+          "spearman": 0.822875,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_23_v1",
@@ -762,7 +879,10 @@
           "r2": 0.661396,
           "rmse": 0.169556,
           "mae": 0.131345,
-          "spearman": 0.810036
+          "spearman": 0.810036,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_24_v1",
@@ -779,7 +899,10 @@
           "r2": 0.538207,
           "rmse": 0.198011,
           "mae": 0.154958,
-          "spearman": 0.738943
+          "spearman": 0.738943,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_2_v1",
@@ -795,7 +918,10 @@
           "r2": 0.434353,
           "rmse": 0.219149,
           "mae": 0.175105,
-          "spearman": 0.658064
+          "spearman": 0.658064,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_34_v1",
@@ -812,7 +938,10 @@
           "r2": 0.627922,
           "rmse": 0.177739,
           "mae": 0.135159,
-          "spearman": 0.794661
+          "spearman": 0.794661,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_3_v1",
@@ -828,7 +957,10 @@
           "r2": 0.642774,
           "rmse": 0.174156,
           "mae": 0.13141,
-          "spearman": 0.803982
+          "spearman": 0.803982,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_4_v1",
@@ -837,14 +969,17 @@
           "feature_components": [
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_4_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_4_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 107,
-          "r2": 0.433753,
-          "rmse": 0.219265,
-          "mae": 0.173106,
-          "spearman": 0.662978
+          "r2": 0.419467,
+          "rmse": 0.222014,
+          "mae": 0.174252,
+          "spearman": 0.649991,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         }
       ]
     },
@@ -882,14 +1017,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_1234_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_1234_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 144,
-          "r2": 0.877551,
-          "rmse": 0.101719,
-          "mae": 0.079893,
-          "spearman": 0.935861
+          "r2": 0.876252,
+          "rmse": 0.102257,
+          "mae": 0.082048,
+          "spearman": 0.936476,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_123_v1",
@@ -907,7 +1045,10 @@
           "r2": 0.873077,
           "rmse": 0.103561,
           "mae": 0.083823,
-          "spearman": 0.934077
+          "spearman": 0.934077,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_124_v1",
@@ -925,7 +1066,10 @@
           "r2": 0.85973,
           "rmse": 0.10887,
           "mae": 0.084166,
-          "spearman": 0.925223
+          "spearman": 0.925223,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_12_v1",
@@ -942,7 +1086,10 @@
           "r2": 0.784668,
           "rmse": 0.13489,
           "mae": 0.107348,
-          "spearman": 0.888807
+          "spearman": 0.888807,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_134_v1",
@@ -960,7 +1107,10 @@
           "r2": 0.874327,
           "rmse": 0.10305,
           "mae": 0.082137,
-          "spearman": 0.936488
+          "spearman": 0.936488,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_13_v1",
@@ -977,7 +1127,10 @@
           "r2": 0.875221,
           "rmse": 0.102683,
           "mae": 0.083346,
-          "spearman": 0.934129
+          "spearman": 0.934129,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_14_v1",
@@ -994,7 +1147,10 @@
           "r2": 0.843256,
           "rmse": 0.115085,
           "mae": 0.086946,
-          "spearman": 0.914774
+          "spearman": 0.914774,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_1_v1",
@@ -1010,7 +1166,10 @@
           "r2": 0.679947,
           "rmse": 0.164451,
           "mae": 0.132902,
-          "spearman": 0.821598
+          "spearman": 0.821598,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_234_v1",
@@ -1028,7 +1187,10 @@
           "r2": 0.880758,
           "rmse": 0.100378,
           "mae": 0.080074,
-          "spearman": 0.937477
+          "spearman": 0.937477,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_23_v1",
@@ -1045,7 +1207,10 @@
           "r2": 0.873056,
           "rmse": 0.103569,
           "mae": 0.082686,
-          "spearman": 0.935122
+          "spearman": 0.935122,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_24_v1",
@@ -1062,7 +1227,10 @@
           "r2": 0.851569,
           "rmse": 0.111992,
           "mae": 0.086184,
-          "spearman": 0.920758
+          "spearman": 0.920758,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_2_v1",
@@ -1071,14 +1239,17 @@
           "feature_components": [
             "tier2"
           ],
-          "spec_name": "hist_gb__tier_bundle_2_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_2_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 144,
-          "r2": 0.722623,
-          "rmse": 0.153095,
-          "mae": 0.120275,
-          "spearman": 0.85049
+          "r2": 0.706051,
+          "rmse": 0.157602,
+          "mae": 0.125166,
+          "spearman": 0.844603,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_34_v1",
@@ -1095,7 +1266,10 @@
           "r2": 0.875917,
           "rmse": 0.102396,
           "mae": 0.082947,
-          "spearman": 0.934861
+          "spearman": 0.934861,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_3_v1",
@@ -1111,7 +1285,10 @@
           "r2": 0.880654,
           "rmse": 0.100422,
           "mae": 0.081038,
-          "spearman": 0.93902
+          "spearman": 0.93902,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_4_v1",
@@ -1127,7 +1304,10 @@
           "r2": 0.812538,
           "rmse": 0.125858,
           "mae": 0.097558,
-          "spearman": 0.895426
+          "spearman": 0.895426,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         }
       ]
     },
@@ -1137,21 +1317,22 @@
       "latest_decade": 2020,
       "bundle_count": 15,
       "best_overall": {
-        "spec_name": "hist_gb__tier_bundle_34_v1",
-        "model_name": "hist_gb",
+        "spec_name": "gradient_boosting__tier_bundle_134_v1",
+        "model_name": "gradient_boosting",
         "model_family": "boosted_tree",
-        "feature_set": "tier_bundle_34_v1",
-        "feature_tier": "tiers_34",
-        "feature_tier_label": "Society + Governance",
+        "feature_set": "tier_bundle_134_v1",
+        "feature_tier": "tiers_134",
+        "feature_tier_label": "Nature + Society + Governance",
         "feature_components": [
+          "tier1",
           "tier3",
           "tier4"
         ],
         "decade": 2020,
-        "r2": 0.907583,
-        "rmse": 0.088325,
-        "mae": 0.070595,
-        "spearman": 0.950142
+        "r2": 0.903677,
+        "rmse": 0.090172,
+        "mae": 0.072664,
+        "spearman": 0.949792
       },
       "bundles": [
         {
@@ -1164,14 +1345,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_1234_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_1234_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 155,
-          "r2": 0.902851,
-          "rmse": 0.090557,
-          "mae": 0.070817,
-          "spearman": 0.948165
+          "r2": 0.893607,
+          "rmse": 0.094768,
+          "mae": 0.076381,
+          "spearman": 0.944786,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_123_v1",
@@ -1189,7 +1373,10 @@
           "r2": 0.878331,
           "rmse": 0.101343,
           "mae": 0.076644,
-          "spearman": 0.937482
+          "spearman": 0.937482,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_124_v1",
@@ -1207,7 +1394,10 @@
           "r2": 0.884201,
           "rmse": 0.098868,
           "mae": 0.077212,
-          "spearman": 0.936865
+          "spearman": 0.936865,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_12_v1",
@@ -1217,14 +1407,17 @@
             "tier1",
             "tier2"
           ],
-          "spec_name": "hist_gb__tier_bundle_12_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_12_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 155,
-          "r2": 0.770546,
-          "rmse": 0.139172,
-          "mae": 0.110225,
-          "spearman": 0.877952
+          "r2": 0.765153,
+          "rmse": 0.140798,
+          "mae": 0.10734,
+          "spearman": 0.871935,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_134_v1",
@@ -1235,14 +1428,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_134_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_134_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 155,
-          "r2": 0.905316,
-          "rmse": 0.089401,
-          "mae": 0.070272,
-          "spearman": 0.950413
+          "r2": 0.903677,
+          "rmse": 0.090172,
+          "mae": 0.072664,
+          "spearman": 0.949792,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_13_v1",
@@ -1252,14 +1448,17 @@
             "tier1",
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_13_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_13_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 155,
-          "r2": 0.879391,
-          "rmse": 0.100901,
-          "mae": 0.076236,
-          "spearman": 0.936302
+          "r2": 0.878226,
+          "rmse": 0.101387,
+          "mae": 0.0765,
+          "spearman": 0.936136,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_14_v1",
@@ -1276,7 +1475,10 @@
           "r2": 0.87979,
           "rmse": 0.100734,
           "mae": 0.079946,
-          "spearman": 0.936455
+          "spearman": 0.936455,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_1_v1",
@@ -1285,14 +1487,17 @@
           "feature_components": [
             "tier1"
           ],
-          "spec_name": "hist_gb__tier_bundle_1_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_1_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 155,
-          "r2": 0.693079,
-          "rmse": 0.16096,
-          "mae": 0.122289,
-          "spearman": 0.83695
+          "r2": 0.674578,
+          "rmse": 0.16574,
+          "mae": 0.121901,
+          "spearman": 0.820381,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_234_v1",
@@ -1303,14 +1508,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_234_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_234_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 155,
-          "r2": 0.892289,
-          "rmse": 0.095353,
-          "mae": 0.076427,
-          "spearman": 0.940693
+          "r2": 0.883023,
+          "rmse": 0.09937,
+          "mae": 0.080418,
+          "spearman": 0.937487,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_23_v1",
@@ -1327,7 +1535,10 @@
           "r2": 0.87152,
           "rmse": 0.104141,
           "mae": 0.078877,
-          "spearman": 0.931932
+          "spearman": 0.931932,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_24_v1",
@@ -1344,7 +1555,10 @@
           "r2": 0.870481,
           "rmse": 0.104561,
           "mae": 0.083549,
-          "spearman": 0.930893
+          "spearman": 0.930893,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_2_v1",
@@ -1360,7 +1574,10 @@
           "r2": 0.61359,
           "rmse": 0.180605,
           "mae": 0.143501,
-          "spearman": 0.78299
+          "spearman": 0.78299,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_34_v1",
@@ -1370,14 +1587,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_34_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_34_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 155,
-          "r2": 0.907583,
-          "rmse": 0.088325,
-          "mae": 0.070595,
-          "spearman": 0.950142
+          "r2": 0.894259,
+          "rmse": 0.094477,
+          "mae": 0.076003,
+          "spearman": 0.944098,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_3_v1",
@@ -1393,7 +1613,10 @@
           "r2": 0.878994,
           "rmse": 0.101067,
           "mae": 0.077536,
-          "spearman": 0.935287
+          "spearman": 0.935287,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_4_v1",
@@ -1409,7 +1632,10 @@
           "r2": 0.878187,
           "rmse": 0.101403,
           "mae": 0.081105,
-          "spearman": 0.933618
+          "spearman": 0.933618,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         }
       ]
     },
@@ -1453,7 +1679,10 @@
           "r2": 0.381896,
           "rmse": 0.228352,
           "mae": 0.1801,
-          "spearman": 0.602915
+          "spearman": 0.602915,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_123_v1",
@@ -1471,7 +1700,10 @@
           "r2": 0.404194,
           "rmse": 0.224195,
           "mae": 0.179931,
-          "spearman": 0.618845
+          "spearman": 0.618845,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_124_v1",
@@ -1489,7 +1721,10 @@
           "r2": 0.353053,
           "rmse": 0.233619,
           "mae": 0.190125,
-          "spearman": 0.587148
+          "spearman": 0.587148,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_12_v1",
@@ -1506,7 +1741,10 @@
           "r2": 0.32372,
           "rmse": 0.238856,
           "mae": 0.194457,
-          "spearman": 0.567047
+          "spearman": 0.567047,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_134_v1",
@@ -1524,7 +1762,10 @@
           "r2": 0.373503,
           "rmse": 0.229897,
           "mae": 0.183043,
-          "spearman": 0.599672
+          "spearman": 0.599672,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_13_v1",
@@ -1541,7 +1782,10 @@
           "r2": 0.409666,
           "rmse": 0.223163,
           "mae": 0.177697,
-          "spearman": 0.632819
+          "spearman": 0.632819,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_14_v1",
@@ -1558,7 +1802,10 @@
           "r2": 0.355943,
           "rmse": 0.233097,
           "mae": 0.188335,
-          "spearman": 0.593657
+          "spearman": 0.593657,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_1_v1",
@@ -1574,7 +1821,10 @@
           "r2": 0.241534,
           "rmse": 0.252954,
           "mae": 0.201404,
-          "spearman": 0.500632
+          "spearman": 0.500632,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_234_v1",
@@ -1592,7 +1842,10 @@
           "r2": 0.397098,
           "rmse": 0.225526,
           "mae": 0.180207,
-          "spearman": 0.620646
+          "spearman": 0.620646,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_23_v1",
@@ -1602,14 +1855,17 @@
             "tier2",
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_23_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_23_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 163,
-          "r2": 0.411245,
-          "rmse": 0.222865,
-          "mae": 0.178232,
-          "spearman": 0.64449
+          "r2": 0.405692,
+          "rmse": 0.223913,
+          "mae": 0.179725,
+          "spearman": 0.627513,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_24_v1",
@@ -1619,14 +1875,17 @@
             "tier2",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_24_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_24_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 163,
-          "r2": 0.340114,
-          "rmse": 0.235944,
-          "mae": 0.193279,
-          "spearman": 0.580528
+          "r2": 0.331268,
+          "rmse": 0.23752,
+          "mae": 0.195389,
+          "spearman": 0.572949,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_2_v1",
@@ -1635,14 +1894,17 @@
           "feature_components": [
             "tier2"
           ],
-          "spec_name": "hist_gb__tier_bundle_2_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_2_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 163,
-          "r2": 0.317402,
-          "rmse": 0.23997,
-          "mae": 0.19643,
-          "spearman": 0.567335
+          "r2": 0.260541,
+          "rmse": 0.249765,
+          "mae": 0.207669,
+          "spearman": 0.514082,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_34_v1",
@@ -1659,7 +1921,10 @@
           "r2": 0.442393,
           "rmse": 0.216889,
           "mae": 0.174835,
-          "spearman": 0.664062
+          "spearman": 0.664062,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_3_v1",
@@ -1675,7 +1940,10 @@
           "r2": 0.44181,
           "rmse": 0.217003,
           "mae": 0.172169,
-          "spearman": 0.651127
+          "spearman": 0.651127,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_4_v1",
@@ -1691,7 +1959,10 @@
           "r2": 0.25763,
           "rmse": 0.250256,
           "mae": 0.205144,
-          "spearman": 0.512572
+          "spearman": 0.512572,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         }
       ]
     },
@@ -1736,7 +2007,10 @@
           "r2": 0.638112,
           "rmse": 0.174649,
           "mae": 0.146512,
-          "spearman": 0.796713
+          "spearman": 0.796713,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_123_v1",
@@ -1747,14 +2021,17 @@
             "tier2",
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_123_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_123_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 162,
-          "r2": 0.603167,
-          "rmse": 0.182888,
-          "mae": 0.144881,
-          "spearman": 0.77884
+          "r2": 0.598721,
+          "rmse": 0.183909,
+          "mae": 0.150176,
+          "spearman": 0.775036,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_124_v1",
@@ -1772,7 +2049,10 @@
           "r2": 0.600174,
           "rmse": 0.183576,
           "mae": 0.15407,
-          "spearman": 0.772942
+          "spearman": 0.772942,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_12_v1",
@@ -1782,14 +2062,17 @@
             "tier1",
             "tier2"
           ],
-          "spec_name": "hist_gb__tier_bundle_12_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_12_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 162,
-          "r2": 0.527791,
-          "rmse": 0.199502,
-          "mae": 0.163481,
-          "spearman": 0.729596
+          "r2": 0.513212,
+          "rmse": 0.202558,
+          "mae": 0.166518,
+          "spearman": 0.716138,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_134_v1",
@@ -1807,7 +2090,10 @@
           "r2": 0.607331,
           "rmse": 0.181925,
           "mae": 0.149197,
-          "spearman": 0.780679
+          "spearman": 0.780679,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_13_v1",
@@ -1817,14 +2103,17 @@
             "tier1",
             "tier3"
           ],
-          "spec_name": "hist_gb__tier_bundle_13_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_13_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 162,
-          "r2": 0.548806,
-          "rmse": 0.195012,
-          "mae": 0.156557,
-          "spearman": 0.746047
+          "r2": 0.545803,
+          "rmse": 0.19566,
+          "mae": 0.157218,
+          "spearman": 0.739873,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_14_v1",
@@ -1841,7 +2130,10 @@
           "r2": 0.557042,
           "rmse": 0.193224,
           "mae": 0.158107,
-          "spearman": 0.738686
+          "spearman": 0.738686,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_1_v1",
@@ -1850,14 +2142,17 @@
           "feature_components": [
             "tier1"
           ],
-          "spec_name": "hist_gb__tier_bundle_1_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_1_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 162,
-          "r2": 0.467042,
-          "rmse": 0.211947,
-          "mae": 0.166932,
-          "spearman": 0.686622
+          "r2": 0.408983,
+          "rmse": 0.223193,
+          "mae": 0.177862,
+          "spearman": 0.639244,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_234_v1",
@@ -1875,7 +2170,10 @@
           "r2": 0.639838,
           "rmse": 0.174233,
           "mae": 0.14496,
-          "spearman": 0.795051
+          "spearman": 0.795051,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_23_v1",
@@ -1892,7 +2190,10 @@
           "r2": 0.614347,
           "rmse": 0.180293,
           "mae": 0.14498,
-          "spearman": 0.785311
+          "spearman": 0.785311,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_24_v1",
@@ -1909,7 +2210,10 @@
           "r2": 0.603872,
           "rmse": 0.182725,
           "mae": 0.152218,
-          "spearman": 0.776006
+          "spearman": 0.776006,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_2_v1",
@@ -1925,7 +2229,10 @@
           "r2": 0.478236,
           "rmse": 0.209709,
           "mae": 0.173958,
-          "spearman": 0.681356
+          "spearman": 0.681356,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_34_v1",
@@ -1935,14 +2242,17 @@
             "tier3",
             "tier4"
           ],
-          "spec_name": "hist_gb__tier_bundle_34_v1",
-          "model_name": "hist_gb",
+          "spec_name": "gradient_boosting__tier_bundle_34_v1",
+          "model_name": "gradient_boosting",
           "model_family": "boosted_tree",
           "row_count": 162,
-          "r2": 0.596611,
-          "rmse": 0.184392,
-          "mae": 0.149156,
-          "spearman": 0.765994
+          "r2": 0.581862,
+          "rmse": 0.187733,
+          "mae": 0.150775,
+          "spearman": 0.755016,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_3_v1",
@@ -1958,7 +2268,10 @@
           "r2": 0.55108,
           "rmse": 0.19452,
           "mae": 0.154752,
-          "spearman": 0.74183
+          "spearman": 0.74183,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         },
         {
           "feature_set": "tier_bundle_4_v1",
@@ -1974,7 +2287,10 @@
           "r2": 0.545079,
           "rmse": 0.195816,
           "mae": 0.160633,
-          "spearman": 0.729344
+          "spearman": 0.729344,
+          "has_feature_effects": true,
+          "has_permutation_importance": true,
+          "has_country_contributions": true
         }
       ]
     }

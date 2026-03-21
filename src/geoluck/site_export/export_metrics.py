@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 from dataclasses import dataclass
@@ -17,6 +18,7 @@ from geoluck.feature_columns import (
 from geoluck.models.train_levels import feature_block_name
 
 SMALL_HOLDOUT_THRESHOLD = 5
+DATA_PAYLOAD_VERSION = "display-spec-v1"
 BUNDLE_EXPORT_TARGETS = (
     "income",
     "life_expectancy",
@@ -40,6 +42,7 @@ TARGET_LABELS = {
 @dataclass(frozen=True)
 class WebExportResult:
     metadata_path: Path
+    data_manifest_path: Path | None
     metrics_path: Path
     profiles_path: Path
     model_summary_path: Path | None
@@ -131,6 +134,44 @@ def best_available_non_baseline_by_feature_set(
         .groupby("feature_set", as_index=False)
         .first()
     )
+
+
+def _spec_name_set(frame: pd.DataFrame | None) -> set[str]:
+    if frame is None or frame.empty or "spec_name" not in frame.columns:
+        return set()
+    return set(frame["spec_name"].astype(str).unique().tolist())
+
+
+def best_complete_bundle_non_baseline_by_feature_set(
+    scores: pd.DataFrame,
+    *,
+    feature_importance: pd.DataFrame | None,
+    coefficients: pd.DataFrame | None,
+    permutation_importance: pd.DataFrame | None,
+    contributions: pd.DataFrame | None,
+) -> pd.DataFrame:
+    latest_best_rows = best_non_baseline_by_feature_set(scores)
+    if latest_best_rows.empty:
+        return latest_best_rows
+
+    explainable_spec_names = _spec_name_set(feature_importance) | _spec_name_set(coefficients)
+    complete_spec_names = (
+        explainable_spec_names
+        & _spec_name_set(permutation_importance)
+        & _spec_name_set(contributions)
+    )
+    complete_rows = best_available_non_baseline_by_feature_set(scores, complete_spec_names)
+
+    missing_feature_sets = sorted(
+        set(latest_best_rows["feature_set"].astype(str).tolist())
+        - set(complete_rows["feature_set"].astype(str).tolist())
+    )
+    if missing_feature_sets:
+        raise ValueError(
+            "No fully-exported display spec found for feature sets: "
+            + ", ".join(missing_feature_sets)
+        )
+    return complete_rows
 
 
 def build_metrics_payload(
@@ -472,14 +513,72 @@ def build_country_contributions_summary_payload(
     }
 
 
-def build_bundle_summary_payload(score_frames: dict[str, pd.DataFrame]) -> dict:
+def _has_spec_rows(frame: pd.DataFrame | None, spec_name: str) -> bool:
+    if frame is None or frame.empty or "spec_name" not in frame.columns:
+        return False
+    return bool((frame["spec_name"].astype(str) == spec_name).any())
+
+
+def _bundle_missing_reason(
+    *,
+    has_source_rows: bool,
+    has_canonical_spec_rows: bool,
+    source_unavailable_reason: str,
+    spec_mismatch_reason: str,
+) -> str | None:
+    if has_canonical_spec_rows:
+        return None
+    if not has_source_rows:
+        return source_unavailable_reason
+    return spec_mismatch_reason
+
+
+def _bundle_data_status(has_canonical_spec_rows: bool) -> str:
+    return "ready" if has_canonical_spec_rows else "missing"
+
+
+def _bundle_file_token(value: object) -> str:
+    if value is None or pd.isna(value):
+        return "unknown"
+    token = "".join(ch.lower() if ch.isalnum() else "_" for ch in str(value))
+    token = "_".join(part for part in token.split("_") if part)
+    return token or "unknown"
+
+
+def _remove_stale_bundle_country_contribution_files(
+    directory: Path,
+    *,
+    keep_names: set[str],
+) -> None:
+    for path in directory.glob("bundle_country_contributions_*.json"):
+        if path.name not in keep_names:
+            path.unlink()
+
+
+def build_bundle_summary_payload(
+    score_frames: dict[str, pd.DataFrame],
+    feature_importance_frames: dict[str, pd.DataFrame | None] | None = None,
+    coefficient_frames: dict[str, pd.DataFrame | None] | None = None,
+    permutation_frames: dict[str, pd.DataFrame | None] | None = None,
+    contribution_frames: dict[str, pd.DataFrame | None] | None = None,
+) -> dict:
     targets: list[dict[str, object]] = []
     for target in BUNDLE_EXPORT_TARGETS:
         scores = score_frames.get(target)
         if scores is None or scores.empty:
             continue
-        best_rows = best_non_baseline_by_feature_set(scores)
-        best_overall = select_best_model_spec(scores)
+        feature_importance = None if feature_importance_frames is None else feature_importance_frames.get(target)
+        coefficients = None if coefficient_frames is None else coefficient_frames.get(target)
+        permutation_importance = None if permutation_frames is None else permutation_frames.get(target)
+        contributions = None if contribution_frames is None else contribution_frames.get(target)
+        best_rows = best_complete_bundle_non_baseline_by_feature_set(
+            scores,
+            feature_importance=feature_importance,
+            coefficients=coefficients,
+            permutation_importance=permutation_importance,
+            contributions=contributions,
+        )
+        best_overall = select_best_model_spec(best_rows)
         targets.append(
             {
                 "target": target,
@@ -487,25 +586,48 @@ def build_bundle_summary_payload(score_frames: dict[str, pd.DataFrame]) -> dict:
                 "latest_decade": _clean_int(scores["decade"].max()),
                 "bundle_count": int(len(best_rows)),
                 "best_overall": best_overall,
-                "bundles": [
-                    {
-                        "feature_set": _clean_text(row.feature_set),
-                        "feature_tier": feature_set_tier_key(row.feature_set),
-                        "feature_tier_label": feature_set_tier_label(row.feature_set),
-                        "feature_components": feature_set_components(row.feature_set),
-                        "spec_name": _clean_text(row.spec_name),
-                        "model_name": _clean_text(row.model_name),
-                        "model_family": _clean_text(row.model_family),
-                        "row_count": _clean_int(row.row_count),
-                        "r2": _clean_number(row.r2),
-                        "rmse": _clean_number(row.rmse),
-                        "mae": _clean_number(row.mae),
-                        "spearman": _clean_number(row.spearman),
-                    }
-                    for row in best_rows.itertuples(index=False)
-                ],
+                "bundles": [],
             }
         )
+        bundle_rows: list[dict[str, object]] = []
+        for row in best_rows.itertuples(index=False):
+            spec_name = str(row.spec_name)
+            has_importance = _has_spec_rows(
+                feature_importance,
+                spec_name,
+            )
+            has_coefficients = _has_spec_rows(
+                coefficients,
+                spec_name,
+            )
+            has_permutation = _has_spec_rows(
+                permutation_importance,
+                spec_name,
+            )
+            has_contributions = _has_spec_rows(
+                contributions,
+                spec_name,
+            )
+            bundle_rows.append(
+                {
+                    "feature_set": _clean_text(row.feature_set),
+                    "feature_tier": feature_set_tier_key(row.feature_set),
+                    "feature_tier_label": feature_set_tier_label(row.feature_set),
+                    "feature_components": feature_set_components(row.feature_set),
+                    "spec_name": _clean_text(row.spec_name),
+                    "model_name": _clean_text(row.model_name),
+                    "model_family": _clean_text(row.model_family),
+                    "row_count": _clean_int(row.row_count),
+                    "r2": _clean_number(row.r2),
+                    "rmse": _clean_number(row.rmse),
+                    "mae": _clean_number(row.mae),
+                    "spearman": _clean_number(row.spearman),
+                    "has_feature_effects": bool(has_importance or has_coefficients),
+                    "has_permutation_importance": bool(has_permutation),
+                    "has_country_contributions": bool(has_contributions),
+                }
+            )
+        targets[-1]["bundles"] = bundle_rows
     latest_decades = [
         int(frame["decade"].max())
         for frame in score_frames.values()
@@ -524,19 +646,20 @@ def build_bundle_feature_effects_payload(
     feature_importance: pd.DataFrame | None,
     coefficients: pd.DataFrame | None,
     feature_coverage: pd.DataFrame | None,
+    permutation_importance: pd.DataFrame | None,
+    contributions: pd.DataFrame | None,
     *,
     top_k: int = 12,
 ) -> dict:
-    available_spec_names = set()
-    if feature_importance is not None and not feature_importance.empty:
-        available_spec_names.update(feature_importance["spec_name"].astype(str).unique().tolist())
-    if coefficients is not None and not coefficients.empty:
-        available_spec_names.update(coefficients["spec_name"].astype(str).unique().tolist())
-    best_rows = (
-        best_available_non_baseline_by_feature_set(scores, available_spec_names)
-        if available_spec_names
-        else best_non_baseline_by_feature_set(scores)
+    best_rows = best_complete_bundle_non_baseline_by_feature_set(
+        scores,
+        feature_importance=feature_importance,
+        coefficients=coefficients,
+        permutation_importance=permutation_importance,
+        contributions=contributions,
     )
+    has_importance_source = feature_importance is not None and not feature_importance.empty
+    has_coefficient_source = coefficients is not None and not coefficients.empty
     bundles: list[dict[str, object]] = []
     for row in best_rows.itertuples(index=False):
         spec_name = str(row.spec_name)
@@ -564,6 +687,7 @@ def build_bundle_feature_effects_payload(
                 .sort_values(["non_null_share", "feature_name"], ascending=[True, True])
                 .head(top_k)
             )
+        has_canonical_spec_rows = not importance_rows.empty or not coefficient_rows.empty
         bundles.append(
             {
                 "feature_set": _clean_text(row.feature_set),
@@ -574,6 +698,18 @@ def build_bundle_feature_effects_payload(
                 "model_name": _clean_text(row.model_name),
                 "model_family": _clean_text(row.model_family),
                 "r2": _clean_number(row.r2),
+                "data_status": _bundle_data_status(has_canonical_spec_rows),
+                "missing_reason": _bundle_missing_reason(
+                    has_source_rows=bool(has_importance_source or has_coefficient_source),
+                    has_canonical_spec_rows=has_canonical_spec_rows,
+                    source_unavailable_reason=(
+                        "No feature-importance or coefficient rows were exported for this target."
+                    ),
+                    spec_mismatch_reason=(
+                        "The canonical summary spec has no exported feature-importance or "
+                        "coefficient rows."
+                    ),
+                ),
                 "top_feature_importance": [
                     {
                         "feature_name": _clean_text(item.feature_name),
@@ -619,6 +755,8 @@ def build_bundle_feature_effects_summary_payload(
     feature_importance_frames: dict[str, pd.DataFrame | None],
     coefficient_frames: dict[str, pd.DataFrame | None],
     feature_coverage_frames: dict[str, pd.DataFrame | None],
+    permutation_frames: dict[str, pd.DataFrame | None],
+    contribution_frames: dict[str, pd.DataFrame | None],
     *,
     top_k: int = 12,
 ) -> dict:
@@ -630,6 +768,8 @@ def build_bundle_feature_effects_summary_payload(
                 feature_importance_frames.get(target),
                 coefficient_frames.get(target),
                 feature_coverage_frames.get(target),
+                permutation_frames.get(target),
+                contribution_frames.get(target),
                 top_k=top_k,
             )
             for target in BUNDLE_EXPORT_TARGETS
@@ -644,44 +784,45 @@ def build_bundle_feature_effects_summary_payload(
 def build_bundle_permutation_importance_payload(
     target: str,
     scores: pd.DataFrame,
+    feature_importance: pd.DataFrame | None,
+    coefficients: pd.DataFrame | None,
     permutation_importance: pd.DataFrame | None,
+    contributions: pd.DataFrame | None,
     *,
     top_k: int = 20,
 ) -> dict:
-    if permutation_importance is None or permutation_importance.empty:
-        return {
-            "target": target,
-            "target_label": TARGET_LABELS.get(target, target),
-            "latest_decade": _clean_int(scores["decade"].max()) if not scores.empty else None,
-            "top_k": int(top_k),
-            "bundles": [],
-        }
-    available_spec_names = set(
-        permutation_importance["spec_name"].astype(str).unique().tolist()
+    has_permutation_source = permutation_importance is not None and not permutation_importance.empty
+    best_rows = best_complete_bundle_non_baseline_by_feature_set(
+        scores,
+        feature_importance=feature_importance,
+        coefficients=coefficients,
+        permutation_importance=permutation_importance,
+        contributions=contributions,
     )
-    best_rows = best_available_non_baseline_by_feature_set(scores, available_spec_names)
     bundles: list[dict[str, object]] = []
     for row in best_rows.itertuples(index=False):
         spec_name = str(row.spec_name)
-        feature_rows = (
-            permutation_importance.loc[permutation_importance["spec_name"] == spec_name]
-            .sort_values(["importance_rank", "delta_r2_mean"], ascending=[True, False])
-            .head(top_k)
-        )
-        if feature_rows.empty:
-            continue
-        block_rows = (
-            permutation_importance.loc[permutation_importance["spec_name"] == spec_name]
-            .groupby("feature_block", as_index=False)
-            .agg(
-                feature_count=("feature_name", "size"),
-                delta_r2_mean=("delta_r2_mean", "sum"),
-                delta_rmse_mean=("delta_rmse_mean", "sum"),
-                delta_mae_mean=("delta_mae_mean", "sum"),
-                delta_spearman_mean=("delta_spearman_mean", "sum"),
+        feature_rows = pd.DataFrame()
+        block_rows = pd.DataFrame()
+        if permutation_importance is not None and not permutation_importance.empty:
+            feature_rows = (
+                permutation_importance.loc[permutation_importance["spec_name"] == spec_name]
+                .sort_values(["importance_rank", "delta_r2_mean"], ascending=[True, False])
+                .head(top_k)
             )
-            .sort_values("delta_r2_mean", ascending=False)
-        )
+            block_rows = (
+                permutation_importance.loc[permutation_importance["spec_name"] == spec_name]
+                .groupby("feature_block", as_index=False)
+                .agg(
+                    feature_count=("feature_name", "size"),
+                    delta_r2_mean=("delta_r2_mean", "sum"),
+                    delta_rmse_mean=("delta_rmse_mean", "sum"),
+                    delta_mae_mean=("delta_mae_mean", "sum"),
+                    delta_spearman_mean=("delta_spearman_mean", "sum"),
+                )
+                .sort_values("delta_r2_mean", ascending=False)
+            )
+        has_canonical_spec_rows = not feature_rows.empty
         bundles.append(
             {
                 "feature_set": _clean_text(row.feature_set),
@@ -692,6 +833,17 @@ def build_bundle_permutation_importance_payload(
                 "model_name": _clean_text(row.model_name),
                 "model_family": _clean_text(row.model_family),
                 "r2": _clean_number(row.r2),
+                "data_status": _bundle_data_status(has_canonical_spec_rows),
+                "missing_reason": _bundle_missing_reason(
+                    has_source_rows=has_permutation_source,
+                    has_canonical_spec_rows=has_canonical_spec_rows,
+                    source_unavailable_reason=(
+                        "No permutation-importance rows were exported for this target."
+                    ),
+                    spec_mismatch_reason=(
+                        "The canonical summary spec has no exported permutation-importance rows."
+                    ),
+                ),
                 "top_permutation_features": [
                     {
                         "feature_name": _clean_text(item.feature_name),
@@ -728,7 +880,10 @@ def build_bundle_permutation_importance_payload(
 
 def build_bundle_permutation_importance_summary_payload(
     score_frames: dict[str, pd.DataFrame],
+    feature_importance_frames: dict[str, pd.DataFrame | None],
+    coefficient_frames: dict[str, pd.DataFrame | None],
     permutation_frames: dict[str, pd.DataFrame | None],
+    contribution_frames: dict[str, pd.DataFrame | None],
     *,
     top_k: int = 20,
 ) -> dict:
@@ -737,7 +892,10 @@ def build_bundle_permutation_importance_summary_payload(
             build_bundle_permutation_importance_payload(
                 target,
                 score_frames[target],
+                feature_importance_frames.get(target),
+                coefficient_frames.get(target),
                 permutation_frames.get(target),
+                contribution_frames.get(target),
                 top_k=top_k,
             )
             for target in BUNDLE_EXPORT_TARGETS
@@ -752,24 +910,38 @@ def build_bundle_permutation_importance_summary_payload(
 def build_bundle_country_contributions_payload(
     target: str,
     scores: pd.DataFrame,
-    contributions: pd.DataFrame,
+    feature_importance: pd.DataFrame | None,
+    coefficients: pd.DataFrame | None,
+    permutation_importance: pd.DataFrame | None,
+    contributions: pd.DataFrame | None,
     *,
     top_k: int = 8,
 ) -> dict:
-    available_spec_names = set(contributions["spec_name"].astype(str).unique().tolist())
-    best_rows = best_available_non_baseline_by_feature_set(scores, available_spec_names)
+    has_contribution_source = contributions is not None and not contributions.empty
+    best_rows = best_complete_bundle_non_baseline_by_feature_set(
+        scores,
+        feature_importance=feature_importance,
+        coefficients=coefficients,
+        permutation_importance=permutation_importance,
+        contributions=contributions,
+    )
     bundles: list[dict[str, object]] = []
     for row in best_rows.itertuples(index=False):
-        spec_contributions = contributions.loc[
-            contributions["spec_name"] == str(row.spec_name)
-        ].copy()
-        if spec_contributions.empty:
-            continue
-        bundle_payload = build_country_contributions_summary_payload(
-            spec_contributions,
-            selected_spec_name=str(row.spec_name),
-            top_k=top_k,
-        )
+        spec_name = str(row.spec_name)
+        spec_contributions = pd.DataFrame()
+        if contributions is not None and not contributions.empty:
+            spec_contributions = contributions.loc[contributions["spec_name"] == spec_name].copy()
+        has_canonical_spec_rows = not spec_contributions.empty
+        country_count = 0
+        countries: list[dict[str, object]] = []
+        if has_canonical_spec_rows:
+            bundle_payload = build_country_contributions_summary_payload(
+                spec_contributions,
+                selected_spec_name=spec_name,
+                top_k=top_k,
+            )
+            country_count = _clean_int(bundle_payload["country_count"])
+            countries = bundle_payload["countries"]
         bundles.append(
             {
                 "feature_set": _clean_text(row.feature_set),
@@ -784,8 +956,19 @@ def build_bundle_country_contributions_payload(
                 "mae": _clean_number(row.mae),
                 "spearman": _clean_number(row.spearman),
                 "row_count": _clean_int(row.row_count),
-                "country_count": _clean_int(bundle_payload["country_count"]),
-                "countries": bundle_payload["countries"],
+                "data_status": _bundle_data_status(has_canonical_spec_rows),
+                "missing_reason": _bundle_missing_reason(
+                    has_source_rows=has_contribution_source,
+                    has_canonical_spec_rows=has_canonical_spec_rows,
+                    source_unavailable_reason=(
+                        "No country-contribution rows were exported for this target."
+                    ),
+                    spec_mismatch_reason=(
+                        "The canonical summary spec has no exported country-contribution rows."
+                    ),
+                ),
+                "country_count": country_count,
+                "countries": countries,
             }
         )
     return {
@@ -799,21 +982,12 @@ def build_bundle_country_contributions_payload(
 
 
 def build_bundle_country_contributions_index_payload(
-    payloads: dict[str, dict],
-    paths_by_target: dict[str, str],
+    target_rows: list[dict[str, object]],
+    bundle_rows: list[dict[str, object]],
 ) -> dict:
     return {
-        "targets": [
-            {
-                "target": target,
-                "target_label": TARGET_LABELS.get(target, target),
-                "path": paths_by_target[target],
-                "latest_decade": payload.get("latest_decade"),
-                "bundle_count": payload.get("bundle_count"),
-                "top_k": payload.get("top_k"),
-            }
-            for target, payload in payloads.items()
-        ]
+        "targets": target_rows,
+        "bundles": bundle_rows,
     }
 
 
@@ -1027,6 +1201,10 @@ def build_metadata_payload(
     reference: pd.DataFrame,
     metric: str,
     *,
+    generated_at_utc: str,
+    data_export_id: str | None = None,
+    data_payload_version: str | None = None,
+    data_manifest_path: str | None = None,
     metrics: list[dict[str, str]] | None = None,
     selected_model_spec: dict[str, object] | None = None,
     model_summary_path: str | None = None,
@@ -1041,7 +1219,10 @@ def build_metadata_payload(
     latest_decade = decades[-1]
     latest = reference.loc[reference["decade"] == latest_decade].copy()
     return {
-        "generated_at_utc": datetime.now(UTC).isoformat(),
+        "generated_at_utc": generated_at_utc,
+        "data_export_id": data_export_id,
+        "data_payload_version": data_payload_version,
+        "data_manifest_path": data_manifest_path,
         "metric_default": metric,
         "decades": decades,
         "country_count_geometry": int(len(reference)),
@@ -1066,6 +1247,68 @@ def build_metadata_payload(
         "bundle_feature_effects_path": bundle_feature_effects_path,
         "bundle_permutation_importance_path": bundle_permutation_importance_path,
         "bundle_country_contributions_index_path": bundle_country_contributions_index_path,
+    }
+
+
+def _stable_json_bytes(payload: dict[str, object]) -> bytes:
+    return json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
+def _sha256_hex(payload_bytes: bytes) -> str:
+    return hashlib.sha256(payload_bytes).hexdigest()
+
+
+def _build_data_export_id(
+    *,
+    payloads: list[tuple[str, dict[str, object]]],
+    extra_files: list[tuple[str, bytes]] | None = None,
+) -> str:
+    digest = hashlib.sha256()
+    hashed_items: list[tuple[str, str]] = []
+    for path_name, payload in payloads:
+        hashed_items.append((path_name, _sha256_hex(_stable_json_bytes(payload))))
+    for path_name, file_bytes in extra_files or []:
+        hashed_items.append((path_name, _sha256_hex(file_bytes)))
+    for path_name, file_hash in sorted(hashed_items):
+        digest.update(path_name.encode("utf-8"))
+        digest.update(b":")
+        digest.update(file_hash.encode("utf-8"))
+        digest.update(b"\n")
+    return digest.hexdigest()
+
+
+def build_data_manifest_payload(
+    *,
+    generated_at_utc: str,
+    export_id: str,
+    payload_version: str,
+    payloads: list[tuple[str, dict[str, object]]],
+    extra_files: list[tuple[str, bytes]],
+) -> dict[str, object]:
+    files: list[dict[str, object]] = []
+    for path_name, payload in payloads:
+        payload_bytes = _stable_json_bytes(payload)
+        files.append(
+            {
+                "path": path_name,
+                "sha256": _sha256_hex(payload_bytes),
+                "byte_count": len(payload_bytes),
+            }
+        )
+    for path_name, file_bytes in extra_files:
+        files.append(
+            {
+                "path": path_name,
+                "sha256": _sha256_hex(file_bytes),
+                "byte_count": len(file_bytes),
+            }
+        )
+    files.sort(key=lambda row: str(row["path"]))
+    return {
+        "generated_at_utc": generated_at_utc,
+        "export_id": export_id,
+        "payload_version": payload_version,
+        "files": files,
     }
 
 
@@ -1115,6 +1358,7 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
     residual_metrics_path = web_dir / "metrics_income_rank_pct_residual.json"
     profiles_path = web_dir / "country_profiles.json"
     metadata_path = web_dir / "metadata.json"
+    data_manifest_path = web_dir / "data_manifest.json"
     model_summary_path = web_dir / "model_summary.json"
     robustness_summary_path = web_dir / "robustness_summary.json"
     country_contributions_summary_path = web_dir / "country_contributions_summary.json"
@@ -1211,7 +1455,15 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
             pd.read_parquet(contribution_candidate) if contribution_candidate.exists() else None
         )
     bundle_summary_payload = (
-        build_bundle_summary_payload(bundle_score_frames) if bundle_score_frames else None
+        build_bundle_summary_payload(
+            bundle_score_frames,
+            bundle_feature_importance_frames,
+            bundle_coefficient_frames,
+            bundle_permutation_frames,
+            bundle_contribution_frames,
+        )
+        if bundle_score_frames
+        else None
     )
     bundle_feature_effects_payload = (
         build_bundle_feature_effects_summary_payload(
@@ -1219,6 +1471,8 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
             bundle_feature_importance_frames,
             bundle_coefficient_frames,
             bundle_feature_coverage_frames,
+            bundle_permutation_frames,
+            bundle_contribution_frames,
         )
         if bundle_score_frames
         else None
@@ -1226,38 +1480,109 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
     bundle_permutation_importance_payload = (
         build_bundle_permutation_importance_summary_payload(
             bundle_score_frames,
+            bundle_feature_importance_frames,
+            bundle_coefficient_frames,
             bundle_permutation_frames,
+            bundle_contribution_frames,
         )
         if bundle_score_frames
         else None
     )
-    bundle_country_contributions_payloads: dict[str, dict] = {}
-    bundle_country_contributions_paths: dict[str, Path] = {}
+    bundle_country_contributions_target_payloads: list[tuple[Path, dict[str, object]]] = []
+    bundle_country_contributions_bundle_payloads: list[tuple[Path, dict[str, object]]] = []
+    bundle_country_contributions_index_targets: list[dict[str, object]] = []
+    bundle_country_contributions_index_rows: list[dict[str, object]] = []
     if bundle_score_frames:
         for target, bundle_scores in bundle_score_frames.items():
             bundle_contributions = bundle_contribution_frames.get(target)
-            if bundle_contributions is None or bundle_contributions.empty:
-                continue
-            bundle_country_contributions_payloads[target] = (
-                build_bundle_country_contributions_payload(
-                    target,
-                    bundle_scores,
-                    bundle_contributions,
+            target_payload = build_bundle_country_contributions_payload(
+                target,
+                bundle_scores,
+                bundle_feature_importance_frames.get(target),
+                bundle_coefficient_frames.get(target),
+                bundle_permutation_frames.get(target),
+                bundle_contributions,
+            )
+            target_path = web_dir / f"bundle_country_contributions_{target}.json"
+            bundle_country_contributions_target_payloads.append((target_path, target_payload))
+            bundle_country_contributions_index_targets.append(
+                {
+                    "target": target_payload["target"],
+                    "target_label": target_payload["target_label"],
+                    "path": target_path.name,
+                    "latest_decade": target_payload["latest_decade"],
+                    "bundle_count": target_payload["bundle_count"],
+                    "top_k": target_payload["top_k"],
+                }
+            )
+            for bundle in target_payload["bundles"]:
+                feature_tier = _bundle_file_token(bundle.get("feature_tier"))
+                bundle_path = (
+                    web_dir / f"bundle_country_contributions_{target}_{feature_tier}.json"
                 )
-            )
-            bundle_country_contributions_paths[target] = (
-                web_dir / f"bundle_country_contributions_{target}.json"
-            )
+                bundle_payload = {
+                    "target": target_payload["target"],
+                    "target_label": target_payload["target_label"],
+                    "latest_decade": target_payload["latest_decade"],
+                    "top_k": target_payload["top_k"],
+                    "feature_set": bundle.get("feature_set"),
+                    "feature_tier": bundle.get("feature_tier"),
+                    "feature_tier_label": bundle.get("feature_tier_label"),
+                    "feature_components": bundle.get("feature_components"),
+                    "spec_name": bundle.get("spec_name"),
+                    "model_name": bundle.get("model_name"),
+                    "model_family": bundle.get("model_family"),
+                    "r2": bundle.get("r2"),
+                    "rmse": bundle.get("rmse"),
+                    "mae": bundle.get("mae"),
+                    "spearman": bundle.get("spearman"),
+                    "row_count": bundle.get("row_count"),
+                    "data_status": bundle.get("data_status"),
+                    "missing_reason": bundle.get("missing_reason"),
+                    "country_count": bundle.get("country_count"),
+                    "countries": bundle.get("countries", []),
+                }
+                bundle_country_contributions_bundle_payloads.append((bundle_path, bundle_payload))
+                bundle_country_contributions_index_rows.append(
+                    {
+                        "target": target_payload["target"],
+                        "target_label": target_payload["target_label"],
+                        "feature_set": bundle.get("feature_set"),
+                        "feature_tier": bundle.get("feature_tier"),
+                        "feature_tier_label": bundle.get("feature_tier_label"),
+                        "feature_components": bundle.get("feature_components"),
+                        "spec_name": bundle.get("spec_name"),
+                        "model_name": bundle.get("model_name"),
+                        "model_family": bundle.get("model_family"),
+                        "r2": bundle.get("r2"),
+                        "rmse": bundle.get("rmse"),
+                        "mae": bundle.get("mae"),
+                        "spearman": bundle.get("spearman"),
+                        "row_count": bundle.get("row_count"),
+                        "path": bundle_path.name,
+                        "latest_decade": target_payload["latest_decade"],
+                        "top_k": target_payload["top_k"],
+                        "data_status": bundle.get("data_status"),
+                        "missing_reason": bundle.get("missing_reason"),
+                        "country_count": bundle.get("country_count"),
+                    }
+                )
     bundle_country_contributions_index_payload = (
         build_bundle_country_contributions_index_payload(
-            bundle_country_contributions_payloads,
-            {
-                target: path.name
-                for target, path in bundle_country_contributions_paths.items()
-            },
+            bundle_country_contributions_index_targets,
+            bundle_country_contributions_index_rows,
         )
-        if bundle_country_contributions_payloads
+        if bundle_country_contributions_index_rows
         else None
+    )
+    keep_bundle_contribution_names = {
+        bundle_country_contributions_index_path.name,
+        *[bundle_path.name for bundle_path, _ in bundle_country_contributions_target_payloads],
+        *[bundle_path.name for bundle_path, _ in bundle_country_contributions_bundle_payloads],
+    }
+    _remove_stale_bundle_country_contribution_files(
+        web_dir,
+        keep_names=keep_bundle_contribution_names,
     )
 
     if predictions is not None and selected_model_spec is not None:
@@ -1341,10 +1666,58 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
                 },
             ]
         )
+    generated_at_utc = datetime.now(UTC).isoformat()
+    map_path = resolved_paths.data_web / "countries_2020.geojson"
+    map_bytes = map_path.read_bytes()
+    preliminary_payloads: list[tuple[str, dict[str, object]]] = [
+        *[(path.name, payload) for path, payload in metrics_payloads],
+        (profiles_path.name, profiles_payload),
+    ]
+    if model_summary_payload is not None:
+        preliminary_payloads.append((model_summary_path.name, model_summary_payload))
+    if robustness_summary_payload is not None:
+        preliminary_payloads.append((robustness_summary_path.name, robustness_summary_payload))
+    if country_contributions_summary_payload is not None:
+        preliminary_payloads.append(
+            (country_contributions_summary_path.name, country_contributions_summary_payload)
+        )
+    if bundle_summary_payload is not None:
+        preliminary_payloads.append((bundle_summary_path.name, bundle_summary_payload))
+    if bundle_feature_effects_payload is not None:
+        preliminary_payloads.append(
+            (bundle_feature_effects_path.name, bundle_feature_effects_payload)
+        )
+    if bundle_permutation_importance_payload is not None:
+        preliminary_payloads.append(
+            (bundle_permutation_importance_path.name, bundle_permutation_importance_payload)
+        )
+    if bundle_country_contributions_index_payload is not None:
+        preliminary_payloads.append(
+            (
+                bundle_country_contributions_index_path.name,
+                bundle_country_contributions_index_payload,
+            )
+        )
+    preliminary_payloads.extend(
+        (bundle_path.name, bundle_payload)
+        for bundle_path, bundle_payload in bundle_country_contributions_target_payloads
+    )
+    preliminary_payloads.extend(
+        (bundle_path.name, bundle_payload)
+        for bundle_path, bundle_payload in bundle_country_contributions_bundle_payloads
+    )
+    data_export_id = _build_data_export_id(
+        payloads=preliminary_payloads,
+        extra_files=[(map_path.name, map_bytes)],
+    )
     metadata_payload = build_metadata_payload(
         panel,
         reference,
         metric="income_rank_pct",
+        generated_at_utc=generated_at_utc,
+        data_export_id=data_export_id,
+        data_payload_version=DATA_PAYLOAD_VERSION,
+        data_manifest_path=data_manifest_path.name,
         metrics=metadata_metrics,
         selected_model_spec=selected_model_spec,
         model_summary_path=model_summary_path.name if model_summary_payload is not None else None,
@@ -1375,11 +1748,22 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
             else None
         ),
     )
+    data_manifest_payload = build_data_manifest_payload(
+        generated_at_utc=generated_at_utc,
+        export_id=data_export_id,
+        payload_version=DATA_PAYLOAD_VERSION,
+        payloads=[(metadata_path.name, metadata_payload), *preliminary_payloads],
+        extra_files=[(map_path.name, map_bytes)],
+    )
 
     for path, payload in metrics_payloads:
         path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     profiles_path.write_text(json.dumps(profiles_payload, indent=2) + "\n", encoding="utf-8")
     metadata_path.write_text(json.dumps(metadata_payload, indent=2) + "\n", encoding="utf-8")
+    data_manifest_path.write_text(
+        json.dumps(data_manifest_payload, indent=2) + "\n",
+        encoding="utf-8",
+    )
     if model_summary_payload is not None:
         model_summary_path.write_text(
             json.dumps(model_summary_payload, indent=2) + "\n",
@@ -1415,18 +1799,28 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
             json.dumps(bundle_country_contributions_index_payload, indent=2) + "\n",
             encoding="utf-8",
         )
-    for target, payload in bundle_country_contributions_payloads.items():
-        bundle_country_contributions_paths[target].write_text(
-            json.dumps(payload, indent=2) + "\n",
+    for bundle_path, bundle_payload in bundle_country_contributions_target_payloads:
+        bundle_path.write_text(
+            json.dumps(bundle_payload, indent=2) + "\n",
+            encoding="utf-8",
+        )
+    for bundle_path, bundle_payload in bundle_country_contributions_bundle_payloads:
+        bundle_path.write_text(
+            json.dumps(bundle_payload, indent=2) + "\n",
             encoding="utf-8",
         )
 
     public_data_dir = resolved_paths.web_public / "data"
     public_data_dir.mkdir(parents=True, exist_ok=True)
+    _remove_stale_bundle_country_contribution_files(
+        public_data_dir,
+        keep_names=keep_bundle_contribution_names,
+    )
     copy_paths = [
         *[path for path, _ in metrics_payloads],
         profiles_path,
         metadata_path,
+        data_manifest_path,
         resolved_paths.data_web / metadata_payload["map_path"],
     ]
     if model_summary_payload is not None:
@@ -1443,12 +1837,14 @@ def export_web_payloads(paths: ProjectPaths | None = None) -> WebExportResult:
         copy_paths.append(bundle_permutation_importance_path)
     if bundle_country_contributions_index_payload is not None:
         copy_paths.append(bundle_country_contributions_index_path)
-    copy_paths.extend(bundle_country_contributions_paths.values())
+    copy_paths.extend(path for path, _ in bundle_country_contributions_target_payloads)
+    copy_paths.extend(path for path, _ in bundle_country_contributions_bundle_payloads)
     for source_path in copy_paths:
         shutil.copy2(source_path, public_data_dir / source_path.name)
 
     return WebExportResult(
         metadata_path=metadata_path,
+        data_manifest_path=data_manifest_path,
         metrics_path=metrics_path,
         profiles_path=profiles_path,
         model_summary_path=model_summary_path if model_summary_payload is not None else None,
