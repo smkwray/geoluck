@@ -1,5 +1,7 @@
 .DS_Store
 .env
+.private-denylist
+.worktrees/
 .env.local
 .python-version
 .coverage

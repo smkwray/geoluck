@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .PHONY: sync test lint fmt web-install web-build web-preview-local check
 
-VENV_PATH ?= [local-path]
+VENV_PATH ?= .venv
 VENV_PYTHON := $(VENV_PATH)/bin/python
 VENV_PIP := $(VENV_PATH)/bin/pip
 LOAD_ENV = if [ -f .env ]; then set -a; . ./.env; set +a; fi;
