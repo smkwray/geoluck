@@ -1,12 +1,18 @@
 # geoluck &nbsp; <img src="logo/geoduck.png" alt="" width="36" />
 
-**How much of relative country outcomes can be predicted from geography, natural endowments, resource development, social structure, and governance — and who outperforms those expectations?**
+**How much of relative country outcomes can be predicted from geography, natural endowments, resource development, social structure, and governance, and who outperforms those expectations?**
 
 Geoluck is an open-source research project that builds a country-decade panel (1900–2020) and trains machine learning models to predict country-level income, wellbeing, inequality, wealth, and gender outcomes from tiered feature sets. The results are published as an interactive static site.
 
-This is explicitly about **predictive association**, not causal effect.
+The models measure predictive association, not causal effect. A high R² for Nature-only features means geography is a strong statistical predictor, likely because it correlates with deeper causal channels, not that geography causes prosperity.
 
 **[View the live site →](https://smkwray.github.io/geoluck/)**
+
+---
+
+## Headline findings
+
+In the 2020 decade, cross-validated R² for the income rank is 0.526 with Nature (geography) features alone, 0.841 with Society features, 0.825 with Governance features, and 0.854 with all four tiers; the best combination, Society + Governance, reaches 0.858. Across the seven outcomes, the best tier combination ranges from R² 0.442 for female labor-force participation to 0.904 for gender inequality. The site shows every outcome and tier combination, with country-level over- and under-performance against the predictions.
 
 ---
 
@@ -18,28 +24,28 @@ The static site models seven outcome metrics, each converted to within-decade pe
 |---|---|---|
 | **Income** | Log GDP per capita rank | Maddison Project Database 2023 |
 | **Wealth** | Produced capital per capita rank | World Bank Changing Wealth of Nations |
-| **Life expectancy** | Life expectancy at birth rank | World Bank WDI / UN Population Division |
-| **Inequality** | Disposable-income Gini rank (higher = more unequal) | SWIID |
-| **Gender inequality** | UNDP Gender Inequality Index rank (higher = more unequal) | UNDP HDR 2025 |
-| **Female LFPR** | Female labor-force participation rate rank | World Bank WDI / ILO |
+| **Life expectancy** | Life expectancy at birth rank | World Bank World Development Indicators (WDI) / UN Population Division |
+| **Inequality** | Disposable-income Gini rank (higher = more unequal) | Standardized World Income Inequality Database (SWIID) |
+| **Gender inequality** | UNDP Gender Inequality Index rank (higher = more unequal) | UNDP Human Development Report 2025 |
+| **Female LFPR** | Female labor-force participation rate rank | World Bank WDI / International Labour Organization |
 | **Women, Business and the Law** | Women, Business and the Law index rank | World Bank |
 
 Predictor features are organized into four independently toggleable tiers:
 
-- **Nature** — Pure geography: latitude, climate normals, terrain, soil, malaria ecology, seismic activity, wind/solar potential, ocean productivity, cyclone exposure.
-- **Infrastructure** — Resource development: dams, irrigation, oil/gas/coal/mineral extraction, agricultural land use, energy assets.
-- **Society** — Social and historical structure: trade openness, colonial history, legal origins, ethnic/religious fractionalization, gender inequality, demographics.
-- **Governance** — State capacity, political order, democracy, fragility, and conflict: WGI, V-Dem, Freedom House, FSI, Polity5, UCDP.
+- Nature: pure geography, including latitude, climate normals, terrain, soil, malaria ecology, seismic activity, wind and solar potential, ocean productivity, and cyclone exposure.
+- Infrastructure: resource development, including dams, irrigation, oil, gas, coal and mineral extraction, agricultural land use, and energy assets.
+- Society: social and historical structure, including trade openness, colonial history, legal origins, ethnic and religious fractionalization, gender inequality, and demographics.
+- Governance: state capacity, political order, democracy, fragility, and conflict, from the Worldwide Governance Indicators (WGI), Varieties of Democracy (V-Dem), Freedom House, the Fragile States Index (FSI), Polity5, and the Uppsala Conflict Data Program (UCDP).
 
-All 15 non-empty tier combinations are modeled independently for each outcome (105 model bundles across the seven maintained targets). The site supports interactive choropleth maps, model comparison, country-level SHAP feature contributions, country-vs-country comparison, feature exploration by data source, full sortable rankings with CSV export, staged loading on slower connections, and shareable deep links.
+All 15 non-empty tier combinations are modeled independently for each outcome (105 model bundles across the seven maintained targets). The site supports interactive choropleth maps, model comparison, country-level SHAP (SHapley Additive exPlanations) feature contributions, country-vs-country comparison, feature exploration by data source, full sortable rankings with CSV export, staged loading on slower connections, and shareable deep links.
 
 ---
 
 ## Repository structure
 
 ```
-src/           Python pipeline — ETL, feature building, modeling, export
-web/           Static frontend — TypeScript, Vite, Leaflet, Chart.js
+src/           Python pipeline: ETL, feature building, modeling, export
+web/           Static frontend: TypeScript, Vite, Leaflet, Chart.js
 docs/          Methodology and payload documentation
 web/public/data/   Precomputed JSON payloads consumed by the frontend
 ```
@@ -50,30 +56,22 @@ web/public/data/   Precomputed JSON payloads consumed by the frontend
 
 Raw and intermediate research data are **not** stored in the public repository. Only compact, precomputed JSON payloads required by the static site are committed under `web/public/data/`. These are generated by the Python pipeline's export commands.
 
-Bundle analytics now use one published display spec per outcome+tier pair: the best-scoring non-baseline spec that also has the full exported analytics bundle needed by the site. Scores, feature effects, permutation importance, and country contributions always stay aligned to that same display spec, and export fails if any maintained bundle cannot meet that contract.
+For each outcome and tier combination, the site shows one model: the best-scoring non-baseline specification with a complete analytics export. Its scores, feature effects, permutation importance, and country contributions all come from that same model.
 
 ---
 
 ## Modeling notes
 
-- Models are evaluated **out of sample** using cross-validated R², RMSE, MAE, and Spearman rank correlation.
+- Models are evaluated **out of sample** using cross-validated R², root mean squared error (RMSE), mean absolute error (MAE), and Spearman rank correlation.
 - User-facing predictions and residuals use **cross-validated exports**, not in-sample fits.
 - Feature contributions use SHAP values from fold-trained estimators.
-- Public bundle analytics ship provenance and availability metadata per tier, including `spec_name`, `model_family`, `row_count`, and whether feature effects, permutation importance, or country contributions are available for the published display spec.
-- Exported robustness diagnostics currently focus on the flagship income model and include both within-decade holdouts and leave-region-out checks.
-- Results should be interpreted as **predictive structure**, not causal effects. A high R² for Nature-only features means geography is a strong statistical predictor — likely because it correlates with deeper causal channels — not that geography *causes* prosperity.
-
----
-
-## GitHub Pages deployment
-
-The site is deployed through **GitHub Actions**, not "Deploy from a branch."
-
-In repository Settings → Pages, set the source to **GitHub Actions**. The workflow builds the frontend from `web/` and publishes the contents of `web/dist/`.
+- Robustness diagnostics cover the flagship income model only, with decade-holdout and leave-region-out checks.
 
 ---
 
 ## Local development
+
+Requires Python 3.12+ (with [uv](https://docs.astral.sh/uv/), or a `.venv` and pip) and Node.js for the frontend.
 
 ```bash
 # Python pipeline
@@ -81,17 +79,18 @@ make sync        # Install/sync Python dependencies
 make test        # Run tests
 
 # Frontend
-make web-build   # Build the static site (output: web/dist/)
+make web-install        # Install frontend dependencies
+make web-build          # Build the static site (output: web/dist/)
 make web-preview-local  # Build from a clean local temp copy and serve a stable preview on localhost
 ```
 
-The frontend expects JSON data under `web/public/data/`. These payloads are committed to the repository and are generated by:
+The frontend reads the JSON payloads committed under `web/public/data/`. To regenerate them, run the pipeline's `fetch-*`, `build-*`, and `train-*` commands (`uv run geoluck --help` lists them), then:
 
 ```bash
 uv run geoluck export-web-data
 ```
 
-`make test` includes a committed-payload contract check so schema drift or cross-file spec mismatches fail in CI before deployment. `make web-build` now also verifies that `web/dist/data` and `web/public/data` share the same export manifest and display-spec selection.
+`make test` includes a check that the committed payloads match the export schema and share one display-spec selection. The exporter also writes `data_manifest.json` in `web/public/data/`, recording the export id, payload version, and per-file hashes.
 
 For frontend development with hot reload:
 
@@ -99,18 +98,16 @@ For frontend development with hot reload:
 cd web && npm run dev
 ```
 
-The exporter writes `data_manifest.json` alongside `metadata.json` in `web/public/data/`. This manifest records the shared export id, payload version, and per-file hashes for the published data bundle.
-
 ---
 
 ## Documentation
 
-- [`DATA_SOURCES.md`](DATA_SOURCES.md) — Source registry and licensing notes
-- [`docs/MODEL_SPECS.md`](docs/MODEL_SPECS.md) — Model families, feature-set variants, evaluation design
-- [`docs/UI_DATA_PAYLOADS.md`](docs/UI_DATA_PAYLOADS.md) — Frontend JSON payload schemas
+- [`DATA_SOURCES.md`](DATA_SOURCES.md): source registry and licensing notes
+- [`docs/MODEL_SPECS.md`](docs/MODEL_SPECS.md): model families, feature-set variants, evaluation design
+- [`docs/UI_DATA_PAYLOADS.md`](docs/UI_DATA_PAYLOADS.md): frontend JSON payload schemas
 
 ---
 
 ## License
 
-MIT
+[MIT](LICENSE)
