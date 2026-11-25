@@ -1,6 +1,6 @@
 # UI Data Payloads
 
-This note is the frontend handoff reference for the maintained web JSON exports.
+This note describes the JSON payloads the pipeline exports for the web frontend.
 
 All payloads are written to:
 - `data_final/web/`
@@ -47,11 +47,11 @@ The UI should read the mirrored `web/public/data/` copies.
 ### `country_contributions_summary.json`
 - Country-level top-k contributions for the selected public income model.
 - One selected spec only.
-- `prediction` is now aligned to the maintained cross-validated prediction export, not a full-sample fitted value.
+- `prediction` comes from the cross-validated prediction export, not a full-sample fit.
 
 ## Multi-target bundle payloads
 
-These are the new UI-builder payloads for all maintained targets and all non-empty tier combinations.
+These payloads cover all maintained targets and all non-empty tier combinations.
 
 ### `bundle_summary.json`
 - Small comparison payload.
@@ -132,7 +132,7 @@ Interpretation:
 
 ## Tier semantics
 
-Maintained bundle payloads now use deterministic four-tier identifiers:
+Bundle payloads use deterministic four-tier identifiers:
 - Internal feature-set ids: `tier_bundle_<digits>_v1`
 - Exported tier keys: `tiers_<digits>`
 - Exported `feature_components`: ordered arrays like `["tier1"]`, `["tier1","tier4"]`, `["tier1","tier2","tier3","tier4"]`
